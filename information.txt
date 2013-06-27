@@ -1,0 +1,55 @@
+DEMO bang CI:
+
+http://eglobalcash.cyahost.com
+Your CyaCash account number: 31996355
+Password : X74S9mYLul
+Login Pin : 56550
+Master key :  745
+
+
+
+
++===================================+
+| New Account Info                  |
++===================================+
+| Domain: e-globalcash.net
+| Ip: 216.131.127.29 (n)
+| HasCgi: y
+| UserName: eglobalc
+| PassWord: [EA%GJZp12$i
+| CpanelMod: x3
+| HomeRoot: /home
+| Quota: unlimited Meg
+| NameServer1: ns1.california.net
+| NameServer2: ns1.oakweb.com
+| NameServer3: 
+| NameServer4: 
+| Contact Email: eglobalcash@gmail.com
+| Package: default
+| Feature List: default
+| Language: en
++===================================+
+
+
+
++===================================+
+| Old Account Info                  |
++===================================+
+|Shared Plan:        Business
+       Your Control Panel: https://gator1674.hostgator.com:2083
+       Username:           eglobal
+       Domain:             e-globalcash.net
+       Password:           zLGRIEAnHTgb
+       1st Nameserver:     ns3347.hostgator.com
+       2nd Nameserver:     ns3348.hostgator.com
+       Server IP:          184.173.252.139
++===================================+
+
+
+
+Acount Test
+Password: 	di7HSb1
+Login PIN: 	29460
+Master Key: 	967
+Security Question: 	Mother's Miden Name
+Answer: 	test

@@ -1,0 +1,37 @@
+<?php
+	define('PAGE_DEFAULT','page=index');	
+	define('PAGE_SIGNUP','page=signup');
+	define('PAGE_LOGIN','page=login');
+	define('PAGE_LOGOUT','page=logout');	
+	define('PAGE_HOME_AJAX','page=ajax');
+	define('PAGE_SECUREIMAGE','module=secureimage&page=secureimage');
+	define('PAGE_CONTACT_US','page=contact');	
+	define('PAGE_TERMS','page=terms');
+	define('PAGE_SIGNUP_PERSONAL','page=signup_personal');
+	define('PAGE_ACCOUNT_REMIND','page=account_remind');
+	define('PAGE_GLOBAL_AJAX','page=global_ajax');
+	define('PAGE_RESET_PASSWORD','page=reset_password');
+	define('PAGE_LOGIN_CONFIRM','page=login_confirm');
+	define('PAGE_LOGIN_BALANCE','page=login_balance');
+	define('PAGE_LOGIN_PIN','page=login_pin');
+	define('PAGE_ACCOUNT','module=account&page=account');
+	define('PAGE_ACCOUNT_PERSONAL','module=account&page=personal');
+	define('PAGE_ACCOUNT_SETTINGS','module=account&page=settings');
+	define('PAGE_ACCOUNT_PUBLIC','module=account&page=public');
+	define('PAGE_ACCOUNT_TRANSACTIONS','module=account&page=history');
+	define('PAGE_ACCOUNT_TRANSFER','module=account&page=transfer');	
+	define('PAGE_ACCOUNT_TRANSACTIONS_AJAX','module=account&page=history_ajax');
+	define('PAGE_SERVICES','module=services');
+	define('PAGE_SECURITY','page=security');
+	define('PAGE_MERCHANTS','page=merchants');	
+	define('PAGE_APPLICATIONS','page=applications');
+	define('PAGE_FAQ','page=faq');	
+	define('PAGE_EXCHANGERS','page=exchangers');
+	define('PAGE_TERMS','page=terms');
+	define('PAGE_PRIVACY','page=privacy');
+	define('PAGE_AML','page=aml');
+	define('PAGE_CORPORATE','page=corporate');
+	//Services
+	define('PAGE_SERVICE_SEARCH_USER','module=services&page=search_user');
+	
+?>
