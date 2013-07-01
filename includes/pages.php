@@ -23,6 +23,8 @@
 	define('PAGE_ACCOUNT_TRANSACTIONS_AJAX','module=account&page=history_ajax');
 	define('PAGE_SERVICES','module=services');
 	define('PAGE_SECURITY','page=security');
+	define('PAGE_GENERAL_FORM','page=general_form');
+	define('PAGE_PROCESS','page=sci');
 	define('PAGE_MERCHANTS','page=merchants');	
 	define('PAGE_APPLICATIONS','page=applications');
 	define('PAGE_FAQ','page=faq');	
@@ -31,6 +33,9 @@
 	define('PAGE_PRIVACY','page=privacy');
 	define('PAGE_AML','page=aml');
 	define('PAGE_CORPORATE','page=corporate');
+	define('PAGE_TRANSFER','module=account&page=transfer');
+	define('PAGE_SCI_TRANSFER','module=account&page=sci_transfer');
+	define('PAGE_SCI_TRANSFER_COMPLETE','module=account&page=sci_complete');
 	//Services
 	define('PAGE_SERVICE_SEARCH_USER','module=services&page=search_user');
 	

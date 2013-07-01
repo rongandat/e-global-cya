@@ -1,0 +1,92 @@
+<form name="frmTransfer" id="frmTransfer" method="post" action="{$url}" >
+    <input type="hidden" name="action" value="process"  />
+    <input  name="payee_account" type="hidden" id="payee_account"  value="{$transaction.to_account}"  />
+    <input  name="payer_account" type="hidden" id="payer_account"  value="{$transaction.from_account}"  />
+    <input  name="checkout_amount" type="hidden" id="checkout_amount"  value="{$transaction.amount}" />
+    <input  name="checkout_currency" type="hidden" id="checkout_currency"  value="{$transaction.transaction_currency}" />
+    <input  name="checkout_currency" type="hidden" id="checkout_currency"  value="{$transaction.transaction_currency}" />
+    <input  name="batch_number" type="hidden" id="batch_number"  value="{$transaction.batch_number}" />
+    <input  name="transaction_status" type="hidden" id="transaction_status"  value="{$transaction.transaction_status}" />
+    {foreach from=$extra_fields item=foo key=k}
+    <input  name="{$k}" type="hidden" id="{$k}"  value="{$foo}" />
+    {/foreach}
+    <div align="right">
+        <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="650" id="AutoNumber1" height="20">
+            <tr>
+                <td width="100%">&nbsp;</td>
+            </tr>
+        </table>
+    </div>
+
+    <div align="center">
+        <center>
+            <table cellpadding="2" cellspacing="0" border="0" width="580" style="border-collapse: collapse" bordercolor="#111111" >
+                <tr>
+                    <td  class="pageHeading" height="50" valign="top"><b>
+                            <font face="Tahoma" color="#6666FF">Transfer {if $history.transaction_status == 'completed'} Successful {else} Error {/if}</font></b></td>
+                </tr>
+                {if $history.transaction_status == 'completed'}
+                <tr><td><font size="2" face="Tahoma">Your transfer was successful!.</font></td></tr>
+                <tr><td><font size="2" face="Tahoma">you will redirect within 10 seconds.</font></td></tr>
+                <div align="center">
+                    <center>
+                        <table cellspacing="0" cellpadding="0" bordercolor="#111111" border="0" style="border-collapse: collapse" class="form_content">
+                            <tbody><tr>
+                                    <td class="form_label"><font size="2" face="Tahoma">Date:</font></td>
+                                    <td class="form_field"><font size="2" face="Tahoma">{$transaction.transaction_time}</font></td>
+                                </tr>	
+                                <tr>
+                                    <td class="form_label"><font size="2" face="Tahoma">Batch Number#:</font></td>
+                                    <td class="form_field"><font size="2" face="Tahoma">{$transaction.batch_number}</font></td>
+                                </tr>	
+                                <tr>
+                                    <td class="form_label"><font size="2" face="Tahoma">From:</font></td>
+                                    <td class="form_field"><font size="2" face="Tahoma">{$transaction.from_account}(<strong>{$user_transfer.account_name}</strong>)</font></td>
+                                </tr>	    
+                                <tr>
+                                    <td class="form_label"><font size="2" face="Tahoma">To:</font></td>
+                                    <td class="form_field"><font size="2" face="Tahoma">{$transaction.to_account}</font></td>
+                                </tr>	 
+                                <tr>
+                                    <td class="form_label"><font size="2" face="Tahoma">Amount:</font></td>
+                                    <td class="form_field"><font size="2" face="Tahoma">{$transaction.amount_text}</font></td>
+                                </tr>	 
+                                <tr>
+                                    <td class="form_label"><font size="2" face="Tahoma">Transaction Memo:</font></td>
+                                    <td class="form_field"><font size="2" face="Tahoma">{$transaction.transaction_memo}</font></td>
+                                </tr>	       
+                                {if !empty($url)}
+                                <tr>
+                                    <td class="">
+
+                                    </td>
+                                    <td class="">
+                                        <button type="submit">Return</button>
+                                    </td>
+                                </tr>
+                                {/if}
+                            </tbody>
+                        </table>  
+                    </center>
+                </div>
+                {else}
+                <tr><td><font size="2" face="Tahoma">{$transaction.description}</font></td></tr>
+                {/if}
+            </table>
+        </center>
+    </div>
+    {if !empty($url)}
+    {literal}
+    <script>
+        var interval = 1000;
+        var i = 10
+        setInterval(function(){
+            i--;
+            if(i == 0){
+                jQuery('form#frmTransfer').submit();
+            }
+        }, interval);
+    </script>
+    {/literal}
+    {/if}
+</form>

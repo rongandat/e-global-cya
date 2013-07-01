@@ -27,6 +27,7 @@ if (is_file(_CURRENT_MODULE . '/' . _CURRENT_PAGE . _PAGE_EXTENDSION)) {
             }
         </style>
         <script type="text/javascript" src="includes/js/general.js"></script>
+        <script type="text/javascript" src="../includes/js/jquery.min.js"></script>
         <?php
 //module header settings load
         include('includes/module_header_load.php');

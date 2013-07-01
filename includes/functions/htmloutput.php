@@ -59,7 +59,7 @@
   
   // assign all $_POST variables to smarty template
   function postAssign(&$smartyobj, $postArray='')
-  {	
+  {         
   		if (!is_array($postArray)) $postArray	=	$_POST;
   		foreach ($postArray as $key=>$value) {
 			$smartyobj->assign($key,db_prepare_input($value));

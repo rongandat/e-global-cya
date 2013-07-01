@@ -23,5 +23,6 @@
 	define('_TABLE_USER_BALANCE',_TABLE_PREFIX.'user_balance');
 	define('_TABLE_USER_WALLET',_TABLE_PREFIX.'user_wallet');
 	define('_TABLE_TRANSACTIONS',_TABLE_PREFIX.'transactions');
+	define('_TABLE_TRANSACTIONS_HISTOTY',_TABLE_PREFIX.'transactions_history');
 	define('_TABLE_USER_SETTINGS',_TABLE_PREFIX.'user_information_settings');
 ?>

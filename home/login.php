@@ -1,7 +1,6 @@
 <?php
 
 $smarty->assign('action_login', get_href_link(PAGE_LOGIN, 'action=login'));
-
 if ($_POST['action'] == 'process') {
     $account_number = db_prepare_input($_POST['account_number']);
     $login_password = db_prepare_input($_POST['password']);

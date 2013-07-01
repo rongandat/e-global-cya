@@ -18,7 +18,6 @@
 <title><?php echo SITE_NAME; ?></title>
 <script type="text/javascript" src="../includes/js/general.js"></script>
 <script type="text/javascript" src="../includes/js/jquery.min.js"></script>
-
 <style type="text/css">
 <!--
 body,td,th {
