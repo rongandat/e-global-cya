@@ -71,6 +71,10 @@ if (db_num_rows($user_query) > 0) {
     tep_session_register('extra_fields');
     $action = $requests['action'];
 
+    $currency = get_currency($checkout_currency);
+    $balance = get_currency_value_format($checkout_amount, $currency);
+
+    $smarty->assign('amount', $balance);
 
     $user_info = db_fetch_array($user_query);
     $smarty->assign('user_info', $user_info);

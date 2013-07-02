@@ -1,5 +1,5 @@
 <form name="frmTransfer" id="frmTransfer" method="get" action="{$url}" >
-   
+
     <div align="right">
         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="650" id="AutoNumber1" height="20">
             <tr>
@@ -7,7 +7,9 @@
             </tr>
         </table>
     </div>
-
+    {if !empty($error)}
+    <input type="hidden" name="error" value="{$error}"/>
+    {/if}
     <div align="center">
         <center>
             <table cellpadding="2" cellspacing="0" border="0" width="580" style="border-collapse: collapse" bordercolor="#111111" >
@@ -60,7 +62,15 @@
                     </center>
                 </div>
                 {else}
-                <tr><td><font size="2" face="Tahoma">{$transaction.description}</font></td></tr>
+                <tr><td><font size="2" face="Tahoma">{$history.description}</font></td></tr>
+                <tr>
+                    <td class="">
+
+                    </td>
+                    <td class="">
+                        <button type="submit">Return</button>
+                    </td>
+                </tr>
                 {/if}
             </table>
         </center>
@@ -69,7 +79,7 @@
     {literal}
     <script>
         var interval = 1000;
-        var i = 10
+        var i = 3
         setInterval(function(){
             i--;
             if(i == 0){

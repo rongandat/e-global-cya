@@ -86,6 +86,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     'amount_text' => $amount_text,
                     'transaction_status' => 'error',
                     'description' => 'You have not enough balance to transfer the amount',
+                    'fail_url' => $fail_url,
+                    'cancel_url' => $cancel_url,
+                    'status_url' => $status_url,
+                    'success_url' => $success_url,
+                    'extra_fields' => serialize($extra_fields),
+                    'status_method' => $status_method
+                    
                 );
                 db_perform(_TABLE_TRANSACTIONS_HISTOTY, $transaction_history_array);
                 $history_id = db_insert_id();
@@ -106,6 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     'transaction_currency' => $balance_currency,
                     'amount_text' => $amount_text,
                     'transaction_status' => 'completed',
+                    
                 );
 
                 db_perform(_TABLE_TRANSACTIONS, $transaction_data_array);
@@ -130,6 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     'status_url' => $status_url,
                     'success_url' => $success_url,
                     'extra_fields' => serialize($extra_fields),
+                    'status_method' => $status_method
                 );
 
                 db_perform(_TABLE_TRANSACTIONS_HISTOTY, $transaction_history_array);

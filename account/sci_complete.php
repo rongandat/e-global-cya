@@ -29,7 +29,8 @@ $history_query = db_query("SELECT * FROM " . _TABLE_TRANSACTIONS_HISTOTY . " WHE
 $history = db_fetch_array($history_query);
 if (empty($history)) {
     tep_redirect(get_href_link(PAGE_LOGIN));
-} else {
+}
+if ($history['transaction_status'] == 'completed') {
     $currency = get_currency($history['transaction_currency']);
     $balance = get_currency_value_format($history['amount'], $currency);
     $transfer_info['fees_text'] = get_currency_value_format($history['fee'], $currency);
@@ -46,16 +47,20 @@ if (empty($history)) {
     }
     if (!empty($history['status_url'])) {
         $dataPost = array(
-            'payee_account' => $history['to_userid'],
-            'payer_account' => $history['to_userid'],
-            'checkout_amount' => $history['to_userid'],
-            'checkout_currency' => $history['to_userid'],
-            'batch_number' => $history['to_userid'],
-            'transaction_status' => $history['to_userid'],
+            'payee_account' => $history['to_account'],
+            'payer_account' => $history['from_account'],
+            'checkout_amount' => $history['amount'],
+            'checkout_currency' => $history['transaction_currency'],
+            'batch_number' => $history['batch_number'],
+            'transaction_status' => $history['transaction_status'],
+            'transaction_currency' => $history['transaction_currency'],
         );
         $extra_fields = unserialize($history['extra_fields']);
         $dataPost = array_merge($extra_fields, $dataPost);
-        $results = curl_post($history['status_url'], $dataPost);
+        if ($history['status_method'] == 'GET')
+            $results = curl_get($history['status_url'], $dataPost);
+        else
+            $results = curl_post($history['status_url'], $dataPost);
         if ($results) {
             $sql_delete = "DELETE  FROM " . _TABLE_TRANSACTIONS_HISTOTY . " WHERE history_id='" . $history_id . "'";
             db_query($sql_delete);
@@ -63,6 +68,7 @@ if (empty($history)) {
                 $smarty->assign('url', $history['success_url']);
             } elseif (eregi("ERROR", $results) && !empty($history['fail_url'])) {
                 $smarty->assign('url', $history['fail_url']);
+                $smarty->assign('error', $results);
             }
         }
     } else {
@@ -78,8 +84,12 @@ if (empty($history)) {
     $transaction_query = db_query($sql_transaction);
     $transaction = db_fetch_array($transaction_query);
     $smarty->assign('transaction', $transaction);
-    $smarty->assign('history', $history);
+} else {
+    $smarty->assign('url', $history['fail_url']);
+    $smarty->assign('error', $history['description']);
 }
+
+$smarty->assign('history', $history);
 
 $_html_main_content = $smarty->fetch('account/sci_complete.html');
 
@@ -98,7 +108,35 @@ function curl_post($url, $fields) {
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_POST, count($fields));
     curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
-    curl_setopt($process, CURLOPT_TIMEOUT, 60);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 60);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+//execute post
+    $result = curl_exec($ch);
+    $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+//close connection
+    curl_close($ch);
+    if ($httpcode >= 200 && $httpcode < 300) {
+        return $result;
+    } else {
+        return false;
+    }
+}
+
+function curl_get($url, $fields) {
+    //url-ify the data for the POST
+    $fields_string = '';
+    foreach ($fields as $key => $value) {
+        $fields_string .= $key . '=' . $value . '&';
+    }
+    rtrim($fields_string, '&');
+
+//open connection
+    $ch = curl_init();
+    $url .= '?' . $fields_string;
+//set the url, number of POST vars, POST data
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 60);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 //execute post
     $result = curl_exec($ch);

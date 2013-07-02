@@ -10,15 +10,38 @@ include('includes/page_init.php');
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $fields = $_POST;
     if (empty($fields['batch_number'])) {
-        echo 'ERROR';
+        echo 'ERROR : Bath number is not exists';
         exit();
     }
 
-    $sql_check = "SELECT * FROM " . _TABLE_TRANSACTIONS_HISTOTY . " WHERE batch_number='" . $fields['batch_number'] . "' AND from_account='" . $fields['from_account'] . "' AND to_account='" . $fields['to_account'] . "' AND transaction_status='" . $fields['transaction_status'] . "' AND transaction_currency='" . $fields['transaction_currency'] . "' AND amount='" . $fields['amount'] . "'";
+    $sql_check = "SELECT * FROM " . _TABLE_TRANSACTIONS_HISTOTY . " WHERE batch_number='" . $fields['batch_number'] . "'";
     $history_check = db_query($sql_check);
     $history = db_fetch_array($history_check);
-    if (!empty($history)) {
-        echo 'ERROR';
+    if (empty($history)) {
+        echo 'ERROR : Bath number id not exists';
+        exit();
+    }
+   
+    if($history['from_account'] != $fields['payer_account']){
+        echo 'ERROR : Transfer acount invalid';
+        exit();
+    }
+    
+    if($history['to_account'] != $fields['payee_account']){
+        echo 'ERROR : To acount invalid';
+        exit();
+    }
+    
+    if($history['amount'] != $fields['checkout_amount']){
+        echo 'ERROR : Amount error';
+        exit();
+    }
+    if($history['transaction_status'] != $fields['transaction_status']){
+        echo 'ERROR : Tranasction status invalid';
+        exit();
+    }
+    if($history['transaction_currency'] != $fields['transaction_currency']){
+        echo 'ERROR : Tranasction currency invalid';
         exit();
     }
 

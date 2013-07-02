@@ -2,8 +2,7 @@
 
 //set POST variables
 $url = 'http://global.lc/sci_validate.php';
-
-foreach ($_POST as $key => $post) {
+foreach ($_REQUEST as $key => $post) {
     $fields[$key] = urldecode($post);
 }
 
