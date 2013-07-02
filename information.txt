@@ -16,13 +16,12 @@ Security Question : Highschool Name
 Answer : 3131 
 
 Local Host 
-
-Acount          8114621
-Password: 	MfTOJ2P
-Login PIN: 	90919
-Master Key: 	915
+Acount:   3156245
+Password: 	uf1AUul
+Login PIN: 	28329
+Master Key: 	340
 Security Question: 	Mother's Miden Name
-Answer: 	test
+Answer: 	53454
  
 
 CYA PAY
@@ -71,6 +70,23 @@ Account Secure PIN: 7159
 +===================================+
 
 
+You need the 'add-pkg-ip' priv to be able to create an account with a dedicated ip address.Dns Zone check is enabled.
++===================================+
+| Test Account Info                  |
++===================================+
+| Domain: egcash.cyahost.com
+| Ip: 174.121.3.251 (n)
+| HasCgi: y
+| UserName: egcashcy
+| PassWord: r{MMeKc_cFa3
+| CpanelMod: x3
+| HomeRoot: /home
+| Quota: 2000 Meg
+| NameServer1: ns1133.websitewelcome.com
+| NameServer2: ns1134.websitewelcome.com
+| NameServer3: 
+| NameServer4: 
+| Contact Email: contact@cyasoft.com
 
 Acount Test
 Password: 	di7HSb1

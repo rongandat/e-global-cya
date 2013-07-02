@@ -16,7 +16,6 @@
 	include('includes/dbtables.php');	
 	include('includes/pages.php');
 	
-		
 	db_connect(DB_SERVER,DB_SERVER_USERNAME,DB_SERVER_PASSWORD,DB_DATABASE);
 
 	// set the application parameters

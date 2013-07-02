@@ -1,5 +1,5 @@
 <?php
-error_reporting(0);
+error_reporting(1);
 include('includes/page_init.php');
 // MAIN PAGE CONTENT
 

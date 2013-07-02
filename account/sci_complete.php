@@ -45,6 +45,7 @@ if ($history['transaction_status'] == 'completed') {
     if (db_num_rows($user_query) == 0) {
         tep_redirect(get_href_link(PAGE_TRANSFER));
     }
+    
     if (!empty($history['status_url'])) {
         $dataPost = array(
             'payee_account' => $history['to_account'],

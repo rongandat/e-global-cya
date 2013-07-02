@@ -14,17 +14,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $string_input = '';
     foreach ($posts as $key => $post) {
         $posts[$key] = db_prepare_input($post);
-        
-        if ($key != 'extra_field' && $key != 'extra_value'){
+
+        if ($key != 'extra_field' && $key != 'extra_value') {
             $posts_value[$key] = db_prepare_input($post);
             $string_input .= '&' . $key . '=' . db_prepare_input($post);
-        }
-        elseif ($key == 'extra_field') {
-            foreach ($post as $number => $field){
-                $posts_value[$field] = $posts['extra_value'][$number];
-                $string_input .= '&' . $field . '=' . db_prepare_input($posts['extra_value'][$number]);
+        } elseif ($key == 'extra_field') {
+            foreach ($post as $number => $field) {
+                if (!empty($field)) {
+                    $posts_value[$field] = $posts['extra_value'][$number];
+                    $string_input .= '&' . $field . '=' . db_prepare_input($posts['extra_value'][$number]);
+                }
             }
-                
         }
     }
     $sql_user = "SELECT user_id,  email,password FROM " . _TABLE_USERS . " WHERE account_number='" . $posts['payee_account'] . "'";
