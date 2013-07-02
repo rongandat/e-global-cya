@@ -110,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 db_perform(_TABLE_TRANSACTIONS, $transaction_data_array);
                 $transaction_id = db_insert_id();
-                
+
                 $transaction_history_array = array(
                     'from_userid' => $login_userid,
                     'batch_number' => $transaction_data_array['batch_number'],
@@ -125,7 +125,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     'amount_text' => $amount_text,
                     'transaction_status' => 'completed',
                     'description' => '',
+                    'fail_url' => $fail_url,
+                    'cancel_url' => $cancel_url,
+                    'status_url' => $status_url,
+                    'success_url' => $success_url,
+                    'extra_fields' => serialize($extra_fields),
                 );
+
                 db_perform(_TABLE_TRANSACTIONS_HISTOTY, $transaction_history_array);
                 $history_id = db_insert_id();
                 $smarty->assign('status_transaction', 'completed');
@@ -195,4 +201,5 @@ $smarty->assign('validerrors', $validator->errors);
 $smarty->assign('step_value', $step);
 
 $_html_main_content = $smarty->fetch('account/sci_transfer.html');
+
 ?>

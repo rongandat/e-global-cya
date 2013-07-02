@@ -1,15 +1,5 @@
-<form name="frmTransfer" id="frmTransfer" method="post" action="{$url}" >
-    <input type="hidden" name="action" value="process"  />
-    <input  name="payee_account" type="hidden" id="payee_account"  value="{$transaction.to_account}"  />
-    <input  name="payer_account" type="hidden" id="payer_account"  value="{$transaction.from_account}"  />
-    <input  name="checkout_amount" type="hidden" id="checkout_amount"  value="{$transaction.amount}" />
-    <input  name="checkout_currency" type="hidden" id="checkout_currency"  value="{$transaction.transaction_currency}" />
-    <input  name="checkout_currency" type="hidden" id="checkout_currency"  value="{$transaction.transaction_currency}" />
-    <input  name="batch_number" type="hidden" id="batch_number"  value="{$transaction.batch_number}" />
-    <input  name="transaction_status" type="hidden" id="transaction_status"  value="{$transaction.transaction_status}" />
-    {foreach from=$extra_fields item=foo key=k}
-    <input  name="{$k}" type="hidden" id="{$k}"  value="{$foo}" />
-    {/foreach}
+<form name="frmTransfer" id="frmTransfer" method="get" action="{$url}" >
+   
     <div align="right">
         <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="650" id="AutoNumber1" height="20">
             <tr>

@@ -72,8 +72,10 @@
     <table cellpadding="2" cellspacing="2" border="0" width="100%" >
         <tr >
             <td align="center" class="contenButtons" >
-                <font face="Tahoma"><input  type="submit" name="buttonConfirm" class="button"  value="Confirm" /></font>
-                <font size="2" face="Tahoma">&nbsp;</font><font face="Tahoma"><input  type="button" name="buttonCancel" class="button"  value="Cancel" onclick="redirect('{dev_get_page_link page=PAGE_DEFAULT ssl=true}');" /></font></td></tr>
+                <font face="Tahoma"><input  type="submit" name="buttonConfirm" class="button"  value="Confirm" /></font>.
+                {if !empty($cancel_url)}
+                <font size="2" face="Tahoma">&nbsp;</font><font face="Tahoma"><input  type="button" name="buttonCancel" class="button"  value="Cancel" onclick="redirect('{$cancel_url}');" /></font></td></tr>
+                {/if}
     </table>	
 </form>
 

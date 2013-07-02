@@ -10,7 +10,7 @@ include('includes/page_init.php');
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $fields = $_POST;
     if (empty($fields['batch_number'])) {
-        echo 'error';
+        echo 'ERROR';
         exit();
     }
 
@@ -18,13 +18,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $history_check = db_query($sql_check);
     $history = db_fetch_array($history_check);
     if (!empty($history)) {
-        echo 'error';
+        echo 'ERROR';
         exit();
     }
 
-    echo 'VERIFIED';
+    echo 'SUCCESS';
 } else {
-    echo 'error';
+    echo 'ERROR';
     exit();
 }
 
