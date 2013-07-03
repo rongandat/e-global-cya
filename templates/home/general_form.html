@@ -81,7 +81,7 @@
                                                                                 Currency:
                                                                                 </font>
                                                                                 <select id="" class="form" name="checkout_currency">
-                                                                                   {html_options options=$balance_currencies selected=$balance_currency}
+                                                                                    {html_options options=$balance_currencies selected=$balance_currency}
                                                                                 </select>
                                                                             </td>
                                                                         </tr>
@@ -209,6 +209,7 @@
                                                                         <font size="2" face="Tahoma">Field Value</font>
                                                                     </td>
                                                                 </tr>
+                                                                {section name=foo start=0 loop=$fields_extra step=1}
                                                                 <tr>
                                                                     <td width="150">
                                                                         &nbsp;
@@ -217,27 +218,12 @@
                                                                         &nbsp;
                                                                     </td>
                                                                 </tr>
-                                                                <tr><td><input type="text" name="extra_field[1]" value="{$extra_field1}"></td><td>=</td><td><input type="text" name="extra_value[1]" value="{$extra_value1}"></td></tr>
-                                                                <tr>
-                                                                    <td width="150">
-                                                                        &nbsp;
-                                                                    <td width="50"></td>
-                                                                    <td width="150">
-                                                                        &nbsp;
-                                                                    </td>
-                                                                </tr>
-                                                                <tr><td><input type="text" name="extra_field[2]" value="{$extra_field2}"></td><td>=</td><td><input type="text" name="extra_value[2]" value="{$extra_value2}"></td></tr>
-                                                                <tr>
-                                                                    <td width="150">
-                                                                        &nbsp;
-                                                                    <td width="50"></td>
-                                                                    <td width="150">
-                                                                        &nbsp;
-                                                                    </td>
-                                                                </tr>
-                                                                <tr><td><input type="text" name="extra_field[3]" value="{$extra_field3}"></td><td>=</td><td><input type="text" name="extra_value[3]" value="{$extra_value3}"></td></tr>
+                                                                <tr><td><input type="text" name="extra_field[{$smarty.section.foo.index}]" value="{$extra_field[$smarty.section.foo.index]}"></td><td>=</td><td><input type="text" name="extra_value[{$smarty.section.foo.index}]" value="{$extra_value[$smarty.section.foo.index]}"></td></tr>
+                                                                {/section}
                                                             </table>
+
                                                         </div>
+                                                       
                                                     </td>
                                                 </tr>
                                                 <tr>

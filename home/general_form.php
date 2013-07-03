@@ -7,7 +7,7 @@ foreach ($currencies_array as $currency_code => $currency_info) {
 }
 $smarty->assign('balance_currencies', $balance_currencies);
 //eof: get currencies
-
+$smarty->assign('fields_extra',FIELDS_EXTRA_SCI_LIMIT);
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     postAssign($smarty);
     $posts = $_POST;

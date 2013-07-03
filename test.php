@@ -7,7 +7,10 @@
         <input type="hidden" name="fail_url" value="http://egcash.cyahost.com/fail.php">
         <input type="hidden" name="success_url" value="http://egcash.cyahost.com/success.php">
         <input type="hidden" name="status_url" value="http://egcash.cyahost.com/status.php">
-        <input type="hidden" name="status_method" value="POST">
+        <input type="hidden" name="status_method" value="GET">
         <input type="hidden" name="action" value="process">
+        <input type="hidden" name="fsdfs" value="fsdfsd">
+        <input type="hidden" name="fsfs" value="gdfg">
+        <input type="hidden" name="gdgd" value="gdgd">
         <input type="submit" />
 </form>

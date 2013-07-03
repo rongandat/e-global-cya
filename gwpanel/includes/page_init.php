@@ -1,5 +1,5 @@
 <?php
-
+    error_reporting(1);
 	include('../includes/configs.php');
 
 	include(_CLASSES_DIR.'validator.php');		

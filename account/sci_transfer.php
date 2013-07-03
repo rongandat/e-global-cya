@@ -73,32 +73,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $batch_number = tep_create_random_value(11, 'digits');
             $amount_text = $balance;
             if ($checkout_amount > $curency['value']) {
-                $transaction_history_array = array(
-                    'from_userid' => $login_userid,
-                    'batch_number' => '',
-                    'to_userid' => $to_userid,
-                    'amount' => $amount,
-                    'transaction_time' => date('YmdHis'),
-                    'transaction_memo' => $transaction_memo,
-                    'from_account' => $login_account_number,
-                    'to_account' => $to_account,
-                    'transaction_currency' => $balance_currency,
-                    'amount_text' => $amount_text,
-                    'transaction_status' => 'error',
-                    'description' => 'You have not enough balance to transfer the amount',
-                    'fail_url' => $fail_url,
-                    'cancel_url' => $cancel_url,
-                    'status_url' => $status_url,
-                    'success_url' => $success_url,
-                    'extra_fields' => serialize($extra_fields),
-                    'status_method' => $status_method
-                    
-                );
-                db_perform(_TABLE_TRANSACTIONS_HISTOTY, $transaction_history_array);
-                $history_id = db_insert_id();
-                $smarty->assign('status_transaction', 'error');
-                $smarty->assign('transaction', $transaction_history_array);
-                tep_redirect(get_href_link(PAGE_SCI_TRANSFER_COMPLETE, 'transaction=' . $history_id));
+                $error_code[] = 'ERR_001';
+                $smarty->assign('errors', $error_code);
+                $smarty->assign('error_code', $__ERROR_CODE);
             } else {
 
                 $transaction_data_array = array(
@@ -113,7 +90,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     'transaction_currency' => $balance_currency,
                     'amount_text' => $amount_text,
                     'transaction_status' => 'completed',
-                    
                 );
 
                 db_perform(_TABLE_TRANSACTIONS, $transaction_data_array);
@@ -210,5 +186,4 @@ $smarty->assign('validerrors', $validator->errors);
 $smarty->assign('step_value', $step);
 
 $_html_main_content = $smarty->fetch('account/sci_transfer.html');
-
 ?>

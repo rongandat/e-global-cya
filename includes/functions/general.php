@@ -136,9 +136,8 @@ function passgen($len)
     if (tep_not_null($plain) && tep_not_null($encrypted)) {
 // split apart the hash / salt
       $stack = explode(':', $encrypted);
-
       if (sizeof($stack) != 2) return false;
-
+      
       if (md5($stack[1] . $plain) == $stack[0]) {
         return true;
       }

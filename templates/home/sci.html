@@ -3,12 +3,13 @@
         <tbody><tr>
                 <td width="100%" height="20">&nbsp;</td>
             </tr>
+            
+            {if empty($errors)}
             <tr>
                 <td width="100%" valign="top" height="70">
                     <font size="3" face="Tahoma" color="#800000"><b>Pay with a Eglobalcash Account</b>
                     </font></td>
             </tr>
-            {if !empty($user_info)}
             <tr>
                 <td width="100%" valign="top" height="13">
                     <div align="center">
@@ -70,12 +71,55 @@
             </tr>
             {else}
             <tr>
-                <td >{include file="$_TEMPLATE_SOURCE_DIR/modules/validate_error.tpl" }</td>
+                <td width="100%" valign="top" height="70">
+                    <font size="3" face="Tahoma" color="#800000"><b>Errors:</b>
+                    </font></td>
             </tr>
-            {/if}
             <tr>
                 <td width="100%" valign="top" height="57">
-                    &nbsp;</td>
+                    <div align="center">
+                        <center>
+                            <table width="580" cellspacing="0" cellpadding="15" bordercolor="#111111" border="0" id="" style="border-collapse: collapse">
+                                <tbody><tr>
+                                        <td width="100%" bgcolor="#CCCCCC">
+                                            <input type="hidden" value="process" name="action">
+                                            <table width="100%" cellspacing="0" cellpadding="0" bordercolor="#111111" border="0" id="AutoNumber39" style="border-collapse: collapse">
+                                                <tbody>
+                                                    <tr>
+                                                        <td width="100%"><font size="2" face="Tahoma"> <div align="left">
+                                                                <table width="350" cellspacing="0" cellpadding="0" bordercolor="#111111" border="0" id="AutoNumber40" style="border-collapse: collapse">
+                                                                    <tbody>
+                                                                        {foreach from=$errors item=foo}
+                                                                        <tr>
+                                                                            <td width="100%">
+                                                                                <font size="2" face="Tahoma" style="color: red">{$error_code[$foo]}</font>
+                                                                            </td>
+                                                                        </tr>
+                                                                        
+                                                                        {/foreach}
+                                                                    </tbody></table>
+
+                                                            </div>
+
+                                                        </td>
+                                                    </tr>
+                                                    
+                                                </tbody></table>
+                                        </td>
+                                    </tr>
+                                </tbody></table>
+                        </center>
+                    </div>
+                </td>
             </tr>
+            {/if}
         </tbody></table>
+</div>
+<div align="right">
+    <table width="650" cellspacing="0" cellpadding="0" bordercolor="#111111" border="0" style="border-collapse: collapse" id="AutoNumber43">
+        <tbody><tr>
+                <td width="100%" height="80">&nbsp;</td>
+            </tr>
+        </tbody>
+    </table>
 </div>

@@ -16,6 +16,7 @@
 	include('includes/dbtables.php');	
 	include('includes/pages.php');
 	
+	
 	db_connect(DB_SERVER,DB_SERVER_USERNAME,DB_SERVER_PASSWORD,DB_DATABASE);
 
 	// set the application parameters
@@ -30,6 +31,7 @@
 	
 	include(_CLASSES_DIR.'email.php');
 	include(_CLASSES_DIR.'mime.php');  	
+        include('includes/error_code.php');
 	
 // BEGIN sessions/cookies -------------
 		// set the type of request (secure or not)

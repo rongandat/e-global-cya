@@ -2,15 +2,19 @@
 
 //set POST variables
 $url = 'http://egcash.cyahost.com/sci_validate.php';
+//$url = 'http://global.lc/sci_validate.php';
 foreach ($_REQUEST as $key => $post) {
     $fields[$key] = urldecode($post);
 }
 
-//url-ify the data for the POST
-$fields_string = '';
-foreach ($fields as $key => $value) {
-    $fields_string .= $key . '=' . $value . '&';
-}
+$validateField = trim($fields['payee_account']);
+$validateField .= trim($fields['payer_account']);
+$validateField .= trim($fields['checkout_amount']);
+$validateField .= trim($fields['transaction_currency']);
+$validateField .= trim($fields['batch_number']);
+$validateField .= trim($fields['transaction_status']);
+$fields_string = 'validate=' . md5($validateField);
+
 rtrim($fields_string, '&');
 //open connection
 $ch = curl_init();
