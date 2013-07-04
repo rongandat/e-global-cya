@@ -34,6 +34,23 @@ if ($requests['checkout_amount'] < 0) {
 if (empty($requests['checkout_currency'])) {
     $error_code[] = 'ERR_006';
 }
+if (empty($requests['checkout_currency'])) {
+    $error_code[] = 'ERR_006';
+}
+
+if (!is_numeric($requests['checkout_amount']) || $requests['checkout_amount'] < 0) {
+    $error_code[] = 'ERR_009';
+}
+if (empty($requests['checkout_currency'])) {
+    $error_code[] = 'ERR_010';
+} else {
+    $sql_currencies_page = "SELECT * FROM " . _TABLE_CURRENCIES . " WHERE code='{$requests['checkout_currency']}'";
+    $currency_page_query = db_query($sql_currencies_page);
+    if (db_num_rows($currency_page_query) <= 0) {
+        $error_code[] = 'ERR_010';
+    }
+}
+
 
 $i = 0;
 foreach ($requests as $field => $value) {
@@ -114,7 +131,7 @@ if (empty($error_code)) {
         $validator->addError(ERROR_FIELD_SCI, ERROR_INVALID_ACCOUNT_SCI);
     }
 } else {
-   
+
     $smarty->assign('errors', $error_code);
     $smarty->assign('error_code', $__ERROR_CODE);
 }

@@ -45,7 +45,7 @@ if ($history['transaction_status'] == 'completed') {
     if (db_num_rows($user_query) == 0) {
         tep_redirect(get_href_link(PAGE_TRANSFER));
     }
-    
+
     if (!empty($history['status_url'])) {
         $dataPost = array(
             'payee_account' => $history['to_account'],
@@ -75,6 +75,8 @@ if ($history['transaction_status'] == 'completed') {
     } else {
         $sql_delete = "DELETE  FROM " . _TABLE_TRANSACTIONS_HISTOTY . " WHERE history_id='" . $history_id . "'";
         db_query($sql_delete);
+        if (!empty($history['success_url']))
+            $smarty->assign('url', $history['success_url']);
     }
 
     $user_to_info = db_fetch_array($user_query);

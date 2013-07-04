@@ -3,34 +3,37 @@
 -- Server version:               5.5.16 - MySQL Community Server (GPL)
 -- Server OS:                    Win32
 -- HeidiSQL version:             7.0.0.4053
--- Date/time:                    2013-07-02 14:57:10
+-- Date/time:                    2013-07-04 14:28:31
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET NAMES utf8 */;
 /*!40014 SET FOREIGN_KEY_CHECKS=0 */;
 
--- Dumping structure for table eglobal_main_new.admins
+-- Dumping structure for table global.admins
 DROP TABLE IF EXISTS `admins`;
 CREATE TABLE IF NOT EXISTS `admins` (
-  `admin_id` int(11) NOT NULL AUTO_INCREMENT,
-  `admin_email` varchar(100) CHARACTER SET latin1 NOT NULL DEFAULT '',
-  `admin_password` varchar(255) CHARACTER SET latin1 NOT NULL DEFAULT '',
-  `admin_contactname` varchar(50) CHARACTER SET latin1 NOT NULL DEFAULT '',
-  `admin_username` varchar(30) CHARACTER SET latin1 NOT NULL DEFAULT '',
-  PRIMARY KEY (`admin_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `contactname` varchar(50) NOT NULL,
+  `username` varchar(30) NOT NULL,
+  `created_on` datetime NOT NULL,
+  `group_id` int(10) NOT NULL,
+  `last_login` datetime NOT NULL,
+  `ip_address` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
--- Dumping data for table eglobal_main_new.admins: 3 rows
+-- Dumping data for table global.admins: 2 rows
 /*!40000 ALTER TABLE `admins` DISABLE KEYS */;
-INSERT INTO `admins` (`admin_id`, `admin_email`, `admin_password`, `admin_contactname`, `admin_username`) VALUES
-	(2, 'osccoder@yahoo.com', '77bd33bc98f4844dc0cffb426295e920:0c', 'Minh Mai', 'minhmt'),
-	(3, 'shibata.shinei@gmail.com', 'da326e2cd3203911bb2367214f8d8bc6:d4', 'Shin', 'shinbata'),
-	(4, 'shibata.shinei@gmail.com', '808549db83474d3bbbb2310b8a79b434:74', 'Shinei Shibata', 'shinshibata');
+INSERT INTO `admins` (`id`, `email`, `password`, `contactname`, `username`, `created_on`, `group_id`, `last_login`, `ip_address`) VALUES
+	(1, 'ngoclecong@gmail.com', '2dcd129bcf58cec2216566d510ecdffa:8b', 'Le Cong Ngoc', 'administrator', '2012-11-21 14:41:21', 1, '2012-11-21 14:45:34', '0.0.0.0'),
+	(2, 'ngdasd@gmail.com', 'e366dfae7d9a1a60d788e1bd3d45e5ea:d0', 'Le ngoc 3', 'ngocngo312', '2012-11-05 13:55:53', 0, '0000-00-00 00:00:00', '');
 /*!40000 ALTER TABLE `admins` ENABLE KEYS */;
 
 
--- Dumping structure for table eglobal_main_new.configuration
+-- Dumping structure for table global.configuration
 DROP TABLE IF EXISTS `configuration`;
 CREATE TABLE IF NOT EXISTS `configuration` (
   `configuration_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -45,45 +48,60 @@ CREATE TABLE IF NOT EXISTS `configuration` (
   `use_function` varchar(255) DEFAULT NULL,
   `set_function` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`configuration_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=167 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=183 DEFAULT CHARSET=latin1;
 
--- Dumping data for table eglobal_main_new.configuration: 30 rows
+-- Dumping data for table global.configuration: 45 rows
 /*!40000 ALTER TABLE `configuration` DISABLE KEYS */;
 INSERT INTO `configuration` (`configuration_id`, `configuration_title`, `configuration_key`, `configuration_value`, `configuration_description`, `configuration_group_id`, `sort_order`, `last_modified`, `date_added`, `use_function`, `set_function`) VALUES
 	(137, 'Session Directory', 'SESSION_WRITE_DIRECTORY', '/tmp', 'If sessions are file based, store them in this directory.', 15, 1, NULL, '2007-09-18 06:32:54', NULL, NULL),
-	(139, 'Check SSL Session ID', 'SESSION_CHECK_SSL_SESSION_ID', 'False', 'Validate the SSL_SESSION_ID on every secure HTTPS page request.', 15, 3, NULL, '2007-09-18 06:32:54', NULL, 'tep_cfg_select_option(array(\'True\', \'False\'),'),
+	(139, 'Check SSL Session ID', 'SESSION_CHECK_SSL_SESSION_ID', 'False', 'Validate the SSL_SESSION_ID on every secure HTTPS page request.', 15, 3, '2012-08-13 08:41:27', '2007-09-18 06:32:54', NULL, 'tep_cfg_select_option(array(\'True\', \'False\'),'),
 	(140, 'Check User Agent', 'SESSION_CHECK_USER_AGENT', 'False', 'Validate the clients browser user agent on every page request.', 15, 4, NULL, '2007-09-18 06:32:54', NULL, 'tep_cfg_select_option(array(\'True\', \'False\'),'),
 	(141, 'Check IP Address', 'SESSION_CHECK_IP_ADDRESS', 'False', 'Validate the clients IP address on every page request.', 15, 5, NULL, '2007-09-18 06:32:54', NULL, 'tep_cfg_select_option(array(\'True\', \'False\'),'),
 	(142, 'Prevent Spider Sessions', 'SESSION_BLOCK_SPIDERS', 'False', 'Prevent known spiders from starting a session.', 15, 6, NULL, '2007-09-18 06:32:54', NULL, 'tep_cfg_select_option(array(\'True\', \'False\'),'),
 	(143, 'Recreate Session', 'SESSION_RECREATE', 'False', 'Recreate the session to generate a new session ID when the customer logs on or creates an account (PHP >=4.1 needed).', 15, 7, NULL, '2007-09-18 06:32:54', NULL, 'tep_cfg_select_option(array(\'True\', \'False\'),'),
-	(138, 'Force Cookie Use', 'SESSION_FORCE_COOKIE_USE', 'False', 'Force the use of sessions when cookies are only enabled.', 15, 2, NULL, '2007-09-18 06:32:54', NULL, 'tep_cfg_select_option(array(\'True\', \'False\'),'),
-	(145, 'upload image extensions', 'IMAGE_UPLOAD_EXTS', '.bmp, .gif, .jpg, .jpeg, .png', 'extensiond of upload images', 6, NULL, NULL, '0000-00-00 00:00:00', NULL, NULL),
-	(146, 'Use Resampling', 'THUMBNAIL_USE_RESAMPLING', 'true', 'Set the value to true to generate resampled thumbnails resulting in smoother-looking images. (Not supported in GD versions < 2.0.1)', 100, 0, NULL, '2007-10-03 20:41:25', NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),'),
-	(147, 'Use True Colour', 'THUMBNAIL_TRUE_COLOUR', 'true', 'Create true colour thumbnails. Provides better overall quality but set to false if GD version < 2.0.1 or if creating transparent thumbnails.', 100, 1, NULL, '2007-10-03 20:41:25', NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),'),
-	(148, 'Output GIF as JPEG', 'THUMBNAIL_OUTPUT_JPEG', 'false', 'Output GIF as JPEG instead of GIF or PNG. Note that your GIF transparencies will not be retained. Requires GD version > 1.6. Set the \'Background matte colour\' below if setting this option to true.', 100, 2, NULL, '2007-10-03 20:41:25', NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),'),
+	(138, 'Force Cookie Use', 'SESSION_FORCE_COOKIE_USE', 'True', 'Force the use of sessions when cookies are only enabled.', 15, 2, '2012-08-13 12:22:29', '2007-09-18 06:32:54', NULL, 'tep_cfg_select_option(array(\'True\', \'False\'),'),
+	(145, 'upload image extensions', 'IMAGE_UPLOAD_EXTS', '.bmp, .gif, .jpg, .jpeg, .png', 'extensiond of upload images', 6, NULL, '2012-08-13 08:49:53', '0000-00-00 00:00:00', NULL, NULL),
+	(146, 'Use Resampling', 'THUMBNAIL_USE_RESAMPLING', 'false', 'Set the value to true to generate resampled thumbnails resulting in smoother-looking images. (Not supported in GD versions < 2.0.1)', 100, 0, '2012-08-14 10:41:30', '2007-10-03 20:41:25', NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),'),
+	(147, 'Use True Colour', 'THUMBNAIL_TRUE_COLOUR', 'true', 'Create true colour thumbnails. Provides better overall quality but set to false if GD version < 2.0.1 or if creating transparent thumbnails.', 100, 1, '2012-08-14 10:38:34', '2007-10-03 20:41:25', NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),'),
+	(148, 'Output GIF as JPEG', 'THUMBNAIL_OUTPUT_JPEG', 'true', 'Output GIF as JPEG instead of GIF or PNG. Note that your GIF transparencies will not be retained. Requires GD version > 1.6. Set the \'Background matte colour\' below if setting this option to true.', 100, 2, '2012-08-13 12:22:36', '2007-10-03 20:41:25', NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),'),
 	(149, 'Background matte colour (GIF as JPEG)', 'THUMBNAIL_BACKGROUND_MATTE', '255,255,255', 'Define RGB colour value for background matte if outputting GIF as JPEG in the format 255,255,255 (comma delimited). An example of the RGB colour system: WHITE=255,255,255; BLACK=0,0,0; RED=255,0,0.', 100, 3, NULL, '2007-10-03 20:41:25', NULL, NULL),
 	(150, 'Cache images on the server', 'THUMBNAIL_CACHE_SERVER', 'true', 'Save requested thumbnails on the server. Recommended setting is \'true\'. This will use slightly more disk space but save processor and bandwidth.', 100, 4, NULL, '2007-10-03 20:41:25', NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),'),
 	(151, 'Thumbnail path', 'THUMBNAIL_PATH', '', 'Specify a sub-directory for the thumbnail cache. Leave blank for the catalog/images/ directory (default). Use \'thumbnails/\' syntax (with trailing slash) to create a separate directory and chmod it to 777.', 100, 5, NULL, '2007-10-03 20:41:25', NULL, NULL),
-	(152, 'Cache images in browser', 'THUMBNAIL_CACHE_BROWSER', 'true', 'Allow browsers to cache thumbnails locally. This will save having to transfer another copy of the same file for each successive view. Recommended setting is \'true\'.', 100, 6, NULL, '2007-10-03 20:41:25', NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),'),
+	(152, 'Cache images in browser', 'THUMBNAIL_CACHE_BROWSER', 'true', 'Allow browsers to cache thumbnails locally. This will save having to transfer another copy of the same file for each successive view. Recommended setting is \'true\'.', 100, 6, '2012-08-14 09:54:29', '2007-10-03 20:41:25', NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),'),
 	(153, 'JPEG Compression Level', 'THUMBNAIL_JPEG_COMPRESSION', '70', 'Set the JPEG compression quality for resampled images. The default is 100. Recommended setting is 70.', 100, 7, NULL, '2007-10-03 20:41:25', NULL, NULL),
 	(154, 'Allow larger', 'THUMBNAIL_ALLOW_LARGER', 'false', 'Allow the creation of thumbnail images that are larger than their original counterpart. This causes upsampling and can make the images distorted.', 100, 8, NULL, '2007-10-03 20:41:25', NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),'),
 	(155, 'Show original', 'THUMBNAIL_SHOW_ORIGINAL', 'true', 'If \'Allow larger\' is set to false, you can opt to output the original image. Better leave it true if you want pixel_trans_* to work as expected.', 100, 9, NULL, '2007-10-03 20:41:25', NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),'),
-	(55, 'Small Image Width', 'SMALL_IMAGE_WIDTH', '80', 'The pixel width of small images', 4, 1, NULL, '2007-09-18 06:32:54', NULL, NULL),
+	(55, 'Small Image Width', 'SMALL_IMAGE_WIDTH', '808', 'The pixel width of small images', 4, 1, '2012-08-14 10:20:04', '2007-09-18 06:32:54', NULL, NULL),
 	(56, 'Small Image Height', 'SMALL_IMAGE_HEIGHT', '80', 'The pixel height of small images', 4, 2, NULL, '2007-09-18 06:32:54', NULL, NULL),
 	(62, 'Image Required', 'IMAGE_REQUIRED', 'true', 'Enable to display broken images. Good for development.', 4, 8, NULL, '2007-09-18 06:32:54', NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),'),
-	(61, 'Calculate Image Size', 'CONFIG_CALCULATE_IMAGE_SIZE', 'true', 'Calculate the size of images?', 4, 7, NULL, '2007-09-18 06:32:54', NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),'),
-	(9, 'Switch To Default Language Currency', 'USE_DEFAULT_LANGUAGE_CURRENCY', 'false', 'Automatically switch to the language\'s currency when it is changed', 1, 10, NULL, '2007-09-18 06:32:54', NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),'),
-	(85, 'Default Currency', 'DEFAULT_CURRENCY', 'USD', 'Default Currency', 6, 0, NULL, '2007-09-18 06:32:54', NULL, NULL),
-	(156, 'Frontend date format', 'FRONTEND_DATE_FORMAT', '%d/%m/%y', 'format of Date that displayed on Front-End', 1, NULL, NULL, '0000-00-00 00:00:00', NULL, NULL),
-	(157, 'Frontend Time format', 'FRONTEND_TIME_FORMAT', '%Hh%i', 'format of TIME that displayed on Front-End', 1, NULL, NULL, '0000-00-00 00:00:00', NULL, NULL),
-	(158, 'Name of the site', 'SITE_NAME', 'Global Cash Payment Network Service', 'the value use for email out SENDER', 1, NULL, NULL, '0000-00-00 00:00:00', NULL, NULL),
-	(159, 'Site contact email', 'SITE_CONTACT_EMAIL', 'admin@e-globalcash.com', 'email that used for service contacts or supports', 1, NULL, NULL, '0000-00-00 00:00:00', NULL, NULL),
-	(160, 'media file extendsions', 'MEDIA_FILE_EXTS', '.swf,.mpg', 'extensions that acceptable for uploading(music/video)', 0, NULL, NULL, '0000-00-00 00:00:00', NULL, NULL),
-	(162, 'Image upload file extendsions', 'IMAGE_UPLOAD_EXTS', '.gif, .jpg, .jpeg', 'File extensions allowed for images file uploading', 4, NULL, NULL, '2009-10-19 00:00:00', NULL, NULL);
+	(61, 'Calculate Image Size', 'CONFIG_CALCULATE_IMAGE_SIZE', 'false', 'Calculate the size of images?', 4, 7, '2012-08-13 15:14:14', '2007-09-18 06:32:54', NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),'),
+	(9, 'Switch To Default Language Currency', 'USE_DEFAULT_LANGUAGE_CURRENCY', 'true', 'Automatically switch to the language\'s currency when it is changed', 1, 10, '2012-08-13 15:13:49', '2007-09-18 06:32:54', NULL, 'tep_cfg_select_option(array(\'true\', \'false\'),'),
+	(167, 'Email No reply Admin', 'email_send_noreply', 'no_reply@eglobal.com', 'email that used for service sent when user registing', 1, NULL, NULL, '0000-00-00 00:00:00', NULL, NULL),
+	(156, 'Frontend date format', 'frontend_date_format', 'd/m/Y', 'format of Date that displayed on Front-End', 1, NULL, '2012-08-22 08:39:25', '0000-00-00 00:00:00', NULL, NULL),
+	(157, 'Frontend Time format', 'frontend_time_format', 'H:i:s', 'format of TIME that displayed on Front-End', 1, NULL, '2012-08-22 08:29:56', '0000-00-00 00:00:00', NULL, NULL),
+	(158, 'Name of the site', 'site_name', 'Cyacash', 'the value use for email out SENDER', 1, NULL, '2012-08-22 08:50:51', '0000-00-00 00:00:00', NULL, NULL),
+	(159, 'Site contact email', 'site_contact_mail', 'ngoclecong@gmail.com', 'email that used for service contacts or supports', 1, NULL, '2012-08-22 08:51:04', '0000-00-00 00:00:00', NULL, NULL),
+	(160, 'media file extendsions', 'MEDIA_FILE_EXTS', '123443322', 'extensions that acceptable for uploading(music/video)', 0, NULL, '2012-08-14 10:42:05', '0000-00-00 00:00:00', NULL, NULL),
+	(162, 'Image upload file extendsions', 'IMAGE_UPLOAD_EXTS', '.gif, .jpg, .jpeg', 'File extensions allowed for images file uploading', 4, NULL, NULL, '2009-10-19 00:00:00', NULL, NULL),
+	(168, 'Private Payment', 'PRIVATE_PAYMENT_FEE', '1.5', 'Private Payment Fee', 105, NULL, '2012-08-24 16:18:30', '0000-00-00 00:00:00', NULL, NULL),
+	(169, 'Private Payment Currency', 'PRIVATE_PAYMENT_CURRENCY', 'USD', 'Private payment currency', 105, NULL, NULL, '0000-00-00 00:00:00', NULL, NULL),
+	(170, 'Rate Dola', 'RATE_USD', '1', 'Rate USD', 103, NULL, '2012-08-24 16:01:53', '0000-00-00 00:00:00', NULL, NULL),
+	(171, 'Rate Viet Nam Dong', 'RATE_VND', '20000', 'Rate Viet Nam Dong', 103, NULL, '2012-10-31 15:58:30', '0000-00-00 00:00:00', NULL, NULL),
+	(172, 'Rate Euro', 'RATE_EUR', '0.7716', 'Rate Euro', 103, NULL, '2012-10-31 15:57:27', '0000-00-00 00:00:00', NULL, NULL),
+	(173, 'KRW', 'RATE_KRW', '', 'Rate krw', 103, NULL, NULL, '0000-00-00 00:00:00', NULL, NULL),
+	(174, 'RMB', 'RATE_RMB', '', 'Rate RMB', 103, NULL, NULL, '0000-00-00 00:00:00', NULL, NULL),
+	(175, 'GBP', 'RATE_GPB', '', 'Rate GPB', 103, NULL, NULL, '0000-00-00 00:00:00', NULL, NULL),
+	(176, 'Switzerland, Francs', 'RATE_CHF', '', 'Rate Switzerland, Francs', 103, NULL, NULL, '0000-00-00 00:00:00', NULL, NULL),
+	(177, 'Taiwan, New Dollars', 'RATE_NT$', '', 'Rate Taiwan, New Dollars', 103, NULL, NULL, '0000-00-00 00:00:00', NULL, NULL),
+	(178, 'Denmark, Kroner', 'RATE_DKK', '', 'Rate Denmark, Kroner', 103, NULL, NULL, '0000-00-00 00:00:00', NULL, NULL),
+	(179, 'Hong Kong, Dollars', 'RATE_HKD', '', 'Rate Hong Kong, Dollars', 103, NULL, NULL, '0000-00-00 00:00:00', NULL, NULL),
+	(180, 'Russia, Rubles', 'RATE_RUB', '', 'Rate Russia, Rubles', 103, NULL, NULL, '0000-00-00 00:00:00', NULL, NULL),
+	(181, 'South Africa, Rand', 'RATE_ZAR', '', 'Rate South Africa, Rand', 103, NULL, NULL, '0000-00-00 00:00:00', NULL, NULL),
+	(182, 'Thailand, Baht', 'RATE_THB', '', 'Rate Thailand, Baht', 103, NULL, NULL, '0000-00-00 00:00:00', NULL, NULL);
 /*!40000 ALTER TABLE `configuration` ENABLE KEYS */;
 
 
--- Dumping structure for table eglobal_main_new.configuration_group
+-- Dumping structure for table global.configuration_group
 DROP TABLE IF EXISTS `configuration_group`;
 CREATE TABLE IF NOT EXISTS `configuration_group` (
   `configuration_group_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -92,35 +110,56 @@ CREATE TABLE IF NOT EXISTS `configuration_group` (
   `sort_order` int(5) DEFAULT NULL,
   `visible` int(1) DEFAULT '1',
   PRIMARY KEY (`configuration_group_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=105 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=106 DEFAULT CHARSET=latin1;
 
--- Dumping data for table eglobal_main_new.configuration_group: 5 rows
+-- Dumping data for table global.configuration_group: 6 rows
 /*!40000 ALTER TABLE `configuration_group` DISABLE KEYS */;
 INSERT INTO `configuration_group` (`configuration_group_id`, `configuration_group_title`, `configuration_group_description`, `sort_order`, `visible`) VALUES
 	(6, 'Module Options', 'Hidden from configuration', 6, 0),
 	(100, 'Thumbnails', '\'On the Fly\' Auto Thumbnailer configuration settings', 5, 1),
-	(4, 'Images', 'Image parameters', 4, 1),
-	(1, 'Site settings', 'Settings for my site', NULL, 1),
-	(103, 'Rates', 'Settings for rates', 103, 1);
+	(4, 'Images', 'Image parameters', 2, 1),
+	(1, 'Site settings', 'Settings for my site', 1, 1),
+	(103, 'Rates', 'Settings for rates', 3, 1),
+	(105, 'Extra Fees', 'Extra fees', 4, 1);
 /*!40000 ALTER TABLE `configuration_group` ENABLE KEYS */;
 
 
--- Dumping structure for table eglobal_main_new.countries
+-- Dumping structure for table global.contacts
+DROP TABLE IF EXISTS `contacts`;
+CREATE TABLE IF NOT EXISTS `contacts` (
+  `contact_id` int(10) NOT NULL AUTO_INCREMENT,
+  `fullname` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `subject` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `email` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `content` text COLLATE utf8_bin,
+  `created_on` datetime DEFAULT NULL,
+  PRIMARY KEY (`contact_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- Dumping data for table global.contacts: ~2 rows (approximately)
+/*!40000 ALTER TABLE `contacts` DISABLE KEYS */;
+INSERT INTO `contacts` (`contact_id`, `fullname`, `subject`, `email`, `content`, `created_on`) VALUES
+	(1, 'Le Cong Ngoc', 'Test contact', 'ngoclecong@gmail.com', 'dasdsa', '2012-11-12 10:28:41'),
+	(2, 'Le Cong Ngoc', 'Test contact', 'ngoclecong@gmail.com', 'dasdsa', '2012-11-12 10:30:58');
+/*!40000 ALTER TABLE `contacts` ENABLE KEYS */;
+
+
+-- Dumping structure for table global.countries
 DROP TABLE IF EXISTS `countries`;
 CREATE TABLE IF NOT EXISTS `countries` (
-  `countries_id` int(11) NOT NULL AUTO_INCREMENT,
-  `countries_name` varchar(64) NOT NULL DEFAULT '',
-  `countries_iso_code_2` char(2) NOT NULL DEFAULT '',
-  `countries_iso_code_3` char(3) NOT NULL DEFAULT '',
-  PRIMARY KEY (`countries_id`),
-  KEY `idx_countries_name_zen` (`countries_name`),
-  KEY `idx_iso_2_zen` (`countries_iso_code_2`),
-  KEY `idx_iso_3_zen` (`countries_iso_code_3`)
+  `country_id` int(11) NOT NULL AUTO_INCREMENT,
+  `country_name` varchar(64) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `iso_code_2` char(2) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `iso_code_3` char(3) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`country_id`),
+  KEY `idx_countries_name_zen` (`country_name`),
+  KEY `idx_iso_2_zen` (`iso_code_2`),
+  KEY `idx_iso_3_zen` (`iso_code_3`)
 ) ENGINE=MyISAM AUTO_INCREMENT=240 DEFAULT CHARSET=ujis;
 
--- Dumping data for table eglobal_main_new.countries: 239 rows
+-- Dumping data for table global.countries: 239 rows
 /*!40000 ALTER TABLE `countries` DISABLE KEYS */;
-INSERT INTO `countries` (`countries_id`, `countries_name`, `countries_iso_code_2`, `countries_iso_code_3`) VALUES
+INSERT INTO `countries` (`country_id`, `country_name`, `iso_code_2`, `iso_code_3`) VALUES
 	(1, 'Afghanistan', 'AF', 'AFG'),
 	(2, 'Albania', 'AL', 'ALB'),
 	(3, 'Algeria', 'DZ', 'DZA'),
@@ -363,140 +402,442 @@ INSERT INTO `countries` (`countries_id`, `countries_name`, `countries_iso_code_2
 /*!40000 ALTER TABLE `countries` ENABLE KEYS */;
 
 
--- Dumping structure for table eglobal_main_new.currencies
+-- Dumping structure for table global.countries_phone
+DROP TABLE IF EXISTS `countries_phone`;
+CREATE TABLE IF NOT EXISTS `countries_phone` (
+  `phone_id` int(10) NOT NULL AUTO_INCREMENT,
+  `contry_code` varchar(10) COLLATE utf8_bin DEFAULT NULL,
+  `code_phone` varchar(20) COLLATE utf8_bin DEFAULT NULL,
+  `country_name` varchar(150) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`phone_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=246 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- Dumping data for table global.countries_phone: ~245 rows (approximately)
+/*!40000 ALTER TABLE `countries_phone` DISABLE KEYS */;
+INSERT INTO `countries_phone` (`phone_id`, `contry_code`, `code_phone`, `country_name`) VALUES
+	(1, 'AF', '93', '+93 Afghanistan'),
+	(2, 'AX', '358', '+358 Åland Islands'),
+	(3, 'AL', '355', '+355 Albania'),
+	(4, 'DZ', '213', '+213 Algeria'),
+	(5, 'AS', '1684', '+1684 American Samoa'),
+	(6, 'AD', '376', '+376 Andorra'),
+	(7, 'AO', '244', '+244 Angola'),
+	(8, 'AI', '1264', '+1264 Anguilla'),
+	(9, 'AQ', NULL, '+0 Antarctica'),
+	(10, 'AG', '1268', '+1268 Antigua and Barbuda'),
+	(11, 'AR', '54', '+54 Argentina'),
+	(12, 'AM', '374', '+374 Armenia'),
+	(13, 'AW', '297', '+297 Aruba'),
+	(14, 'AU', '61', '+61 Australia'),
+	(15, 'AT', '43', '+43 Austria'),
+	(16, 'AZ', '994', '+994 Azerbaijan'),
+	(17, 'BS', '1242', '+1242 Bahamas'),
+	(18, 'BH', '973', '+973 Bahrain'),
+	(19, 'BD', '880', '+880 Bangladesh'),
+	(20, 'BB', '1246', '+1246 Barbados'),
+	(21, 'BY', '375', '+375 Belarus'),
+	(22, 'BE', '32', '+32 Belgium'),
+	(23, 'BZ', '501', '+501 Belize'),
+	(24, 'BJ', '229', '+229 Benin'),
+	(25, 'BM', '1441', '+1441 Bermuda'),
+	(26, 'BT', '975', '+975 Bhutan'),
+	(27, 'BO', '591', '+591 Bolivia (\',Plurinational State of'),
+	(28, 'BA', '387', '+387 Bosnia and Herzegovina'),
+	(29, 'BW', '267', '+267 Botswana'),
+	(30, 'BV', NULL, '+0 Bouvet Island'),
+	(31, 'BR', '55', '+55 Brazil'),
+	(32, 'IO', '246', '+246 British Indian Ocean Territory'),
+	(33, 'BN', '673', '+673 Brunei Darussalam'),
+	(34, 'BG', '359', '+359 Bulgaria'),
+	(35, 'BF', '226', '+226 Burkina Faso'),
+	(36, 'BI', '257', '+257 Burundi'),
+	(37, 'KH', '855', '+855 Cambodia'),
+	(38, 'CM', '237', '+273 Cameroon'),
+	(39, 'CA', '1', '+1 United States / Canada'),
+	(40, 'CV', '238', '+238 Cape Verde'),
+	(41, 'KY', '1345', '+1345 Cayman Islands'),
+	(42, 'CF', '236', '+236 Central African Republic'),
+	(43, 'TD', '235', '+235 Chad'),
+	(44, 'CL', '56', '+56 Chile'),
+	(45, 'CN', '86', '+86 China'),
+	(46, 'CX', '61', '+61 Christmas Island'),
+	(47, 'CC', '61', '+61 Cocos (\',Keeling) Islands'),
+	(48, 'CO', '57', '+57 Colombia'),
+	(49, 'KM', '269', '+296 Comoros'),
+	(50, 'CG', '242', '+242 Congo'),
+	(51, 'CD', '243', '+243 Congo, The Democratic Republic of the'),
+	(52, 'CK', '682', '+682 Cook Islands'),
+	(53, 'CR', '506', '+506 Costa Rica'),
+	(54, 'CI', '225', '+225 Côte D\'Ivoire'),
+	(55, 'HR', '385', '+385 Croatia'),
+	(56, 'CU', '53', '+53 Cuba'),
+	(57, 'CY', '357', '+357 Cyprus'),
+	(58, 'CZ', '420', '+420 Czech Republic'),
+	(59, 'DK', '45', '+45 Denmark'),
+	(60, 'DJ', '253', '+253 Djibouti'),
+	(61, 'DM', '1767', '+1767 Dominica'),
+	(62, 'DO', '1809', '+1809 Dominican Republic'),
+	(63, 'EC', '593', '+593 Ecuador'),
+	(64, 'EG', '20', '+20 Egypt'),
+	(65, 'SV', '503', '+503 El Salvador'),
+	(66, 'GQ', '240', '+240 Equatorial Guinea'),
+	(67, 'ER', '291', '+291 Eritrea'),
+	(68, 'EE', '372', '+372 Estonia'),
+	(69, 'ET', '251', '+251 Ethiopia'),
+	(70, 'FK', '500', '+500 Falkland Islands (\',Malvinas)'),
+	(71, 'FO', '298', '+298 Faroe Islands'),
+	(72, 'FJ', '679', '+679 Fiji'),
+	(73, 'FI', '358', '+358 Finland'),
+	(74, 'FR', '33', '+33 France'),
+	(75, 'GF', '594', '+594 French Guiana'),
+	(76, 'PF', '689', '+689 French Polynesia'),
+	(77, 'TF', NULL, '+0 French Southern Territories'),
+	(78, 'GA', '241', '+241 Gabon'),
+	(79, 'GM', '220', '+220 Gambia'),
+	(80, 'GE', '995', '+995 Georgia'),
+	(81, 'DE', '49', '+49 Germany'),
+	(82, 'GH', '233', '+233 Ghana'),
+	(83, 'GI', '350', '+350 Gibraltar'),
+	(84, 'GR', '30', '+30 Greece'),
+	(85, 'GL', '299', '+299 Greenland'),
+	(86, 'GD', '1473', '+1473 Grenada'),
+	(87, 'GP', '590', '+590 Guadeloupe'),
+	(88, 'GU', '1671', '+1671 Guam'),
+	(89, 'GT', '502', '+502 Guatemala'),
+	(90, 'GG', '44', '+44 Guernsey'),
+	(91, 'GN', '224', '+224 Guinea'),
+	(92, 'GW', '245', '+245 Guinea-Bissau'),
+	(93, 'GY', '592', '+592 Guyana'),
+	(94, 'HT', '509', '+509 Haiti'),
+	(95, 'HM', NULL, '+0 Heard Island and McDonald Islands'),
+	(96, 'VA', '379', '+379 Holy See (\',Vatican City State)'),
+	(97, 'HN', '504', '+504 Honduras'),
+	(98, 'HK', '852', '+852 Hong Kong'),
+	(99, 'HU', '36', '+36 Hungary'),
+	(100, 'IS', '354', '+354 Iceland'),
+	(101, 'IN', '91', '+91 India'),
+	(102, 'ID', '62', '+62 Indonesia'),
+	(103, 'IR', '98', '+98 Iran, Islamic Republic of'),
+	(104, 'IQ', '964', '+964 Iraq'),
+	(105, 'IE', '353', '+353 Ireland'),
+	(106, 'IM', '44', '+44 Isle of Man'),
+	(107, 'IL', '972', '+972 Israel'),
+	(108, 'IT', '39', '+39 Italy'),
+	(109, 'JM', '1876', '+1876 Jamaica'),
+	(110, 'JP', '81', '+81 Japan'),
+	(111, 'JE', '44', '+44 Jersey'),
+	(112, 'JO', '962', '+962 Jordan'),
+	(113, 'KZ', '7', '+7 Kazakhstan'),
+	(114, 'KE', '254', '+254 Kenya'),
+	(115, 'KI', '686', '+686 Kiribati'),
+	(116, 'KP', '850', '+850 Korea, Democratic People\'s Republic of'),
+	(117, 'KR', '82', '+82 Korea, Republic of'),
+	(118, 'KW', '965', '+965 Kuwait'),
+	(119, 'KG', '996', '+996 Kyrgyzstan'),
+	(120, 'LA', '856', '+856 Lao People\'s Democratic Republic'),
+	(121, 'LV', '371', '+371 Latvia'),
+	(122, 'LB', '961', '+961 Lebanon'),
+	(123, 'LS', '266', '+266 Lesotho'),
+	(124, 'LR', '231', '+231 Liberia'),
+	(125, 'LY', '218', '+218 Libyan Arab Jamahiriya'),
+	(126, 'LI', '423', '+423 Liechtenstein'),
+	(127, 'LT', '370', '+370 Lithuania'),
+	(128, 'LU', '352', '+352 Luxembourg'),
+	(129, 'MO', '853', '+853 Macao'),
+	(130, 'MK', '389', '+389 Macedonia, The Former Yugoslav Republic of'),
+	(131, 'MG', '261', '+261 Madagascar'),
+	(132, 'MW', '265', '+265 Malawi'),
+	(133, 'MY', '60', '+60 Malaysia'),
+	(134, 'MV', '960', '+960 Maldives'),
+	(135, 'ML', '223', '+223 Mali'),
+	(136, 'MT', '356', '+356 Malta'),
+	(137, 'MH', '692', '+692 Marshall Islands'),
+	(138, 'MQ', '596', '+596 Martinique'),
+	(139, 'MR', '222', '+222 Mauritania'),
+	(140, 'MU', '230', '+230 Mauritius'),
+	(141, 'YT', '269', '+269 Mayotte'),
+	(142, 'MX', '53', '+53 Mexico'),
+	(143, 'FM', '691', '+691 Micronesia, Federated States of'),
+	(144, 'MD', '373', '+373 Moldova, Republic of'),
+	(145, 'MC', '377', '+377 Monaco'),
+	(146, 'MN', '976', '+976 Mongolia'),
+	(147, 'ME', '382', '+382 Montenegro'),
+	(148, 'MS', '1664', '+1664 Montserrat'),
+	(149, 'MA', '212', '+212 Morocco'),
+	(150, 'MZ', '258', '+258 Mozambique'),
+	(151, 'MM', '95', '+95 Myanmar'),
+	(152, 'NA', '264', '+264 Namibia'),
+	(153, 'NR', '674', '+674 Nauru'),
+	(154, 'NP', '977', '+977 Nepal'),
+	(155, 'NL', '31', '+31 Netherlands'),
+	(156, 'AN', '599', '+599 Netherlands Antilles'),
+	(157, 'NC', '687', '+687 New Caledonia'),
+	(158, 'NZ', '64', '+64 New Zealand'),
+	(159, 'NI', '505', '+505 Nicaragua'),
+	(160, 'NE', '227', '+227 Niger'),
+	(161, 'NG', '234', '+234 Nigeria'),
+	(162, 'NU', '683', '+683 Niue'),
+	(163, 'NF', '672', '+672 Norfolk Island'),
+	(164, 'MP', '1670', '+1670 Northern Mariana Islands'),
+	(165, 'NO', '47', '+47 Norway'),
+	(166, 'OM', '968', '+968 Oman'),
+	(167, 'PK', '92', '+92 Pakistan'),
+	(168, 'PW', '680', '+680 Palau'),
+	(169, 'PS', '970', '+970 Palestinian Territory, Occupied'),
+	(170, 'PA', '507', '+507 Panama'),
+	(171, 'PG', '675', '+675 Papua New Guinea'),
+	(172, 'PY', '595', '+595 Paraguay'),
+	(173, 'PE', '51', '+51 Peru'),
+	(174, 'PH', '63', '+63 Philippines'),
+	(175, 'PN', '870', '+870 Pitcairn'),
+	(176, 'PL', '48', '+48 Poland'),
+	(177, 'PT', '351', '+351 Portugal'),
+	(178, 'PR', '1787', '+1787 Puerto Rico'),
+	(179, 'QA', '974', '+974 Qatar'),
+	(180, 'RE', '262', '+262 Reunion'),
+	(181, 'RO', '40', '+40 Romania'),
+	(182, 'RU', '7', '+7 Russian Federation'),
+	(183, 'RW', '250', '+250 Rwanda'),
+	(184, 'BL', '590', '+590 Saint Barthélemy'),
+	(185, 'SH', '290', '+290 Saint Helena'),
+	(186, 'KN', '1869', '+1869 Saint Kitts and Nevis'),
+	(187, 'LC', '1758', '+1758 Saint Lucia'),
+	(188, 'MF', '590', '+590 Saint Martin'),
+	(189, 'PM', '508', '+508 Saint Pierre and Miquelon'),
+	(190, 'VC', '1784', '+1784 Saint Vincent and the Grenadines'),
+	(191, 'WS', '685', '+685 Samoa'),
+	(192, 'SM', '378', '+378 San Marino'),
+	(193, 'ST', '239', '+239 São Tomé and Principe'),
+	(194, 'SA', '966', '+966 Saudi Arabia'),
+	(195, 'SN', '221', '+221 Senegal'),
+	(196, 'RS', '381', '+381 Serbia'),
+	(197, 'SC', '248', '+248 Seychelles'),
+	(198, 'SL', '232', '+232 Sierra Leone'),
+	(199, 'SG', '65', '+65 Singapore'),
+	(200, 'SK', '421', '+421 Slovakia'),
+	(201, 'SI', '386', '+386 Slovenia'),
+	(202, 'SB', '677', '+677 Solomon Islands'),
+	(203, 'SO', '252', '+252 Somalia'),
+	(204, 'ZA', '27', '+27 South Africa'),
+	(205, 'GS', '500', '+500 South Georgia and the South Sandwich Islands'),
+	(206, 'ES', '34', '+34 Spain'),
+	(207, 'LK', '94', '+94 Sri Lanka'),
+	(208, 'SD', '249', '+249 Sudan'),
+	(209, 'SR', '597', '+597 Suriname'),
+	(210, 'SJ', '47', '+47 Svalbard and Jan Mayen'),
+	(211, 'SZ', '268', '+268 Swaziland'),
+	(212, 'SE', '46', '+46 Sweden'),
+	(213, 'CH', '41', '+41 Switzerland'),
+	(214, 'SY', '963', '+963 Syrian Arab Republic'),
+	(215, 'TW', '886', '+886 Taiwan, Province Of China'),
+	(216, 'TJ', '992', '+992 Tajikistan'),
+	(217, 'TZ', '255', '+255 Tanzania, United Republic of'),
+	(218, 'TH', '66', '+66 Thailand'),
+	(219, 'TL', '670', '+670 Timor-Leste'),
+	(220, 'TG', '228', '+228 Togo'),
+	(221, 'TK', '690', '+690 Tokelau'),
+	(222, 'TO', '676', '+676 Tonga'),
+	(223, 'TT', '1686', '+1686 Trinidad and Tobago'),
+	(224, 'TN', '216', '+216 Tunisia'),
+	(225, 'TR', '90', '+90 Turkey'),
+	(226, 'TM', '993', '+993 Turkmenistan'),
+	(227, 'TC', '1649', '+1649 Turks and Caicos Islands'),
+	(228, 'TV', '688', '+688 Tuvalu'),
+	(229, 'UG', '256', '+256 Uganda'),
+	(230, 'UA', '380', '+380 Ukraine'),
+	(231, 'AE', '971', '+971 United Arab Emirates'),
+	(232, 'GB', '44', '+44 United Kingdom'),
+	(233, 'UM', NULL, '+0 United States Minor Outlying Islands'),
+	(234, 'UY', '598', '+598 Uruguay'),
+	(235, 'UZ', '998', '+998 Uzbekistan'),
+	(236, 'VU', '678', '+678 Vanuatu'),
+	(237, 'VE', '58', '+58 Venezuela'),
+	(238, 'VN', '84', '+84 Viet Nam'),
+	(239, 'VG', '284', '+284 Virgin Islands, British'),
+	(240, 'VI', '1340', '+1430 Virgin Islands, U.S.'),
+	(241, 'WF', '681', '+681 Wallis And Futuna'),
+	(242, 'EH', NULL, '+0 Western Sahara'),
+	(243, 'YE', '967', '+967 Yemen'),
+	(244, 'ZM', '260', '+260 Zambia'),
+	(245, 'ZW', '263', '+263 Zimbabwe');
+/*!40000 ALTER TABLE `countries_phone` ENABLE KEYS */;
+
+
+-- Dumping structure for table global.currencies
 DROP TABLE IF EXISTS `currencies`;
 CREATE TABLE IF NOT EXISTS `currencies` (
   `currencies_id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(32) NOT NULL DEFAULT '',
-  `code` char(3) NOT NULL DEFAULT '',
-  `symbol_left` varchar(12) DEFAULT NULL,
-  `symbol_right` varchar(12) DEFAULT NULL,
+  `title` varchar(32) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `code` char(3) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `symbol_left` varchar(12) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `symbol_right` varchar(12) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `decimal_point` char(1) DEFAULT NULL,
   `thousands_point` char(1) DEFAULT NULL,
   `decimal_places` char(1) DEFAULT NULL,
   `value` float(13,8) DEFAULT NULL,
+  `fee` float DEFAULT NULL,
   `last_updated` datetime DEFAULT NULL,
   `sort_order` int(11) NOT NULL,
   `status` tinyint(4) NOT NULL,
-  PRIMARY KEY (`currencies_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`currencies_id`),
+  UNIQUE KEY `code` (`code`)
+) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 
--- Dumping data for table eglobal_main_new.currencies: 15 rows
+-- Dumping data for table global.currencies: 13 rows
 /*!40000 ALTER TABLE `currencies` DISABLE KEYS */;
-INSERT INTO `currencies` (`currencies_id`, `title`, `code`, `symbol_left`, `symbol_right`, `decimal_point`, `thousands_point`, `decimal_places`, `value`, `last_updated`, `sort_order`, `status`) VALUES
-	(1, 'USD', 'USD', '$', '', '.', ',', '2', 0.13684900, '2007-08-28 21:31:40', 0, 1),
-	(2, 'Euro', 'EUR', 'â‚¬', '', '.', ',', '2', 0.10190000, '2007-08-28 21:31:40', 0, 1),
-	(5, 'JPY', 'JPY', 'Â¥', '', '.', ',', '2', NULL, NULL, 0, 1),
-	(6, 'KRW', 'KRW', 'â‚©', '', '.', ',', '2', NULL, NULL, 0, 1),
-	(7, 'RMB', 'RMB', 'Â¥', '', '.', ',', '2', NULL, NULL, 0, 1),
-	(8, 'GBP', 'GPB', 'Â£', '', '.', ',', '2', NULL, NULL, 0, 1),
-	(9, 'Switzerland, Francs', 'CHF', 'CHF', '', '', '', '0', NULL, NULL, 0, 1),
-	(10, 'Taiwan, New Dollars', 'NT$', 'NT$', '', '', '', '0', NULL, NULL, 0, 0),
-	(12, 'Canada, Dollars', 'CAD', '$', '', '', '', '0', NULL, NULL, 0, 1),
-	(13, 'Denmark, Kroner', 'DKK', 'kr', '', '', '', '0', NULL, NULL, 0, 0),
-	(14, 'Hong Kong, Dollars', 'HKD', '$', '', '', '', '0', NULL, NULL, 0, 1),
-	(15, 'India, Rupees', 'INR', 'â‚¨', '', '', '', '0', NULL, NULL, 0, 0),
-	(16, 'Russia, Rubles', 'RUB', 'Ñ€ÑƒÐ±', '', '', '', '0', NULL, NULL, 0, 0),
-	(17, 'South Africa, Rand', 'ZAR', 'R', '', '', '', '0', NULL, NULL, 0, 0),
-	(18, 'Thailand, Baht', 'THB', 'à¸¿', '', '', '', '0', NULL, NULL, 0, 1);
+INSERT INTO `currencies` (`currencies_id`, `title`, `code`, `symbol_left`, `symbol_right`, `decimal_point`, `thousands_point`, `decimal_places`, `value`, `fee`, `last_updated`, `sort_order`, `status`) VALUES
+	(1, 'USD', 'USD', '$', '', '.', ',', '2', 0.13684900, 0.5, '2007-08-28 21:31:40', 0, 1),
+	(2, 'Euro', 'EUR', '€', '', '.', ',', '2', 0.10190000, 15, '2007-08-28 21:31:40', 0, 1),
+	(6, 'KRW', 'KRW', '₩', '', '.', ',', '2', NULL, NULL, NULL, 0, 1),
+	(7, 'RMB', 'RMB', '¥', '', '.', ',', '2', NULL, NULL, NULL, 0, 1),
+	(8, 'GBP', 'GPB', '£', '', '.', ',', '2', NULL, NULL, NULL, 0, 1),
+	(9, 'Switzerland, Francs', 'CHF', 'CHF', '', '', '', '0', NULL, NULL, NULL, 0, 1),
+	(10, 'Taiwan, New Dollars', 'NT$', 'NT$', '', '', '', '0', NULL, NULL, NULL, 0, 0),
+	(19, 'Việt nam đồng', 'VND', '', 'đ', '.', '', '0', 100000.00000000, 20000, '2012-08-08 10:44:06', 1, 1),
+	(13, 'Denmark, Kroner', 'DKK', 'kr', '', '', '', '0', NULL, NULL, NULL, 0, 0),
+	(14, 'Hong Kong, Dollars', 'HKD', '$', '', '', '', '0', NULL, NULL, NULL, 0, 1),
+	(16, 'Russia, Rubles', 'RUB', 'Ñ€ÑƒÐ±', '', '', '', '0', NULL, 5000, NULL, 0, 0),
+	(17, 'South Africa, Rand', 'ZAR', 'R', '', '', '', '0', NULL, 2.6, NULL, 0, 1),
+	(18, 'Thailand, Baht', 'THB', '฿', '', '', '', '0', NULL, NULL, NULL, 0, 1);
 /*!40000 ALTER TABLE `currencies` ENABLE KEYS */;
 
 
--- Dumping structure for table eglobal_main_new.emailtemplates
-DROP TABLE IF EXISTS `emailtemplates`;
-CREATE TABLE IF NOT EXISTS `emailtemplates` (
-  `emailtemplates_id` int(11) NOT NULL AUTO_INCREMENT,
-  `emailtemplate_key` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `is_html_email` tinyint(4) NOT NULL DEFAULT '0',
-  `emailtemplate_status` tinyint(4) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`emailtemplates_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=ujis;
+-- Dumping structure for table global.emails
+DROP TABLE IF EXISTS `emails`;
+CREATE TABLE IF NOT EXISTS `emails` (
+  `email_id` int(11) NOT NULL AUTO_INCREMENT,
+  `email_key` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`email_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=ujis;
 
--- Dumping data for table eglobal_main_new.emailtemplates: 5 rows
-/*!40000 ALTER TABLE `emailtemplates` DISABLE KEYS */;
-INSERT INTO `emailtemplates` (`emailtemplates_id`, `emailtemplate_key`, `is_html_email`, `emailtemplate_status`) VALUES
-	(1, 'SIGNUP_EMAIL', 0, 1),
-	(2, 'ACCOUNT_REMINDER', 0, 1),
-	(3, 'ADMIN_TRANSFER_EMAIL', 0, 1),
-	(4, 'TRANSFER_EMAIL', 0, 1),
-	(5, 'RESET_PASSWORD_CODE', 0, 1);
-/*!40000 ALTER TABLE `emailtemplates` ENABLE KEYS */;
+-- Dumping data for table global.emails: 5 rows
+/*!40000 ALTER TABLE `emails` DISABLE KEYS */;
+INSERT INTO `emails` (`email_id`, `email_key`) VALUES
+	(1, 'register_user'),
+	(2, 'reset_account_number'),
+	(5, 'reset_code'),
+	(6, 'transfer_from_user'),
+	(7, 'transfer_to_user');
+/*!40000 ALTER TABLE `emails` ENABLE KEYS */;
 
 
--- Dumping structure for table eglobal_main_new.emailtemplates_description
-DROP TABLE IF EXISTS `emailtemplates_description`;
-CREATE TABLE IF NOT EXISTS `emailtemplates_description` (
-  `emailtemplates_id` int(11) NOT NULL,
-  `language_id` int(11) NOT NULL,
-  `emailtemplate_title` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `emailtemplate_content` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `emailtemplate_usage` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `emailtemplate_subject` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`emailtemplates_id`,`language_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+-- Dumping structure for table global.emails_description
+DROP TABLE IF EXISTS `emails_description`;
+CREATE TABLE IF NOT EXISTS `emails_description` (
+  `email_id` int(11) NOT NULL AUTO_INCREMENT,
+  `language_id` int(11) NOT NULL DEFAULT '0',
+  `title` varchar(200) DEFAULT NULL,
+  `content` text,
+  PRIMARY KEY (`email_id`,`language_id`),
+  KEY `FK_emails_description_1` (`language_id`),
+  CONSTRAINT `FK_emails_description_1` FOREIGN KEY (`language_id`) REFERENCES `languages` (`language_id`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
--- Dumping data for table eglobal_main_new.emailtemplates_description: 5 rows
-/*!40000 ALTER TABLE `emailtemplates_description` DISABLE KEYS */;
-INSERT INTO `emailtemplates_description` (`emailtemplates_id`, `language_id`, `emailtemplate_title`, `emailtemplate_content`, `emailtemplate_usage`, `emailtemplate_subject`) VALUES
-	(1, 1, 'Signup Email', '<div id="\\&quot;:5u\\&quot;" class="\\&quot;gt">\r\n<p>Dear [firstname],</p>\r\n<p>Your registration is NOT yet complete! You must login to your account to activate it and complete your registration!</p>\r\n<p>============================================</p>\r\n<p><br />Your Global Cash account number: <strong>[account_number]</strong></p>\r\n<p>============================================</p>\r\n<p>Reminder: You must login to your account in order to activate it.</p>\r\n<p>For inqueries and support please use our contact form.</p>\r\n<p>Thank you.</p>\r\n<p>Global Cash Network Support Team</p>\r\n<p><br /><a href="../">http://www.e-globalcash.net</a></p>\r\n<p>============================================</p>\r\n<p><br />Keep your account secure by following these simple rules:<br />Do NOT click on any links!<br />We will always address you by your first name.<br />We will never send you attached files or ask you to update your login information.<br />Contact us if you are unsure about an email you received.</p>\r\n<p><br />============================================</p>\r\n</div>', '', 'Successful Global Cash Registration'),
-	(2, 1, 'Account number remind', '<div id=":5q" class="gt ii">\r\n<p>============================================</p>\r\n<p>Please note that in all e-mails from Global Cash we will:</p>\r\n<p>1. Always address you by your first name.</p>\r\n<p>2. Never send you any links or attached files.</p>\r\n<p>3. Never ask you to send us your password and/or login PIN.</p>\r\n<p>============================================</p>\r\n<p>Dear [firstname],</p>\r\n<p>Account number: <strong>[account_number]</strong></p>\r\n<p>This is your account login reset code: <strong>[reset_code]</strong></p>\r\n<p>Please DO NOT reply to this e mail.</p>\r\n<p>For information and support please use our contact form in the help section of our web site.</p>\r\n<p>Thank you.</p>\r\n<p>Global Cash Network Support Team<br /><a href="../">http://www.e-globalcash.net/</a></p>\r\n</div>', '', 'Global Cash Account Number Reminder'),
-	(3, 1, 'Admin Transfer Email', '<p>Hi [firstname],</p>\r\n<p>You have just received a payment from Global Cash Billings. The details of the transaction by follow:</p>\r\n<p>======================================</p>\r\n<p>Transfer From: Global Cash Billings</p>\r\n<p>Amount: [amount_text]</p>\r\n<p>Balance Currency: [balance_currency]</p>\r\n<p>Batch Number#: [batch_number]</p>\r\n<p>============================================</p>\r\n<p>Regards</p>\r\n<p>Global Cash Support Team</p>', '', 'You have got payment.'),
-	(4, 1, 'Payment Receive Notification', '<p>============================================</p>\r\n<p><br />Please note that in all e-mails from Global Cash&nbsp;we will:<br />Always address you by your first name.<br />Never send you any links or attached files.<br />Never ask you to send us your password and/or login PIN.</p>\r\n<p><br />============================================</p>\r\n<p>Dear [firstname],</p>\r\n<p>You have received a payment to your account: <strong>[from_account]</strong> . The details of the transaction by follow:</p>\r\n<p>Transfer From: [from_account]</p>\r\n<p>Amount: [amount_text]</p>\r\n<p>Balance Currency: [balance_currency]</p>\r\n<p>Batch Number#: [batch_number]</p>\r\n<p>Thank you.</p>\r\n<p>Global Cash Network Support Team<br /><a href="../">http://www.e-globalcash.net/</a></p>', '', 'Global Cash Payment Received'),
-	(5, 1, 'Password reminder', '<div id=":5q" class="gt ii">\r\n<p>============================================</p>\r\n<p>Please note that in all e-mails from Global Cash we will:</p>\r\n<p>1. Always address you by your first name.</p>\r\n<p>2. Never send you any links or attached files.</p>\r\n<p>3. Never ask you to send us your password and/or login PIN.</p>\r\n<p>============================================</p>\r\n<p>Dear [firstname],</p>\r\n<p>This e-mail is to remind you your account number.</p>\r\n<p>This is your account login reset code: <strong>[reset_code]</strong></p>\r\n<p>Please DO NOT reply to this e mail.</p>\r\n<p>For information and support please use our contact form in the help section of our web site.</p>\r\n<p>Thank you.</p>\r\n<p>Global Cash Network Support Team<br /><a href="../">http://www.e-globalcash.net/</a></p>\r\n</div>', 'Global Cash Password Reminder', 'Global Cash Access Reset Code');
-/*!40000 ALTER TABLE `emailtemplates_description` ENABLE KEYS */;
+-- Dumping data for table global.emails_description: ~10 rows (approximately)
+/*!40000 ALTER TABLE `emails_description` DISABLE KEYS */;
+INSERT INTO `emails_description` (`email_id`, `language_id`, `title`, `content`) VALUES
+	(1, 63, 'Account Activation', '&lt;p&gt;\r\n	Dear $name,&lt;/p&gt;\r\n&lt;p&gt;\r\n	Your registration is NOT yet complete! You must login to your account to activate it and complete your registration!&lt;/p&gt;\r\n&lt;p&gt;\r\n	=============================================&lt;/p&gt;\r\n&lt;p&gt;\r\n	Your CyaCash account number: $account_number&lt;/p&gt;\r\n&lt;p&gt;\r\n	=============================================&lt;/p&gt;\r\n&lt;p&gt;\r\n	Reminder: You must login to your account in order to activate it.&lt;/p&gt;\r\n&lt;p&gt;\r\n	For inqueries and support please use our contact form.&lt;/p&gt;\r\n&lt;p&gt;\r\n	Thank you.&lt;/p&gt;\r\n&lt;p&gt;\r\n	=============================================&lt;/p&gt;\r\n&lt;p&gt;\r\n	Keep your account secure by following these simple rules:&lt;/p&gt;\r\n&lt;p&gt;\r\n	1. Do NOT click on any links!&lt;/p&gt;\r\n&lt;p&gt;\r\n	2. We will always address you by your first name.&lt;/p&gt;\r\n&lt;p&gt;\r\n	3. We will never send you attached files or ask you to update your login information.&lt;/p&gt;\r\n&lt;p&gt;\r\n	4. Contact us if you are unsure about an email you received.&lt;/p&gt;\r\n&lt;p&gt;\r\n	=============================================&lt;/p&gt;\r\n'),
+	(1, 64, 'Account Activation', '&lt;p&gt;\r\n	Dear $name,&lt;/p&gt;\r\n&lt;p&gt;\r\n	Your registration is NOT yet complete! You must login to your account to activate it and complete your registration!&lt;/p&gt;\r\n&lt;p&gt;\r\n	=============================================&lt;/p&gt;\r\n&lt;p&gt;\r\n	Your CyaCash account number: $account_number&lt;/p&gt;\r\n&lt;p&gt;\r\n	=============================================&lt;/p&gt;\r\n&lt;p&gt;\r\n	Reminder: You must login to your account in order to activate it.&lt;/p&gt;\r\n&lt;p&gt;\r\n	For inqueries and support please use our contact form.&lt;/p&gt;\r\n&lt;p&gt;\r\n	Thank you.&lt;/p&gt;\r\n&lt;p&gt;\r\n	=============================================&lt;/p&gt;\r\n&lt;p&gt;\r\n	Keep your account secure by following these simple rules:&lt;/p&gt;\r\n&lt;p&gt;\r\n	1. Do NOT click on any links!&lt;/p&gt;\r\n&lt;p&gt;\r\n	2. We will always address you by your first name.&lt;/p&gt;\r\n&lt;p&gt;\r\n	3. We will never send you attached files or ask you to update your login information.&lt;/p&gt;\r\n&lt;p&gt;\r\n	4. Contact us if you are unsure about an email you received.&lt;/p&gt;\r\n&lt;p&gt;\r\n	=============================================&lt;/p&gt;\r\n'),
+	(2, 63, 'Account Number Reminder', '&lt;p&gt;\r\n	=============================================================&lt;/p&gt;\r\n&lt;p&gt;\r\n	Please note that in all e-mails from CyaCash we will:&lt;/p&gt;\r\n&lt;p&gt;\r\n	1. Always address you by your first name.&lt;/p&gt;\r\n&lt;p&gt;\r\n	2. Never send you any links or attached files.&lt;/p&gt;\r\n&lt;p&gt;\r\n	3. Never ask you to send us your password and/or login PIN.&lt;/p&gt;\r\n&lt;p&gt;\r\n	=============================================================&lt;/p&gt;\r\n&lt;p&gt;\r\n	Dear $name,&lt;/p&gt;\r\n&lt;p&gt;\r\n	This e-mail is to remind you your account number.&lt;/p&gt;\r\n&lt;p&gt;\r\n	Account number: $account_number&lt;/p&gt;\r\n&lt;p&gt;\r\n	Please DO NOT reply to this e-mail.&lt;/p&gt;\r\n&lt;p&gt;\r\n	For information and support please use our contact form in the help section of our web site.&lt;/p&gt;\r\n&lt;p&gt;\r\n	Thank you.&lt;/p&gt;\r\n'),
+	(2, 64, 'Account Number Reminder', '&lt;p&gt;\r\n	=============================================================&lt;/p&gt;\r\n&lt;p&gt;\r\n	Please note that in all e-mails from CyaCash we will:&lt;/p&gt;\r\n&lt;p&gt;\r\n	1. Always address you by your first name.&lt;/p&gt;\r\n&lt;p&gt;\r\n	2. Never send you any links or attached files.&lt;/p&gt;\r\n&lt;p&gt;\r\n	3. Never ask you to send us your password and/or login PIN.&lt;/p&gt;\r\n&lt;p&gt;\r\n	=============================================================&lt;/p&gt;\r\n&lt;p&gt;\r\n	Dear $name,&lt;/p&gt;\r\n&lt;p&gt;\r\n	This e-mail is to remind you your account number.&lt;/p&gt;\r\n&lt;p&gt;\r\n	Account number: $account_number&lt;/p&gt;\r\n&lt;p&gt;\r\n	Please DO NOT reply to this e-mail.&lt;/p&gt;\r\n&lt;p&gt;\r\n	For information and support please use our contact form in the help section of our web site.&lt;/p&gt;\r\n&lt;p&gt;\r\n	Thank you.&lt;/p&gt;\r\n'),
+	(5, 63, 'Access Reset Code', '&lt;p&gt;\r\n	=============================================================&lt;/p&gt;\r\n&lt;p&gt;\r\n	Please note that in all e-mails from CyaCash we will:&lt;/p&gt;\r\n&lt;p&gt;\r\n	1. Always address you by your first name.&lt;/p&gt;\r\n&lt;p&gt;\r\n	2. Never send you any links or attached files.&lt;/p&gt;\r\n&lt;p&gt;\r\n	3. Never ask you to send us your password and/or login PIN.&lt;/p&gt;\r\n&lt;p&gt;\r\n	=============================================================&lt;/p&gt;\r\n&lt;p&gt;\r\n	&amp;nbsp;&lt;/p&gt;\r\n&lt;p&gt;\r\n	Dear $name,&lt;/p&gt;\r\n&lt;p&gt;\r\n	This is your account login reset code: $forget_code&lt;/p&gt;\r\n&lt;p&gt;\r\n	If you are not trying to reset your CyaCash account&#039;s login information then delete this email from your inbox and your trash folder inside your email account.&lt;/p&gt;\r\n&lt;p&gt;\r\n	To verify this code please go to our website. Click on &quot;Services&quot;, &quot;Reset&quot;, fill out that form and click &quot;Verify Code&quot; to continue.&lt;/p&gt;\r\n&lt;p&gt;\r\n	Please delete this email from your inbox and your trash folder inside your email account.&lt;/p&gt;\r\n&lt;p&gt;\r\n	Please DO NOT reply to this e-mail.&lt;/p&gt;\r\n&lt;p&gt;\r\n	For information and support please use our contact form in the help section of our web site.&lt;/p&gt;\r\n&lt;p&gt;\r\n	Thank you.&lt;/p&gt;\r\n'),
+	(5, 64, 'Access Reset Code', '&lt;p&gt;\r\n	=============================================================&lt;/p&gt;\r\n&lt;p&gt;\r\n	Please note that in all e-mails from CyaCash we will:&lt;/p&gt;\r\n&lt;p&gt;\r\n	1. Always address you by your first name.&lt;/p&gt;\r\n&lt;p&gt;\r\n	2. Never send you any links or attached files.&lt;/p&gt;\r\n&lt;p&gt;\r\n	3. Never ask you to send us your password and/or login PIN.&lt;/p&gt;\r\n&lt;p&gt;\r\n	=============================================================&lt;/p&gt;\r\n&lt;p&gt;\r\n	&amp;nbsp;&lt;/p&gt;\r\n&lt;p&gt;\r\n	Dear $name,&lt;/p&gt;\r\n&lt;p&gt;\r\n	This is your account login reset code: $forget_code&lt;/p&gt;\r\n&lt;p&gt;\r\n	If you are not trying to reset your CyaCash account&#039;s login information then delete this email from your inbox and your trash folder inside your email account.&lt;/p&gt;\r\n&lt;p&gt;\r\n	To verify this code please go to our website. Click on &quot;Services&quot;, &quot;Reset&quot;, fill out that form and click &quot;Verify Code&quot; to continue.&lt;/p&gt;\r\n&lt;p&gt;\r\n	Please delete this email from your inbox and your trash folder inside your email account.&lt;/p&gt;\r\n&lt;p&gt;\r\n	Please DO NOT reply to this e-mail.&lt;/p&gt;\r\n&lt;p&gt;\r\n	For information and support please use our contact form in the help section of our web site.&lt;/p&gt;\r\n&lt;p&gt;\r\n	Thank you.&lt;/p&gt;\r\n'),
+	(6, 63, 'Transfer successful', '&lt;p&gt;\r\n	&amp;nbsp;&lt;/p&gt;\r\n&lt;p&gt;\r\n	Dear $name&lt;/p&gt;\r\n&lt;p&gt;\r\n	You&#039;ve done transfers with the following contents:&lt;/p&gt;\r\n&lt;p&gt;\r\n	&lt;i style=&quot;font-family: arial, sans-serif; font-size: 13px; &quot;&gt;Trans. Date, Time: &amp;nbsp;&lt;/i&gt;$date_transfer&lt;/p&gt;\r\n&lt;p&gt;\r\n	&lt;i style=&quot;font-family: arial, sans-serif; font-size: 13px; &quot;&gt;Order(batch) Number:&amp;nbsp;&lt;/i&gt;$batch&lt;/p&gt;\r\n&lt;p&gt;\r\n	&lt;i style=&quot;font-family: arial, sans-serif; font-size: 13px; &quot;&gt;Beneficiary Name :&amp;nbsp;&lt;/i&gt;$to_user&lt;/p&gt;\r\n&lt;p&gt;\r\n	&lt;i style=&quot;font-family: arial, sans-serif; font-size: 13px; &quot;&gt;Charge Code:&amp;nbsp;&lt;/i&gt;$fee&lt;/p&gt;\r\n&lt;p&gt;\r\n	&lt;i style=&quot;font-family: arial, sans-serif; font-size: 13px; &quot;&gt;Details of Payment :&amp;nbsp;&lt;/i&gt;$memo&lt;/p&gt;\r\n&lt;p&gt;\r\n	&lt;i style=&quot;font-family: arial, sans-serif; font-size: 13px; text-align: center; &quot;&gt;Thank you for banking with eglobalcash!&lt;/i&gt;&lt;/p&gt;\r\n&lt;div&gt;\r\n	&amp;nbsp;&lt;/div&gt;\r\n'),
+	(6, 64, 'Transfer successful', '&lt;p&gt;\r\n	&amp;nbsp;&lt;/p&gt;\r\n&lt;p&gt;\r\n	Dear $name&lt;/p&gt;\r\n&lt;p&gt;\r\n	You&#039;ve done transfers with the following contents:&lt;/p&gt;\r\n&lt;p&gt;\r\n	&lt;i style=&quot;font-family: arial, sans-serif; font-size: 13px; &quot;&gt;Trans. Date, Time: &amp;nbsp;&lt;/i&gt;$date_transfer&lt;/p&gt;\r\n&lt;p&gt;\r\n	&lt;i style=&quot;font-family: arial, sans-serif; font-size: 13px; &quot;&gt;Order(batch) Number:&amp;nbsp;&lt;/i&gt;$batch&lt;/p&gt;\r\n&lt;p&gt;\r\n	&lt;i style=&quot;font-family: arial, sans-serif; font-size: 13px; &quot;&gt;Beneficiary Name :&amp;nbsp;&lt;/i&gt;$to_user&lt;/p&gt;\r\n&lt;p&gt;\r\n	&lt;i style=&quot;font-family: arial, sans-serif; font-size: 13px; &quot;&gt;Charge Code:&amp;nbsp;&lt;/i&gt;$fee&lt;/p&gt;\r\n&lt;p&gt;\r\n	&lt;i style=&quot;font-family: arial, sans-serif; font-size: 13px; &quot;&gt;Details of Payment :&amp;nbsp;&lt;/i&gt;$memo&lt;/p&gt;\r\n&lt;p&gt;\r\n	&lt;i style=&quot;font-family: arial, sans-serif; font-size: 13px; text-align: center; &quot;&gt;Thank you for banking with eglobalcash!&lt;/i&gt;&lt;/p&gt;\r\n&lt;div&gt;\r\n	&amp;nbsp;&lt;/div&gt;\r\n'),
+	(7, 63, 'Vừa nhận được tiền', '&lt;p&gt;\r\n	&amp;nbsp;&lt;/p&gt;\r\n&lt;p&gt;\r\n	Bạn vừa nhận được $amount&amp;nbsp;&lt;/p&gt;\r\n&lt;p&gt;\r\n	Do người dùng : $account_number&lt;/p&gt;\r\n&lt;p&gt;\r\n	&amp;nbsp;&lt;/p&gt;\r\n&lt;p&gt;\r\n	Với nội dung : $memo&lt;/p&gt;\r\n&lt;p&gt;\r\n	&amp;nbsp;&lt;/p&gt;\r\n&lt;p&gt;\r\n	Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi!&lt;/p&gt;\r\n'),
+	(7, 64, 'Vừa nhận được tiền', '&lt;p&gt;\r\n	&amp;nbsp;&lt;/p&gt;\r\n&lt;p&gt;\r\n	Bạn vừa nhận được $amount&amp;nbsp;&lt;/p&gt;\r\n&lt;p&gt;\r\n	Do người dùng : $account_number&lt;/p&gt;\r\n&lt;p&gt;\r\n	&amp;nbsp;&lt;/p&gt;\r\n&lt;p&gt;\r\n	Với nội dung : $memo&lt;/p&gt;\r\n&lt;p&gt;\r\n	&amp;nbsp;&lt;/p&gt;\r\n&lt;p&gt;\r\n	Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi!&lt;/p&gt;\r\n');
+/*!40000 ALTER TABLE `emails_description` ENABLE KEYS */;
 
 
--- Dumping structure for table eglobal_main_new.faqs
+-- Dumping structure for table global.faqs
 DROP TABLE IF EXISTS `faqs`;
 CREATE TABLE IF NOT EXISTS `faqs` (
   `faqs_id` int(11) NOT NULL AUTO_INCREMENT,
-  `faqs_status` tinyint(4) NOT NULL DEFAULT '0',
+  `status` tinyint(4) NOT NULL DEFAULT '0',
   `sort_order` int(11) NOT NULL DEFAULT '0',
-  `is_topic` tinyint(4) NOT NULL DEFAULT '0',
-  `parent_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`faqs_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=ujis;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=ujis;
 
--- Dumping data for table eglobal_main_new.faqs: 0 rows
+-- Dumping data for table global.faqs: 6 rows
 /*!40000 ALTER TABLE `faqs` DISABLE KEYS */;
+INSERT INTO `faqs` (`faqs_id`, `status`, `sort_order`) VALUES
+	(2, 1, 1),
+	(5, 1, 0),
+	(4, 1, 0),
+	(6, 1, 0),
+	(7, 0, 0),
+	(8, 1, 0);
 /*!40000 ALTER TABLE `faqs` ENABLE KEYS */;
 
 
--- Dumping structure for table eglobal_main_new.faqs_description
+-- Dumping structure for table global.faqs_description
 DROP TABLE IF EXISTS `faqs_description`;
 CREATE TABLE IF NOT EXISTS `faqs_description` (
   `faqs_id` int(11) NOT NULL AUTO_INCREMENT,
   `language_id` int(11) NOT NULL,
-  `faqs_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `faqs_description` text COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`faqs_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `description` text COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`faqs_id`,`language_id`),
+  KEY `FK_faqs_description_1` (`language_id`),
+  CONSTRAINT `FK_faqs_description_1` FOREIGN KEY (`language_id`) REFERENCES `languages` (`language_id`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
 
--- Dumping data for table eglobal_main_new.faqs_description: 0 rows
+-- Dumping data for table global.faqs_description: ~12 rows (approximately)
 /*!40000 ALTER TABLE `faqs_description` DISABLE KEYS */;
+INSERT INTO `faqs_description` (`faqs_id`, `language_id`, `name`, `description`) VALUES
+	(2, 63, '“Bầu” Kiên bị bắt để điều tra hoạt động kinh tế ', '<p>\r\n	&nbsp;</p>\r\n<div>\r\n	Trung tướng Phan Văn Vĩnh, Tổng Cục trưởng Tổng cục Cảnh sát phòng, chống tội phạm (Bộ Công an) xác nhận thông tin trên với phóng viên.</div>\r\n<div>\r\n	&nbsp;</div>\r\n'),
+	(2, 64, '“Bầu” Kiên bị bắt để điều tra hoạt động kinh tế ', '<p>\r\n	&nbsp;</p>\r\n<div>\r\n	Trung tướng Phan Văn Vĩnh, Tổng Cục trưởng Tổng cục Cảnh sát phòng, chống tội phạm (Bộ Công an) xác nhận thông tin trên với phóng viên.</div>\r\n<div>\r\n	&nbsp;</div>\r\n'),
+	(4, 63, 'Những động thái “lạ” tại cửa khẩu biên giới Móng Cái', '&lt;p&gt;\r\n	&lt;span style=&quot;color: rgb(95, 95, 95); font-family: &#039;Times New Roman&#039;; font-size: 16px; line-height: 18px; &quot;&gt;Tài khoản ngân hàng mà một số thương nhân Việt thường xuyên làm ăn với Trung Quốc mở tại thành phố Đông Hưng (thuộc tỉnh Quảng Tây - Trung Quốc) bất ngờ đã bị phía Trung Quốc phong tỏa. sa&lt;strong&gt; dsa&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;\r\n'),
+	(4, 64, 'Những động thái “lạ” tại cửa khẩu biên giới Móng Cái', '&lt;p&gt;\r\n	&lt;span style=&quot;color: rgb(95, 95, 95); font-family: &#039;Times New Roman&#039;; font-size: 16px; line-height: 18px; &quot;&gt;Tài khoản ngân hàng mà một số thương nhân Việt thường xuyên làm ăn với Trung Quốc mở tại thành phố Đông Hưng (thuộc tỉnh Quảng Tây - Trung Quốc) bất ngờ đã bị phía Trung Quốc phong tỏa. sa&lt;strong&gt; dsa&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;\r\n'),
+	(5, 63, '“Công an nắm chắc lao động ngoại, sao vẫn lọt vụ phòng khám Maria?” ', '&lt;p&gt;\r\n	&amp;nbsp;&lt;/p&gt;\r\n&lt;h2 class=&quot;fon33 mt1&quot; style=&quot;margin: 5px 0px 0px; padding: 0px; font-size: 16px; line-height: 18px; font-family: &#039;Times New Roman&#039;; color: rgb(95, 95, 95); &quot;&gt;\r\n	(Dân trí) - “Thứ trưởng Công an nói phường nắm chắc lý lịch người nước ngoài trên địa bàn. Vậy mà khi xảy ra vụ phòng khám Maria làm chết người, các “bác sỹ” Trung Quốc đã rời Việt Nam từ lúc nào lại không nắm được” - đại biểu Bùi Sỹ Lợi hỏi vặn.&lt;/h2&gt;\r\n'),
+	(5, 64, '“Công an nắm chắc lao động ngoại, sao vẫn lọt vụ phòng khám Maria?” ', '&lt;p&gt;\r\n	&amp;nbsp;&lt;/p&gt;\r\n&lt;h2 class=&quot;fon33 mt1&quot; style=&quot;margin: 5px 0px 0px; padding: 0px; font-size: 16px; line-height: 18px; font-family: &#039;Times New Roman&#039;; color: rgb(95, 95, 95); &quot;&gt;\r\n	(Dân trí) - “Thứ trưởng Công an nói phường nắm chắc lý lịch người nước ngoài trên địa bàn. Vậy mà khi xảy ra vụ phòng khám Maria làm chết người, các “bác sỹ” Trung Quốc đã rời Việt Nam từ lúc nào lại không nắm được” - đại biểu Bùi Sỹ Lợi hỏi vặn.&lt;/h2&gt;\r\n'),
+	(6, 63, 'Nhận diện hai “lỗi” thường gặp của ô tô tại Việt Nam ', '&lt;p&gt;\r\n	&amp;nbsp;&lt;/p&gt;\r\n&lt;p align=&quot;left&quot; style=&quot;margin: 13.800000190734863px 0px; padding: 0px; font-family: &#039;Times New Roman&#039;; font-size: 16px; line-height: 20px; color: rgb(0, 0, 0); &quot;&gt;\r\n	Theo Cục này, 2 lỗi trên luôn chiếm hơn 50% tỷ lệ không đạt chuẩn theo từng nhóm hạng mục được kiểm tra định kỳ hàng tháng.&lt;/p&gt;\r\n&lt;p style=&quot;margin: 13.800000190734863px 0px; padding: 0px; font-family: &#039;Times New Roman&#039;; font-size: 16px; line-height: 20px; color: rgb(0, 0, 0); &quot;&gt;\r\n	&amp;nbsp;&lt;/p&gt;\r\n&lt;p style=&quot;margin: 13.800000190734863px 0px; padding: 0px; font-family: &#039;Times New Roman&#039;; font-size: 16px; line-height: 20px; color: rgb(0, 0, 0); &quot;&gt;\r\n	Cụ thể, kết quả kiểm định phương tiện ô tô tháng 7/2012 cho thấy, trong tổng số 175.458 lượt phương tiện giao thông đường bộ tiến hành kiểm định vào tháng 7/2012 trên cả nước, thì chỉ có 141.924 lượt đạt tiêu chuẩn an toàn kỹ thuật và bảo vệ môi trường, chiếm 81%.&lt;/p&gt;\r\n&lt;p style=&quot;margin: 13.800000190734863px 0px; padding: 0px; font-family: &#039;Times New Roman&#039;; font-size: 16px; line-height: 20px; color: rgb(0, 0, 0); &quot;&gt;\r\n	Trong đó, số lượt đạt tiêu chuẩn ATKT &amp;amp; BVMT là 141.924 lượt chiếm 80,89%, số lượt không đạt tiêu chuẩn ATKT &amp;amp; BVMT là 33.534 lượt chiểm 19,11%. So với cùng kỳ năm 2011 (tháng 7/2011) số lượt kiểm định tăng là 12.822 lượt, 7,9%.&lt;/p&gt;\r\n'),
+	(6, 64, 'Nhận diện hai “lỗi” thường gặp của ô tô tại Việt Nam ', '&lt;p&gt;\r\n	&amp;nbsp;&lt;/p&gt;\r\n&lt;p align=&quot;left&quot; style=&quot;margin: 13.800000190734863px 0px; padding: 0px; font-family: &#039;Times New Roman&#039;; font-size: 16px; line-height: 20px; color: rgb(0, 0, 0); &quot;&gt;\r\n	Theo Cục này, 2 lỗi trên luôn chiếm hơn 50% tỷ lệ không đạt chuẩn theo từng nhóm hạng mục được kiểm tra định kỳ hàng tháng.&lt;/p&gt;\r\n&lt;p style=&quot;margin: 13.800000190734863px 0px; padding: 0px; font-family: &#039;Times New Roman&#039;; font-size: 16px; line-height: 20px; color: rgb(0, 0, 0); &quot;&gt;\r\n	&amp;nbsp;&lt;/p&gt;\r\n&lt;p style=&quot;margin: 13.800000190734863px 0px; padding: 0px; font-family: &#039;Times New Roman&#039;; font-size: 16px; line-height: 20px; color: rgb(0, 0, 0); &quot;&gt;\r\n	Cụ thể, kết quả kiểm định phương tiện ô tô tháng 7/2012 cho thấy, trong tổng số 175.458 lượt phương tiện giao thông đường bộ tiến hành kiểm định vào tháng 7/2012 trên cả nước, thì chỉ có 141.924 lượt đạt tiêu chuẩn an toàn kỹ thuật và bảo vệ môi trường, chiếm 81%.&lt;/p&gt;\r\n&lt;p style=&quot;margin: 13.800000190734863px 0px; padding: 0px; font-family: &#039;Times New Roman&#039;; font-size: 16px; line-height: 20px; color: rgb(0, 0, 0); &quot;&gt;\r\n	Trong đó, số lượt đạt tiêu chuẩn ATKT &amp;amp; BVMT là 141.924 lượt chiếm 80,89%, số lượt không đạt tiêu chuẩn ATKT &amp;amp; BVMT là 33.534 lượt chiểm 19,11%. So với cùng kỳ năm 2011 (tháng 7/2011) số lượt kiểm định tăng là 12.822 lượt, 7,9%.&lt;/p&gt;\r\n'),
+	(7, 63, 'Obama “doạ” can thiệp quân sự nếu Syria dùng vũ khí hoá học ', '&lt;p&gt;\r\n	&amp;nbsp;&lt;/p&gt;\r\n&lt;p style=&quot;margin: 13.800000190734863px 0px; padding: 0px; font-family: &#039;Times New Roman&#039;; font-size: 16px; line-height: 20px; color: rgb(0, 0, 0); &quot;&gt;\r\n	Tuy nhiên, nhà lãnh đạo Mỹ nhấn mạnh rằng việc sử dụng vũ khí hóa học tại Syria sẽ là một “giới hạn đỏ” có thể làm thay đổi suy nghĩ của ông về việc can thiệp vào cuộc khủng hoảng chính trị đang leo thang tại quốc gia Trung Đông.&lt;/p&gt;\r\n&lt;p style=&quot;margin: 13.800000190734863px 0px; padding: 0px; font-family: &#039;Times New Roman&#039;; font-size: 16px; line-height: 20px; color: rgb(0, 0, 0); &quot;&gt;\r\n	“Sẽ có những hậu quả lớn nếu chúng ta bắt đầu nhìn thấy việc đưa vũ khí hoá học ra mặt trận hoặc sử dụng chúng”, ông Obama nói.&lt;/p&gt;\r\n&lt;p style=&quot;margin: 13.800000190734863px 0px; padding: 0px; font-family: &#039;Times New Roman&#039;; font-size: 16px; line-height: 20px; color: rgb(0, 0, 0); &quot;&gt;\r\n	Tổng thống Mỹ cho hay việc triển khai hoặc sử dụng các vũ khí sinh học có thể làm lan rộng cuộc khủng hoảng trong khu vực. “Điều đó không chỉ bao gồm Syria. Nó có liên quan tới các đồng minh trong khu vực, bao gồm Israel, và điều đó khiến chúng tôi lo ngại”, ông nói.&lt;/p&gt;\r\n&lt;p style=&quot;margin: 13.800000190734863px 0px; padding: 0px; font-family: &#039;Times New Roman&#039;; font-size: 16px; line-height: 20px; color: rgb(0, 0, 0); &quot;&gt;\r\n	Ông Obama đã cảnh báo Tổng thống Bashar al-Assad và “các nhân vật khác” về việc sử dụng hoặc di chuyển các loại vũ khí như vậy. “Vạch giới hạn đỏ là nếu chúng tôi nhìn thấy các vũ khí hoá học được vận chuyển hoặc sử dụng, điều đó sẽ thay đổi tính toán của tôi”.&lt;/p&gt;\r\n'),
+	(7, 64, 'Obama “doạ” can thiệp quân sự nếu Syria dùng vũ khí hoá học ', '&lt;p&gt;\r\n	&amp;nbsp;&lt;/p&gt;\r\n&lt;p style=&quot;margin: 13.800000190734863px 0px; padding: 0px; font-family: &#039;Times New Roman&#039;; font-size: 16px; line-height: 20px; color: rgb(0, 0, 0); &quot;&gt;\r\n	Tuy nhiên, nhà lãnh đạo Mỹ nhấn mạnh rằng việc sử dụng vũ khí hóa học tại Syria sẽ là một “giới hạn đỏ” có thể làm thay đổi suy nghĩ của ông về việc can thiệp vào cuộc khủng hoảng chính trị đang leo thang tại quốc gia Trung Đông.&lt;/p&gt;\r\n&lt;p style=&quot;margin: 13.800000190734863px 0px; padding: 0px; font-family: &#039;Times New Roman&#039;; font-size: 16px; line-height: 20px; color: rgb(0, 0, 0); &quot;&gt;\r\n	“Sẽ có những hậu quả lớn nếu chúng ta bắt đầu nhìn thấy việc đưa vũ khí hoá học ra mặt trận hoặc sử dụng chúng”, ông Obama nói.&lt;/p&gt;\r\n&lt;p style=&quot;margin: 13.800000190734863px 0px; padding: 0px; font-family: &#039;Times New Roman&#039;; font-size: 16px; line-height: 20px; color: rgb(0, 0, 0); &quot;&gt;\r\n	Tổng thống Mỹ cho hay việc triển khai hoặc sử dụng các vũ khí sinh học có thể làm lan rộng cuộc khủng hoảng trong khu vực. “Điều đó không chỉ bao gồm Syria. Nó có liên quan tới các đồng minh trong khu vực, bao gồm Israel, và điều đó khiến chúng tôi lo ngại”, ông nói.&lt;/p&gt;\r\n&lt;p style=&quot;margin: 13.800000190734863px 0px; padding: 0px; font-family: &#039;Times New Roman&#039;; font-size: 16px; line-height: 20px; color: rgb(0, 0, 0); &quot;&gt;\r\n	Ông Obama đã cảnh báo Tổng thống Bashar al-Assad và “các nhân vật khác” về việc sử dụng hoặc di chuyển các loại vũ khí như vậy. “Vạch giới hạn đỏ là nếu chúng tôi nhìn thấy các vũ khí hoá học được vận chuyển hoặc sử dụng, điều đó sẽ thay đổi tính toán của tôi”.&lt;/p&gt;\r\n'),
+	(8, 63, '“Tướng” Hùng ký hợp đồng ngắn hạn dẫn dắt ĐT Việt Nam', '&lt;p&gt;\r\n	(Dân trí) - Kết thúc mùa giải 2012, VFF đã gấp rút đàm phán và lên kế hoạch ký hợp đồng với HLV Phan Thanh Hùng dẫn dắt ĐT Việt Nam tham dự giải vô địch Đông Nam Á diễn ra cuối năm. Ông Hùng sẽ ký hợp đồng ngắn hạn, với mức lương gần 200 triệu đồng/tháng. Thông tin chuẩn bị ký hợp đồng chính với vị HLV đang dẫn dắt Hà Nội T&amp;amp;T đã được chính TTK VFF Ngô Lê Bằng xác nhận ngày 20/8. Theo lời ông Bằng, kế hoạch ký hợp đồng với ông Phan Thanh Hùng đã được VFF trình lên Tổng cục TDTT, Bộ VH-TT-DL và được chấp thuận. Dự kiến, lễ ký hợp đồng diễn ra ngay trong tuần này. &amp;nbsp;&lt;/p&gt;\r\n'),
+	(8, 64, '“Tướng” Hùng ký hợp đồng ngắn hạn dẫn dắt ĐT Việt Nam', '&lt;p&gt;\r\n	(Dân trí) - Kết thúc mùa giải 2012, VFF đã gấp rút đàm phán và lên kế hoạch ký hợp đồng với HLV Phan Thanh Hùng dẫn dắt ĐT Việt Nam tham dự giải vô địch Đông Nam Á diễn ra cuối năm. Ông Hùng sẽ ký hợp đồng ngắn hạn, với mức lương gần 200 triệu đồng/tháng. Thông tin chuẩn bị ký hợp đồng chính với vị HLV đang dẫn dắt Hà Nội T&amp;amp;T đã được chính TTK VFF Ngô Lê Bằng xác nhận ngày 20/8. Theo lời ông Bằng, kế hoạch ký hợp đồng với ông Phan Thanh Hùng đã được VFF trình lên Tổng cục TDTT, Bộ VH-TT-DL và được chấp thuận. Dự kiến, lễ ký hợp đồng diễn ra ngay trong tuần này. &amp;nbsp;&lt;/p&gt;\r\n');
 /*!40000 ALTER TABLE `faqs_description` ENABLE KEYS */;
 
 
--- Dumping structure for table eglobal_main_new.info_templates
-DROP TABLE IF EXISTS `info_templates`;
-CREATE TABLE IF NOT EXISTS `info_templates` (
-  `info_id` int(11) NOT NULL AUTO_INCREMENT,
-  `info_key` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `info_title` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `info_content` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `language_code` char(2) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT 'en',
-  `info_usage` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `info_description` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `html_status` tinyint(4) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`info_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=ujis;
+-- Dumping structure for table global.groups
+DROP TABLE IF EXISTS `groups`;
+CREATE TABLE IF NOT EXISTS `groups` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `permission` text COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table eglobal_main_new.info_templates: 0 rows
-/*!40000 ALTER TABLE `info_templates` DISABLE KEYS */;
-/*!40000 ALTER TABLE `info_templates` ENABLE KEYS */;
+-- Dumping data for table global.groups: ~3 rows (approximately)
+/*!40000 ALTER TABLE `groups` DISABLE KEYS */;
+INSERT INTO `groups` (`id`, `name`, `description`, `permission`) VALUES
+	(1, 'adminstrator', 'Supper Administrator', ''),
+	(2, 'members', 'General User', ''),
+	(3, 'moderator', 'Moderator', '');
+/*!40000 ALTER TABLE `groups` ENABLE KEYS */;
 
 
--- Dumping structure for table eglobal_main_new.languages
+-- Dumping structure for table global.groups_admin
+DROP TABLE IF EXISTS `groups_admin`;
+CREATE TABLE IF NOT EXISTS `groups_admin` (
+  `group_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `permission` text COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`group_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- Dumping data for table global.groups_admin: ~2 rows (approximately)
+/*!40000 ALTER TABLE `groups_admin` DISABLE KEYS */;
+INSERT INTO `groups_admin` (`group_id`, `name`, `description`, `permission`) VALUES
+	(1, 'adminstrator', 'Supper Administrator', 'a:15:{s:7:"account";a:4:{s:5:"index";s:1:"1";s:6:"insert";s:1:"1";s:6:"update";s:1:"1";s:6:"delete";s:1:"1";}s:7:"setting";a:3:{s:5:"index";s:1:"1";s:4:"edit";s:1:"1";s:11:"listSetting";s:1:"1";}s:8:"language";a:5:{s:5:"index";s:1:"1";s:6:"insert";s:1:"1";s:6:"update";s:1:"1";s:6:"delete";s:1:"1";s:7:"general";s:1:"1";}s:6:"emails";a:4:{s:5:"index";s:1:"1";s:6:"insert";s:1:"1";s:6:"update";s:1:"1";s:6:"delete";s:1:"1";}s:8:"question";a:4:{s:5:"index";s:1:"1";s:6:"insert";s:1:"1";s:6:"update";s:1:"1";s:6:"delete";s:1:"1";}s:4:"news";a:4:{s:5:"index";s:1:"1";s:6:"insert";s:1:"1";s:6:"update";s:1:"1";s:6:"delete";s:1:"1";}s:3:"faq";a:4:{s:5:"index";s:1:"1";s:6:"insert";s:1:"1";s:6:"update";s:1:"1";s:6:"delete";s:1:"1";}s:4:"user";a:4:{s:5:"index";s:1:"1";s:6:"update";s:1:"1";s:6:"delete";s:1:"1";s:4:"view";s:1:"1";}s:10:"currencies";a:4:{s:5:"index";s:1:"1";s:6:"insert";s:1:"1";s:6:"update";s:1:"1";s:6:"delete";s:1:"1";}s:17:"fees_transactions";a:2:{s:5:"index";s:1:"1";s:6:"update";s:1:"1";}s:5:"funds";a:3:{s:5:"index";s:1:"1";s:7:"confirm";s:1:"1";s:7:"succeed";s:1:"1";}s:8:"transfer";a:2:{s:5:"index";s:1:"1";s:4:"view";s:1:"1";}s:10:"permission";a:2:{s:5:"index";s:1:"1";s:6:"update";s:1:"1";}s:7:"payment";a:4:{s:5:"index";s:1:"1";s:6:"insert";s:1:"1";s:6:"update";s:1:"1";s:6:"delete";s:1:"1";}s:8:"contacts";a:2:{s:5:"index";s:1:"1";s:4:"view";s:1:"1";}}'),
+	(2, 'moderator', 'Moderator', '');
+/*!40000 ALTER TABLE `groups_admin` ENABLE KEYS */;
+
+
+-- Dumping structure for table global.languages
 DROP TABLE IF EXISTS `languages`;
 CREATE TABLE IF NOT EXISTS `languages` (
   `language_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -506,777 +847,719 @@ CREATE TABLE IF NOT EXISTS `languages` (
   `language_directory` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL,
   `sort_order` int(3) DEFAULT NULL,
   `language_status` tinyint(4) NOT NULL DEFAULT '1',
+  `is_default` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`language_id`),
   KEY `IDX_LANGUAGES_NAME` (`language_name`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table eglobal_main_new.languages: 1 rows
+-- Dumping data for table global.languages: ~2 rows (approximately)
 /*!40000 ALTER TABLE `languages` DISABLE KEYS */;
-INSERT INTO `languages` (`language_id`, `language_name`, `language_code`, `language_image`, `language_directory`, `sort_order`, `language_status`) VALUES
-	(1, 'English', 'en', 'flags/en.gif', 'english', 1, 1);
+INSERT INTO `languages` (`language_id`, `language_name`, `language_code`, `language_image`, `language_directory`, `sort_order`, `language_status`, `is_default`) VALUES
+	(63, 'Japanese', 'jp', 'dap.png', 'japanese', 0, 1, 0),
+	(64, 'English', 'en', 'eng.png', 'english', 1, 1, 1);
 /*!40000 ALTER TABLE `languages` ENABLE KEYS */;
 
 
--- Dumping structure for table eglobal_main_new.messages
-DROP TABLE IF EXISTS `messages`;
-CREATE TABLE IF NOT EXISTS `messages` (
-  `message_id` int(11) NOT NULL AUTO_INCREMENT,
-  `message_subject` varchar(255) NOT NULL,
-  `message_content` text NOT NULL,
-  `message_time` datetime NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `message_folder` varchar(8) NOT NULL,
-  `from_username` varchar(32) NOT NULL,
-  `message_status` tinyint(4) NOT NULL DEFAULT '0',
-  `from_userid` int(11) NOT NULL,
-  `to_username` varchar(32) NOT NULL,
-  `to_userid` int(11) NOT NULL,
-  PRIMARY KEY (`message_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+-- Dumping structure for table global.meta
+DROP TABLE IF EXISTS `meta`;
+CREATE TABLE IF NOT EXISTS `meta` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` mediumint(8) unsigned DEFAULT NULL,
+  `first_name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `last_name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `company` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `phone` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table eglobal_main_new.messages: 2 rows
-/*!40000 ALTER TABLE `messages` DISABLE KEYS */;
-INSERT INTO `messages` (`message_id`, `message_subject`, `message_content`, `message_time`, `user_id`, `message_folder`, `from_username`, `message_status`, `from_userid`, `to_username`, `to_userid`) VALUES
-	(1, 'hey, how are you', 'Hey,\r\n\r\nwhat is going on?', '2009-11-19 19:41:27', 1, 'inbox', 'osccoder', 1, 2, '', 0),
-	(4, 'testing', 'this is the testing message again', '2009-11-20 01:15:59', 1, 'trash', 'osccoder', 1, 2, 'minhmt', 1);
-/*!40000 ALTER TABLE `messages` ENABLE KEYS */;
+-- Dumping data for table global.meta: 1 rows
+/*!40000 ALTER TABLE `meta` DISABLE KEYS */;
+INSERT INTO `meta` (`id`, `user_id`, `first_name`, `last_name`, `company`, `phone`) VALUES
+	(1, 1, 'admin', 'istrator', 'cya', '0984509988');
+/*!40000 ALTER TABLE `meta` ENABLE KEYS */;
 
 
--- Dumping structure for table eglobal_main_new.news
+-- Dumping structure for table global.modules
+DROP TABLE IF EXISTS `modules`;
+CREATE TABLE IF NOT EXISTS `modules` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `modules` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `actions` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- Dumping data for table global.modules: ~15 rows (approximately)
+/*!40000 ALTER TABLE `modules` DISABLE KEYS */;
+INSERT INTO `modules` (`id`, `modules`, `actions`) VALUES
+	(1, 'account', 'index,insert,update,delete'),
+	(2, 'setting', 'index,edit,listSetting'),
+	(3, 'language', 'index,insert,update,delete,general'),
+	(4, 'emails', 'index,insert,update,delete'),
+	(5, 'question', 'index,insert,update,delete'),
+	(6, 'news', 'index,insert,update,delete'),
+	(7, 'faq', 'index,insert,update,delete'),
+	(8, 'user', 'index,update,delete,view'),
+	(9, 'currencies', 'index,insert,update,delete'),
+	(10, 'fees_transactions', 'index,update'),
+	(11, 'funds', 'index,confirm,succeed'),
+	(12, 'transfer', 'index,view'),
+	(13, 'permission', 'index,update'),
+	(16, 'payment', 'index,insert,update,delete'),
+	(17, 'contacts', 'index,view');
+/*!40000 ALTER TABLE `modules` ENABLE KEYS */;
+
+
+-- Dumping structure for table global.news
 DROP TABLE IF EXISTS `news`;
 CREATE TABLE IF NOT EXISTS `news` (
   `news_id` int(11) NOT NULL AUTO_INCREMENT,
-  `news_title` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `news_description` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `news_file_path` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  `news_date` date DEFAULT NULL,
-  `news_type` tinyint(4) NOT NULL DEFAULT '0',
-  `news_status` tinyint(4) NOT NULL DEFAULT '0',
+  `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `description` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `file_path` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `date` datetime DEFAULT NULL,
+  `type` tinyint(4) NOT NULL DEFAULT '0',
+  `status` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`news_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
--- Dumping data for table eglobal_main_new.news: 0 rows
+-- Dumping data for table global.news: 2 rows
 /*!40000 ALTER TABLE `news` DISABLE KEYS */;
+INSERT INTO `news` (`news_id`, `title`, `description`, `file_path`, `date`, `type`, `status`) VALUES
+	(19, 'Test  asdas dá', '', '', '2012-11-16 10:12:58', 0, 0),
+	(20, 'Test dshajh', '&lt;p&gt;\r\n	jh&lt;/p&gt;\r\n', 'jhajsdhasjh', '2012-11-16 10:12:39', 1, 1);
 /*!40000 ALTER TABLE `news` ENABLE KEYS */;
 
 
--- Dumping structure for table eglobal_main_new.security_questions
-DROP TABLE IF EXISTS `security_questions`;
-CREATE TABLE IF NOT EXISTS `security_questions` (
-  `security_questions_id` int(11) NOT NULL AUTO_INCREMENT,
+-- Dumping structure for table global.payment
+DROP TABLE IF EXISTS `payment`;
+CREATE TABLE IF NOT EXISTS `payment` (
+  `payment_id` int(10) NOT NULL AUTO_INCREMENT,
+  `sort_order` int(10) DEFAULT NULL,
+  `status` int(10) DEFAULT NULL,
+  PRIMARY KEY (`payment_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- Dumping data for table global.payment: ~8 rows (approximately)
+/*!40000 ALTER TABLE `payment` DISABLE KEYS */;
+INSERT INTO `payment` (`payment_id`, `sort_order`, `status`) VALUES
+	(3, 1, 1),
+	(4, 2, 1),
+	(5, 3, 1),
+	(7, 5, 1),
+	(8, 6, 1),
+	(9, 7, 1),
+	(10, 8, 1),
+	(11, 9, 1);
+/*!40000 ALTER TABLE `payment` ENABLE KEYS */;
+
+
+-- Dumping structure for table global.payment_description
+DROP TABLE IF EXISTS `payment_description`;
+CREATE TABLE IF NOT EXISTS `payment_description` (
+  `payment_id` int(10) NOT NULL AUTO_INCREMENT,
+  `language_id` int(2) NOT NULL,
+  `payment` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`payment_id`,`language_id`),
+  KEY `FK_question_description_1` (`language_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- Dumping data for table global.payment_description: ~16 rows (approximately)
+/*!40000 ALTER TABLE `payment_description` DISABLE KEYS */;
+INSERT INTO `payment_description` (`payment_id`, `language_id`, `payment`) VALUES
+	(3, 63, ' Purchase of goods'),
+	(3, 64, ' Purchase of goods'),
+	(4, 63, 'Purchase of services'),
+	(4, 64, 'Purchase of services'),
+	(5, 63, 'Purchase of on-line auction items'),
+	(5, 64, 'Purchase of on-line auction items'),
+	(7, 63, 'Gift/Donation'),
+	(7, 64, 'Gift/Donation'),
+	(8, 63, 'Refund/Reimbursement'),
+	(8, 64, 'Refund/Reimbursement'),
+	(9, 63, 'Salary'),
+	(9, 64, 'Salary'),
+	(10, 63, 'Living Expense'),
+	(10, 64, 'Living Expense'),
+	(11, 63, 'Other'),
+	(11, 64, 'Other');
+/*!40000 ALTER TABLE `payment_description` ENABLE KEYS */;
+
+
+-- Dumping structure for table global.persons
+DROP TABLE IF EXISTS `persons`;
+CREATE TABLE IF NOT EXISTS `persons` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) DEFAULT NULL,
+  `gender` char(1) DEFAULT NULL,
+  `dob` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table global.persons: ~0 rows (approximately)
+/*!40000 ALTER TABLE `persons` DISABLE KEYS */;
+/*!40000 ALTER TABLE `persons` ENABLE KEYS */;
+
+
+-- Dumping structure for table global.question
+DROP TABLE IF EXISTS `question`;
+CREATE TABLE IF NOT EXISTS `question` (
+  `question_id` int(11) NOT NULL AUTO_INCREMENT,
   `sort_order` int(11) NOT NULL,
   `status` tinyint(4) NOT NULL,
-  PRIMARY KEY (`security_questions_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`question_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
--- Dumping data for table eglobal_main_new.security_questions: 3 rows
-/*!40000 ALTER TABLE `security_questions` DISABLE KEYS */;
-INSERT INTO `security_questions` (`security_questions_id`, `sort_order`, `status`) VALUES
+-- Dumping data for table global.question: 11 rows
+/*!40000 ALTER TABLE `question` DISABLE KEYS */;
+INSERT INTO `question` (`question_id`, `sort_order`, `status`) VALUES
 	(1, 1, 1),
-	(2, 2, 1),
-	(3, 3, 1);
-/*!40000 ALTER TABLE `security_questions` ENABLE KEYS */;
+	(2, 0, 1),
+	(3, 0, 1),
+	(4, 0, 1),
+	(5, 0, 1),
+	(6, 0, 1),
+	(7, 0, 1),
+	(8, 0, 1),
+	(9, 0, 1),
+	(10, 0, 1),
+	(11, 0, 1);
+/*!40000 ALTER TABLE `question` ENABLE KEYS */;
 
 
--- Dumping structure for table eglobal_main_new.security_questions_description
-DROP TABLE IF EXISTS `security_questions_description`;
-CREATE TABLE IF NOT EXISTS `security_questions_description` (
-  `security_questions_id` int(11) NOT NULL AUTO_INCREMENT,
-  `language_id` int(11) NOT NULL,
-  `question` varchar(255) NOT NULL,
-  PRIMARY KEY (`security_questions_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+-- Dumping structure for table global.question_description
+DROP TABLE IF EXISTS `question_description`;
+CREATE TABLE IF NOT EXISTS `question_description` (
+  `question_id` int(10) NOT NULL AUTO_INCREMENT,
+  `language_id` int(2) NOT NULL,
+  `question` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`question_id`,`language_id`),
+  KEY `FK_question_description_1` (`language_id`),
+  CONSTRAINT `FK_question_description_1` FOREIGN KEY (`language_id`) REFERENCES `languages` (`language_id`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=DYNAMIC;
 
--- Dumping data for table eglobal_main_new.security_questions_description: 3 rows
-/*!40000 ALTER TABLE `security_questions_description` DISABLE KEYS */;
-INSERT INTO `security_questions_description` (`security_questions_id`, `language_id`, `question`) VALUES
-	(1, 1, 'Mother\'s Miden Name'),
-	(2, 1, 'City Of Birth'),
-	(3, 1, 'Favorite Pet');
-/*!40000 ALTER TABLE `security_questions_description` ENABLE KEYS */;
+-- Dumping data for table global.question_description: ~22 rows (approximately)
+/*!40000 ALTER TABLE `question_description` DISABLE KEYS */;
+INSERT INTO `question_description` (`question_id`, `language_id`, `question`) VALUES
+	(1, 63, 'Mother&#039;s Maiden Name'),
+	(1, 64, 'Mother&#039;s Maiden Name'),
+	(2, 63, 'City of Birth'),
+	(2, 64, 'City of Birth'),
+	(3, 63, 'Highschool Name'),
+	(3, 64, 'Highschool Name'),
+	(4, 63, 'Name of Your First Love'),
+	(4, 64, 'Name of Your First Love'),
+	(5, 63, 'Favorite Pet'),
+	(5, 64, 'Favorite Pet'),
+	(6, 63, 'Favorite Book'),
+	(6, 64, 'Favorite Book'),
+	(7, 63, 'Favorite TV Show/Sitcom'),
+	(7, 64, 'Favorite TV Show/Sitcom'),
+	(8, 63, 'Favorite Movie'),
+	(8, 64, 'Favorite Movie'),
+	(9, 63, 'Favorite Flower'),
+	(9, 64, 'Favorite Flower'),
+	(10, 63, 'Favorite Color'),
+	(10, 64, 'Favorite Color'),
+	(11, 63, 'Custom Question'),
+	(11, 64, 'Custom Question');
+/*!40000 ALTER TABLE `question_description` ENABLE KEYS */;
 
 
--- Dumping structure for table eglobal_main_new.sessions
+-- Dumping structure for table global.security_log
+DROP TABLE IF EXISTS `security_log`;
+CREATE TABLE IF NOT EXISTS `security_log` (
+  `log_id` int(10) NOT NULL AUTO_INCREMENT,
+  `account_number` int(10) NOT NULL DEFAULT '0',
+  `description` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `date_creater` datetime DEFAULT NULL,
+  `ip_address` varchar(20) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`log_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- Dumping data for table global.security_log: ~72 rows (approximately)
+/*!40000 ALTER TABLE `security_log` DISABLE KEYS */;
+INSERT INTO `security_log` (`log_id`, `account_number`, `description`, `date_creater`, `ip_address`) VALUES
+	(1, 88888888, 'Transfer Success', '2012-10-31 07:21:53', '0.0.0.0'),
+	(2, 11111111, 'Transfer Success', '2012-10-31 07:26:58', '0.0.0.0'),
+	(3, 11111111, 'Transfer Success', '2012-10-31 07:26:58', '0.0.0.0'),
+	(4, 11111111, 'Transfer Success', '2012-10-31 07:32:43', '0.0.0.0'),
+	(5, 11111111, 'Transfer Success', '2012-10-31 07:32:43', '0.0.0.0'),
+	(6, 11111111, 'Transfer Success', '2012-10-31 09:51:44', '0.0.0.0'),
+	(7, 11111111, 'Transfer Success', '2012-10-31 09:51:44', '0.0.0.0'),
+	(8, 33333333, 'Transfer Success', '2012-11-02 03:26:58', '0.0.0.0'),
+	(9, 33333333, 'Transfer Success', '2012-11-02 03:37:03', '0.0.0.0'),
+	(10, 33333333, 'Transfer Success', '2012-11-05 02:08:20', '0.0.0.0'),
+	(11, 33333333, 'Transfer Success', '2012-11-05 02:13:26', '0.0.0.0'),
+	(12, 33333333, 'Transfer Success', '2012-11-05 02:46:09', '0.0.0.0'),
+	(13, 33333333, 'Transfer Success', '2012-11-05 02:58:02', '0.0.0.0'),
+	(14, 33333333, 'Transfer Success', '2012-11-05 03:12:09', '0.0.0.0'),
+	(15, 33333333, 'Transfer Success', '2012-11-05 03:12:09', '0.0.0.0'),
+	(16, 33333333, 'Transfer Success', '2012-11-05 03:12:09', '0.0.0.0'),
+	(17, 33333333, 'Transfer Success', '2012-11-05 03:17:27', '0.0.0.0'),
+	(18, 33333333, 'Transfer Success', '2012-11-05 03:17:27', '0.0.0.0'),
+	(19, 33333333, 'Transfer Success', '2012-11-05 03:17:27', '0.0.0.0'),
+	(20, 33333333, 'Transfer Success', '2012-11-05 03:40:30', '0.0.0.0'),
+	(21, 33333333, 'Transfer Success', '2012-11-05 03:40:30', '0.0.0.0'),
+	(22, 88888888, 'Transfer Success', '2012-11-06 07:50:44', '0.0.0.0'),
+	(23, 88888888, 'Transfer Success', '2012-11-06 07:50:44', '0.0.0.0'),
+	(24, 88888888, 'Transfer Success', '2012-11-06 07:50:44', '0.0.0.0'),
+	(25, 33333333, 'Transfer Success', '2012-11-06 07:56:06', '0.0.0.0'),
+	(26, 33333333, 'Transfer Success', '2012-11-06 08:01:55', '0.0.0.0'),
+	(27, 33333333, 'Transfer Success', '2012-11-06 08:01:55', '0.0.0.0'),
+	(28, 33333333, 'Transfer Success', '2012-11-06 08:01:55', '0.0.0.0'),
+	(29, 33333333, 'Transfer Success', '2012-11-06 08:31:59', '0.0.0.0'),
+	(30, 11111111, 'Transfer Success', '2012-11-06 08:40:08', '0.0.0.0'),
+	(31, 11111111, 'Transfer Success', '2012-11-06 08:49:35', '0.0.0.0'),
+	(32, 11111111, 'Transfer Success', '2012-11-06 08:56:24', '0.0.0.0'),
+	(33, 11111111, 'Transfer Success', '2012-11-06 09:11:46', '0.0.0.0'),
+	(34, 11111111, 'Transfer Success', '2012-11-06 09:17:11', '0.0.0.0'),
+	(35, 33333333, 'Transfer Success', '2012-11-06 09:17:11', '0.0.0.0'),
+	(36, 33333333, 'Transfer Success', '2012-11-06 09:17:11', '0.0.0.0'),
+	(37, 33333333, 'Transfer Success', '2012-11-06 09:17:11', '0.0.0.0'),
+	(38, 33333333, 'Transfer Success', '2012-11-06 09:17:11', '0.0.0.0'),
+	(39, 33333333, 'Transfer Success', '2012-11-06 09:25:29', '0.0.0.0'),
+	(40, 33333333, 'Transfer Success', '2012-11-06 09:47:49', '0.0.0.0'),
+	(41, 33333333, 'Transfer Success', '2012-11-06 09:47:49', '0.0.0.0'),
+	(42, 33333333, 'Transfer Success', '2012-11-06 09:47:49', '0.0.0.0'),
+	(43, 33333333, 'Transfer Success', '2012-11-06 09:47:49', '0.0.0.0'),
+	(44, 11111111, 'Transfer Success', '2012-11-06 09:55:30', '0.0.0.0'),
+	(45, 11111111, 'Transfer Success', '2012-11-06 09:55:30', '0.0.0.0'),
+	(46, 11111111, 'Transfer Success', '2012-11-06 09:55:30', '0.0.0.0'),
+	(47, 33333333, 'Transfer Success', '2012-11-07 06:57:11', '0.0.0.0'),
+	(48, 33333333, 'Transfer Success', '2012-11-07 07:13:43', '0.0.0.0'),
+	(49, 33333333, 'Transfer Success', '2012-11-07 07:13:43', '0.0.0.0'),
+	(50, 11111111, 'Transfer Success', '2012-11-07 07:13:43', '0.0.0.0'),
+	(51, 11111111, 'Update Profile', '2012-11-07 09:17:05', '0.0.0.0'),
+	(52, 11111111, 'Update Profile', '2012-11-07 09:17:05', '0.0.0.0'),
+	(53, 33333333, 'Transfer Success', '2012-11-07 09:23:11', '0.0.0.0'),
+	(54, 33333333, 'Transfer Success', '2012-11-07 10:02:53', '0.0.0.0'),
+	(55, 88888888, 'Transfer Success', '2012-11-08 09:57:28', '0.0.0.0'),
+	(56, 88888888, 'Transfer Success', '2012-11-08 10:03:44', '0.0.0.0'),
+	(57, 88888888, 'Transfer Success', '2012-11-08 10:09:53', '0.0.0.0'),
+	(58, 33333333, 'Transfer Success', '2012-11-09 01:40:53', '0.0.0.0'),
+	(59, 88888888, 'Transfer Success', '2012-11-09 08:03:58', '0.0.0.0'),
+	(60, 33333333, 'Transfer Success', '2012-11-13 02:43:13', '0.0.0.0'),
+	(61, 33333333, 'Transfer Success', '2012-11-13 02:54:59', '0.0.0.0'),
+	(62, 88888888, 'Update Profile', '2012-11-14 01:31:23', '0.0.0.0'),
+	(63, 33333333, 'Transfer Success', '2012-11-15 02:13:55', '0.0.0.0'),
+	(64, 33333333, 'Transfer Success', '2012-11-15 02:44:14', '0.0.0.0'),
+	(65, 33333333, 'Transfer Success', '2012-11-15 02:50:19', '0.0.0.0'),
+	(66, 33333333, 'Transfer Success', '2012-11-15 02:56:00', '0.0.0.0'),
+	(67, 33333333, 'Transfer Success', '2012-11-15 03:57:31', '0.0.0.0'),
+	(68, 33333333, 'Transfer Success', '2012-11-20 04:52:37', '0.0.0.0'),
+	(69, 88888888, 'Changed Login Welcome Messeges', '2012-11-20 08:03:31', '0.0.0.0'),
+	(70, 14176198, 'Transfer Success', '2013-06-28 02:25:26', '127.0.0.1'),
+	(71, 14176198, 'Transfer Success', '2013-06-28 02:31:44', '127.0.0.1'),
+	(72, 14176198, 'Transfer Success', '2013-07-01 08:05:17', '127.0.0.1');
+/*!40000 ALTER TABLE `security_log` ENABLE KEYS */;
+
+
+-- Dumping structure for table global.sercurity_setting
+DROP TABLE IF EXISTS `sercurity_setting`;
+CREATE TABLE IF NOT EXISTS `sercurity_setting` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) NOT NULL,
+  `email_incoming_transfer` int(2) DEFAULT NULL,
+  `email_outgoing_transfer` int(2) DEFAULT '0',
+  `private_incoming` int(2) DEFAULT '0',
+  `incoming_messages` int(2) DEFAULT '0',
+  `master_key` int(2) DEFAULT '0',
+  `ip_sercurity` int(2) DEFAULT '0',
+  `remember` int(2) DEFAULT '0',
+  `payment_mothed` int(2) DEFAULT '0',
+  PRIMARY KEY (`id`,`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- Dumping data for table global.sercurity_setting: ~0 rows (approximately)
+/*!40000 ALTER TABLE `sercurity_setting` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sercurity_setting` ENABLE KEYS */;
+
+
+-- Dumping structure for table global.sessions
 DROP TABLE IF EXISTS `sessions`;
 CREATE TABLE IF NOT EXISTS `sessions` (
-  `sesskey` varchar(32) NOT NULL DEFAULT '',
-  `expiry` int(11) unsigned NOT NULL DEFAULT '0',
+  `sesskey` varchar(32) NOT NULL,
   `value` text NOT NULL,
   PRIMARY KEY (`sesskey`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table eglobal_main_new.sessions: 45 rows
+-- Dumping data for table global.sessions: ~131 rows (approximately)
 /*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
-INSERT INTO `sessions` (`sesskey`, `expiry`, `value`) VALUES
-	('sdejltord8kja1kfp0tdp2g1h3', 1372752375, 'navigation|O:17:"navigationHistory":2:{s:4:"path";a:1:{i:0;a:4:{s:4:"page";s:0:"";s:4:"mode";s:6:"NONSSL";s:3:"get";N;s:4:"post";N;}}s:8:"snapshot";a:0:{}}languages_id|i:1;secure_image_hash_string|s:5:"06032";'),
-	('akjjhv85fjk3r27vafnu766q54', 1372752571, 'languages_id|i:1;secure_image_hash_string|s:5:"30039";'),
-	('ktr8u3qfbmh57g9bgus01avuh2', 1372752776, 'languages_id|i:1;secure_image_hash_string|s:5:"93886";');
+INSERT INTO `sessions` (`sesskey`, `value`) VALUES
+	('0Bm0AL1OG95Q8umRZZcoTc8g8Fexjy', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:32:"http://www.example.com/fail.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"0Bm0AL1OG95Q8umRZZcoTc8g8Fexjy";}'),
+	('0PP0fHyk8z8c6hwYSnFYPwLpNZn1Qa', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:8:"currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:35:"http://www.example.com/success.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"0PP0fHyk8z8c6hwYSnFYPwLpNZn1Qa";}'),
+	('16RiwnV6JvkOADpBFFdM2gHIJpBRic', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:32:"http://www.example.com/fail.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"16RiwnV6JvkOADpBFFdM2gHIJpBRic";}'),
+	('1GBytJFdtOVquUgaUklfd5yuUkFmnx', 'a:15:{s:6:"eg_acc";s:8:"14176198";s:11:"eg_acc_from";s:8:"14176198";s:7:"eg_amnt";s:5:"55555";s:11:"eg_currency";s:3:"USD";s:11:"eg_comments";s:15:"fsdfsdfsdfsdfsd";s:15:"eg_merchant_ref";s:12:"fsdfsdfsdfsd";s:14:"eg_success_url";s:16:"http://zodia.lc/";s:21:"eg_success_url_method";s:4:"POST";s:11:"eg_fail_url";s:16:"http://zodia.lc/";s:18:"eg_fail_url_method";s:3:"GET";s:13:"eg_status_url";s:16:"http://zodia.lc/";s:20:"eg_status_url_method";s:4:"POST";s:7:"ip_user";s:9:"127.0.0.1";s:7:"browser";s:79:"Mozilla/5.0 (Windows NT 6.1; rv:21.0) Gecko/20100101 Firefox/21.0 FirePHP/0.7.2";s:9:"token_sci";s:30:"1GBytJFdtOVquUgaUklfd5yuUkFmnx";}'),
+	('1w6dcoL9cQ9NnnX7wh8cN3eMUKAW2Z', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:4:"POST";s:8:"url_fail";s:29:"http://localhost.com/fail.php";s:15:"fail_url_method";s:4:"LINK";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"1w6dcoL9cQ9NnnX7wh8cN3eMUKAW2Z";}'),
+	('1wsItL3NzMfuM3tCR4JmSkmLRZ7W1u', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:29:"http://localhost.com/fail.php";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"1wsItL3NzMfuM3tCR4JmSkmLRZ7W1u";}'),
+	('2c5wKeC8xNuNpOeul9Y6BSwLpmfkQw', 'a:17:{s:6:"eg_acc";s:8:"88888888";s:11:"eg_acc_from";s:8:"33333333";s:7:"eg_amnt";s:3:"100";s:11:"eg_currency";s:3:"USD";s:11:"eg_comments";s:7:"hichihi";s:15:"eg_merchant_ref";s:4:"hehe";s:14:"eg_success_url";s:42:"http://localhost:8080/testdata/success.php";s:21:"eg_success_url_method";s:3:"GET";s:11:"eg_fail_url";s:39:"http://localhost:8080/testdata/fail.php";s:18:"eg_fail_url_method";s:4:"POST";s:20:"eg_status_url_method";s:3:"GET";s:7:"giatri1";s:2:"10";s:7:"giatri2";s:2:"29";s:7:"giatri3";s:2:"99";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"2c5wKeC8xNuNpOeul9Y6BSwLpmfkQw";}'),
+	('2KfjPph4k9H7jQN50MlQ3mm9NPWFFH', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:32:"http://www.example.com/fail.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"2KfjPph4k9H7jQN50MlQ3mm9NPWFFH";}'),
+	('2Nq9ulsivjaZRlpJ4nCqHCM0t8DPOx', 's:530:"acc_number=88888888,acc_customer=88888888,amount=100,currency=USD,forced=comment that will,merchant=HGF44556756,url_success=http://www.example.com/success.html,success_url_method=GET,url_fail=http://www.example.com/fail.html,fail_url_method=GET,store_name=Cya eglobalcash,email_link=http://www.example.com/status.aspx,status_url_method=GET,tuychon1=10,tuychon2=test2,tuychon3=test3,browser=Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4,token_sci=2Nq9ulsivjaZRlpJ4nCqHCM0t8DPOx";'),
+	('2zjkeGepXqGDEyifeJ5IJELWueG55C', 'a:18:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:8:"currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:32:"http://www.example.com/fail.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"2zjkeGepXqGDEyifeJ5IJELWueG55C";}'),
+	('3gHrhFuqu7MUJZCO3Vxf9Ap3U1Nu0G', 'a:15:{s:6:"eg_acc";s:8:"14176198";s:11:"eg_acc_from";s:8:"14176198";s:7:"eg_amnt";s:5:"55555";s:11:"eg_currency";s:3:"USD";s:15:"eg_merchant_ref";s:12:"fsdfsdfsdfsd";s:11:"eg_comments";s:15:"fsdfsdfsdfsdfsd";s:14:"eg_success_url";s:18:"http://cyasoft.com";s:21:"eg_success_url_method";s:4:"POST";s:13:"eg_status_url";s:18:"http://cyasoft.com";s:20:"eg_status_url_method";s:4:"POST";s:11:"eg_fail_url";s:18:"http://cyasoft.com";s:18:"eg_fail_url_method";s:41:"POST4234=42342342342=4234234242342=424234";s:7:"ip_user";s:9:"127.0.0.1";s:7:"browser";s:79:"Mozilla/5.0 (Windows NT 6.1; rv:21.0) Gecko/20100101 Firefox/21.0 FirePHP/0.7.2";s:9:"token_sci";s:30:"3gHrhFuqu7MUJZCO3Vxf9Ap3U1Nu0G";}'),
+	('3PIwF8iCSDOsr7hrxGoKLZtxtXNM2u', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:32:"http://www.example.com/fail.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"3PIwF8iCSDOsr7hrxGoKLZtxtXNM2u";}'),
+	('3Q3sKUQYBvysyhwFalIGj2bcFimdoy', 'a:15:{s:6:"eg_acc";s:8:"14176198";s:11:"eg_acc_from";s:8:"14176198";s:7:"eg_amnt";s:5:"55555";s:11:"eg_currency";s:3:"USD";s:11:"eg_comments";s:15:"fsdfsdfsdfsdfsd";s:15:"eg_merchant_ref";s:12:"fsdfsdfsdfsd";s:14:"eg_success_url";s:16:"http://zodia.lc/";s:21:"eg_success_url_method";s:4:"POST";s:11:"eg_fail_url";s:16:"http://zodia.lc/";s:18:"eg_fail_url_method";s:3:"GET";s:13:"eg_status_url";s:16:"http://zodia.lc/";s:20:"eg_status_url_method";s:4:"POST";s:7:"ip_user";s:9:"127.0.0.1";s:7:"browser";s:79:"Mozilla/5.0 (Windows NT 6.1; rv:21.0) Gecko/20100101 Firefox/21.0 FirePHP/0.7.2";s:9:"token_sci";s:30:"3Q3sKUQYBvysyhwFalIGj2bcFimdoy";}'),
+	('44dTTnstLKyxcYWGztsw14r56n0XXl', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:32:"http://www.example.com/fail.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"44dTTnstLKyxcYWGztsw14r56n0XXl";}'),
+	('4bulMQd0EmmBx7JcVuwjxBboUG1Tqw', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:8:"currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:35:"http://www.example.com/success.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"4bulMQd0EmmBx7JcVuwjxBboUG1Tqw";}'),
+	('5OSl7V2jfKvk2ztedSiqIvjIaIDoXF', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:32:"http://www.example.com/fail.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"5OSl7V2jfKvk2ztedSiqIvjIaIDoXF";}'),
+	('6aitvXdIFBL2uVRfkreqygBn1qitsI', 'a:18:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:32:"http://www.example.com/fail.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"6aitvXdIFBL2uVRfkreqygBn1qitsI";}'),
+	('6GfeNLk8Aq6GXSujo8IjmbhMJnYLs9', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:8:"currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:35:"http://www.example.com/success.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"6GfeNLk8Aq6GXSujo8IjmbhMJnYLs9";}'),
+	('6jg7DAkS0RcbyJEOD2KFGNnCUpuFMV', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:8:"currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:35:"http://www.example.com/success.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"6jg7DAkS0RcbyJEOD2KFGNnCUpuFMV";}'),
+	('6mFHKFGkKEKrHBn7uAUlDni2ISatic', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:8:"currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:35:"http://www.example.com/success.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"6mFHKFGkKEKrHBn7uAUlDni2ISatic";}'),
+	('7bH2duF73lsEFQc5c00kK5jERB7rXE', 'a:17:{s:6:"eg_acc";s:8:"88888888";s:11:"eg_acc_from";s:8:"33333333";s:7:"eg_amnt";s:3:"100";s:11:"eg_currency";s:3:"USD";s:11:"eg_comments";s:7:"hichihi";s:15:"eg_merchant_ref";s:4:"hehe";s:14:"eg_success_url";s:42:"http://localhost:8080/testdata/success.php";s:21:"eg_success_url_method";s:3:"GET";s:11:"eg_fail_url";s:39:"http://localhost:8080/testdata/fail.php";s:18:"eg_fail_url_method";s:3:"GET";s:20:"eg_status_url_method";s:3:"GET";s:7:"giatri1";s:2:"10";s:7:"giatri2";s:2:"29";s:7:"giatri3";s:2:"99";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"7bH2duF73lsEFQc5c00kK5jERB7rXE";}'),
+	('7Owc7GqgJKyk7dxBXgXx6jxk1webUl', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:29:"http://localhost.com/fail.php";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"7Owc7GqgJKyk7dxBXgXx6jxk1webUl";}'),
+	('7XbqzMOJN2GwBPcg6xxP6BaneXtvgo', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:29:"http://localhost.com/fail.php";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"7XbqzMOJN2GwBPcg6xxP6BaneXtvgo";}'),
+	('8kE4Y8Yn03qp6dvZrDm1IGYgB4XzFd', 'a:15:{s:6:"eg_acc";s:8:"14176198";s:11:"eg_acc_from";s:8:"14176198";s:7:"eg_amnt";s:5:"55555";s:11:"eg_currency";s:3:"USD";s:15:"eg_merchant_ref";s:12:"fsdfsdfsdfsd";s:11:"eg_comments";s:15:"fsdfsdfsdfsdfsd";s:14:"eg_success_url";s:18:"http://cyasoft.com";s:21:"eg_success_url_method";s:4:"POST";s:13:"eg_status_url";s:18:"http://cyasoft.com";s:20:"eg_status_url_method";s:4:"POST";s:11:"eg_fail_url";s:18:"http://cyasoft.com";s:18:"eg_fail_url_method";s:41:"POST4234=42342342342=4234234242342=424234";s:7:"ip_user";s:9:"127.0.0.1";s:7:"browser";s:65:"Mozilla/5.0 (Windows NT 6.1; rv:21.0) Gecko/20100101 Firefox/21.0";s:9:"token_sci";s:30:"8kE4Y8Yn03qp6dvZrDm1IGYgB4XzFd";}'),
+	('9J8HNxWkOMTNVsne1Dxkzd9PERC509', 's:530:"acc_number=88888888,acc_customer=88888888,amount=100,currency=USD,forced=comment that will,merchant=HGF44556756,url_success=http://www.example.com/success.html,success_url_method=GET,url_fail=http://www.example.com/fail.html,fail_url_method=GET,store_name=Cya eglobalcash,email_link=http://www.example.com/status.aspx,status_url_method=GET,tuychon1=10,tuychon2=test2,tuychon3=test3,browser=Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4,token_sci=9J8HNxWkOMTNVsne1Dxkzd9PERC509";'),
+	('A8CX8uIJOp9RTelzLR3CHQOGopNc7q', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:32:"http://www.example.com/fail.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"A8CX8uIJOp9RTelzLR3CHQOGopNc7q";}'),
+	('acdfi0IvpkqKxhDN4CHC8iEJNiVCTL', 'a:17:{s:6:"eg_acc";s:8:"88888888";s:11:"eg_acc_from";s:8:"33333333";s:7:"eg_amnt";s:3:"100";s:11:"eg_currency";s:3:"USD";s:11:"eg_comments";s:7:"hichihi";s:15:"eg_merchant_ref";s:4:"hehe";s:14:"eg_success_url";s:42:"http://localhost:8080/testdata/success.php";s:21:"eg_success_url_method";s:3:"GET";s:11:"eg_fail_url";s:39:"http://localhost:8080/testdata/fail.php";s:18:"eg_fail_url_method";s:3:"GET";s:20:"eg_status_url_method";s:3:"GET";s:7:"giatri1";s:2:"10";s:7:"giatri2";s:2:"29";s:7:"giatri3";s:2:"99";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"acdfi0IvpkqKxhDN4CHC8iEJNiVCTL";}'),
+	('aiZtQZ9FXpNGp7JwLkpsxrTAnPK6Qj', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:32:"http://www.example.com/fail.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"aiZtQZ9FXpNGp7JwLkpsxrTAnPK6Qj";}'),
+	('B09VlVrcstODdgcYo17wQYd5a6rj2x', 'a:15:{s:6:"eg_acc";s:8:"14176198";s:11:"eg_acc_from";s:8:"14176198";s:7:"eg_amnt";s:5:"55555";s:11:"eg_currency";s:3:"USD";s:11:"eg_comments";s:15:"fsdfsdfsdfsdfsd";s:15:"eg_merchant_ref";s:12:"fsdfsdfsdfsd";s:14:"eg_success_url";s:16:"http://zodia.lc/";s:21:"eg_success_url_method";s:4:"POST";s:11:"eg_fail_url";s:16:"http://zodia.lc/";s:18:"eg_fail_url_method";s:3:"GET";s:13:"eg_status_url";s:16:"http://zodia.lc/";s:20:"eg_status_url_method";s:4:"POST";s:7:"ip_user";s:9:"127.0.0.1";s:7:"browser";s:79:"Mozilla/5.0 (Windows NT 6.1; rv:21.0) Gecko/20100101 Firefox/21.0 FirePHP/0.7.2";s:9:"token_sci";s:30:"B09VlVrcstODdgcYo17wQYd5a6rj2x";}'),
+	('bB6JLdup2T7GQRRcfO3VcDSsR5MRze', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:32:"http://www.example.com/fail.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"bB6JLdup2T7GQRRcfO3VcDSsR5MRze";}'),
+	('bCNzshrQL618HqYO05HoEaKKrHuEKD', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:4:"POST";s:8:"url_fail";s:29:"http://localhost.com/fail.php";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"bCNzshrQL618HqYO05HoEaKKrHuEKD";}'),
+	('bjPKAtlUDFNB2EjzQSI02zSBgYYAhd', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:8:"currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:35:"http://www.example.com/success.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"bjPKAtlUDFNB2EjzQSI02zSBgYYAhd";}'),
+	('BpU2vgcZkLJRIUtXUcV9pLUeJ3ywLY', 'a:16:{s:6:"eg_acc";s:8:"88888888";s:11:"eg_acc_from";s:8:"33333333";s:7:"eg_amnt";s:3:"100";s:11:"eg_currency";s:3:"USD";s:11:"eg_comments";s:7:"hichihi";s:14:"eg_success_url";s:42:"http://localhost:8080/testdata/success.php";s:21:"eg_success_url_method";s:3:"GET";s:11:"eg_fail_url";s:39:"http://localhost:8080/testdata/fail.php";s:18:"eg_fail_url_method";s:3:"GET";s:20:"eg_status_url_method";s:3:"GET";s:7:"giatri1";s:2:"10";s:7:"giatri2";s:2:"29";s:7:"giatri3";s:2:"99";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"BpU2vgcZkLJRIUtXUcV9pLUeJ3ywLY";}'),
+	('C2sMgKs2AzwwX5GCXmGkQVDjZhKtw0', 'a:17:{s:6:"eg_acc";s:8:"88888888";s:11:"eg_acc_from";s:8:"33333333";s:7:"eg_amnt";s:3:"100";s:11:"eg_currency";s:3:"USD";s:11:"eg_comments";s:7:"hichihi";s:15:"eg_merchant_ref";s:4:"hehe";s:14:"eg_success_url";s:42:"http://localhost:8080/testdata/success.php";s:21:"eg_success_url_method";s:3:"GET";s:11:"eg_fail_url";s:39:"http://localhost:8080/testdata/fail.php";s:18:"eg_fail_url_method";s:4:"POST";s:20:"eg_status_url_method";s:3:"GET";s:7:"giatri1";s:2:"10";s:7:"giatri2";s:2:"29";s:7:"giatri3";s:2:"99";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"C2sMgKs2AzwwX5GCXmGkQVDjZhKtw0";}'),
+	('CbpaysezLu7OzNkty30NwcQIxbNxod', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:4:"POST";s:8:"url_fail";s:29:"http://localhost.com/fail.php";s:15:"fail_url_method";s:4:"POST";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"CbpaysezLu7OzNkty30NwcQIxbNxod";}'),
+	('cbTIFe9rKQAtkymHTDcgb1kZ35c1Y9', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:4:"POST";s:8:"url_fail";s:29:"http://localhost.com/fail.php";s:15:"fail_url_method";s:4:"LINK";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"cbTIFe9rKQAtkymHTDcgb1kZ35c1Y9";}'),
+	('ce6e5G8tck5b3J2jXZ6sKUmxWnZmId', 'a:18:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:8:"currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:32:"http://www.example.com/fail.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"ce6e5G8tck5b3J2jXZ6sKUmxWnZmId";}'),
+	('chozZHAF7a5ZLZjDMN31qTcepF3wNx', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:4:"POST";s:8:"url_fail";s:29:"http://localhost.com/fail.php";s:15:"fail_url_method";s:4:"LINK";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"chozZHAF7a5ZLZjDMN31qTcepF3wNx";}'),
+	('d9859UYoP78I02fVSjfELiMK9YESiT', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:4:"POST";s:8:"url_fail";s:29:"http://localhost.com/fail.php";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"d9859UYoP78I02fVSjfELiMK9YESiT";}'),
+	('Dg32rxwfSroozeCPpoGW1nnea5bAsM', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:8:"currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:35:"http://www.example.com/success.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"Dg32rxwfSroozeCPpoGW1nnea5bAsM";}'),
+	('dmON0zEeCn9wsl7JRiAkA10IelrGD1', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:4:"POST";s:8:"url_fail";s:29:"http://localhost.com/fail.php";s:15:"fail_url_method";s:4:"LINK";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"dmON0zEeCn9wsl7JRiAkA10IelrGD1";}'),
+	('DoRkWffGYEa7c8AFVgLJ8oeL8rxW4d', 'a:15:{s:6:"eg_acc";s:8:"14176198";s:11:"eg_acc_from";s:8:"14176198";s:7:"eg_amnt";s:5:"55555";s:11:"eg_currency";s:3:"USD";s:11:"eg_comments";s:15:"fsdfsdfsdfsdfsd";s:15:"eg_merchant_ref";s:12:"fsdfsdfsdfsd";s:14:"eg_success_url";s:18:"http://cyasoft.com";s:21:"eg_success_url_method";s:3:"GET";s:11:"eg_fail_url";s:18:"http://cyasoft.com";s:18:"eg_fail_url_method";s:3:"GET";s:13:"eg_status_url";s:18:"http://cyasoft.com";s:20:"eg_status_url_method";s:3:"GET";s:7:"ip_user";s:9:"127.0.0.1";s:7:"browser";s:79:"Mozilla/5.0 (Windows NT 6.1; rv:21.0) Gecko/20100101 Firefox/21.0 FirePHP/0.7.2";s:9:"token_sci";s:30:"DoRkWffGYEa7c8AFVgLJ8oeL8rxW4d";}'),
+	('dXsqMWVgwbS2drj6RDFcqJr9HAv2Qt', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:4:"POST";s:8:"url_fail";s:29:"http://localhost.com/fail.php";s:15:"fail_url_method";s:4:"LINK";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"dXsqMWVgwbS2drj6RDFcqJr9HAv2Qt";}'),
+	('Eg6KdPzFbqUu5exU9csFqZN5r7VhtP', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:4:"POST";s:8:"url_fail";s:29:"http://localhost.com/fail.php";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"Eg6KdPzFbqUu5exU9csFqZN5r7VhtP";}'),
+	('eUuMO0zq1l7Jjc97vAB0UfNvtW9Gb1', 's:530:"acc_number=88888888,acc_customer=88888888,amount=100,currency=USD,forced=comment that will,merchant=HGF44556756,url_success=http://www.example.com/success.html,success_url_method=GET,url_fail=http://www.example.com/fail.html,fail_url_method=GET,store_name=Cya eglobalcash,email_link=http://www.example.com/status.aspx,status_url_method=GET,tuychon1=10,tuychon2=test2,tuychon3=test3,browser=Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4,token_sci=eUuMO0zq1l7Jjc97vAB0UfNvtW9Gb1";'),
+	('EWqLk95EyQyVqpLJlh2Zsh6dZsg86s', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:4:"POST";s:8:"url_fail";s:29:"http://localhost.com/fail.php";s:15:"fail_url_method";s:4:"LINK";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"EWqLk95EyQyVqpLJlh2Zsh6dZsg86s";}'),
+	('FAwzHQlorG9cATxQBdKkLo5W5wwwnO', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:4:"POST";s:8:"url_fail";s:29:"http://localhost.com/fail.php";s:15:"fail_url_method";s:4:"LINK";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"FAwzHQlorG9cATxQBdKkLo5W5wwwnO";}'),
+	('fPOSiKjEzBYbbGC8WHAZMKunyqujm7', 'a:15:{s:6:"eg_acc";s:8:"14176198";s:11:"eg_acc_from";s:8:"14176198";s:7:"eg_amnt";s:5:"55555";s:11:"eg_currency";s:3:"USD";s:11:"eg_comments";s:15:"fsdfsdfsdfsdfsd";s:15:"eg_merchant_ref";s:12:"fsdfsdfsdfsd";s:14:"eg_success_url";s:18:"http://cyasoft.com";s:21:"eg_success_url_method";s:3:"GET";s:11:"eg_fail_url";s:18:"http://cyasoft.com";s:18:"eg_fail_url_method";s:3:"GET";s:13:"eg_status_url";s:18:"http://cyasoft.com";s:20:"eg_status_url_method";s:3:"GET";s:7:"ip_user";s:9:"127.0.0.1";s:7:"browser";s:79:"Mozilla/5.0 (Windows NT 6.1; rv:21.0) Gecko/20100101 Firefox/21.0 FirePHP/0.7.2";s:9:"token_sci";s:30:"fPOSiKjEzBYbbGC8WHAZMKunyqujm7";}'),
+	('FtRXNlAAuOPFe70bb8SWaqToynBRa0', 'a:18:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:8:"currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:32:"http://www.example.com/fail.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"FtRXNlAAuOPFe70bb8SWaqToynBRa0";}'),
+	('G7tpIF3NtZ8HqQSpSwmJCaPOT6urcv', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:32:"http://www.example.com/fail.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"G7tpIF3NtZ8HqQSpSwmJCaPOT6urcv";}'),
+	('GCCSFbg7Euk0BiixSno4D9x3ZCV7PY', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:4:"POST";s:8:"url_fail";s:29:"http://localhost.com/fail.php";s:15:"fail_url_method";s:4:"POST";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"GCCSFbg7Euk0BiixSno4D9x3ZCV7PY";}'),
+	('gcFGLYIheXvS41YNl9AKtReayvdO9c', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:32:"http://www.example.com/fail.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"gcFGLYIheXvS41YNl9AKtReayvdO9c";}'),
+	('GJuRvPvolj5a3M8jOJ4bpOQQxw4hRx', 'a:17:{s:6:"eg_acc";s:8:"88888888";s:11:"eg_acc_from";s:8:"33333333";s:7:"eg_amnt";s:3:"100";s:11:"eg_currency";s:3:"USD";s:11:"eg_comments";s:7:"hichihi";s:15:"eg_merchant_ref";s:4:"hehe";s:14:"eg_success_url";s:42:"http://localhost:8080/testdata/success.php";s:21:"eg_success_url_method";s:3:"GET";s:11:"eg_fail_url";s:39:"http://localhost:8080/testdata/fail.php";s:18:"eg_fail_url_method";s:4:"POST";s:20:"eg_status_url_method";s:3:"GET";s:7:"giatri1";s:2:"10";s:7:"giatri2";s:2:"29";s:7:"giatri3";s:2:"99";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"GJuRvPvolj5a3M8jOJ4bpOQQxw4hRx";}'),
+	('GPWV6gPmNPdJhWcFii5wUuamumYpMF', 'a:9:{s:6:"eg_acc";s:8:"11111111";s:11:"eg_currency";s:3:"USD";s:14:"eg_success_url";s:42:"http://localhost:8080/testdata/success.php";s:21:"eg_success_url_method";s:4:"POST";s:11:"eg_fail_url";s:39:"http://localhost:8080/testdata/fail.php";s:18:"eg_fail_url_method";s:4:"POST";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"GPWV6gPmNPdJhWcFii5wUuamumYpMF";}'),
+	('H0h0GEUkJqqaD58zskTRokxOTCY8RW', 'a:17:{s:6:"eg_acc";s:8:"88888888";s:11:"eg_acc_from";s:8:"33333333";s:7:"eg_amnt";s:3:"100";s:11:"eg_currency";s:3:"USD";s:11:"eg_comments";s:7:"hichihi";s:15:"eg_merchant_ref";s:4:"hehe";s:14:"eg_success_url";s:42:"http://localhost:8080/testdata/success.php";s:21:"eg_success_url_method";s:3:"GET";s:11:"eg_fail_url";s:39:"http://localhost:8080/testdata/fail.php";s:18:"eg_fail_url_method";s:4:"LINK";s:20:"eg_status_url_method";s:3:"GET";s:7:"giatri1";s:2:"10";s:7:"giatri2";s:2:"29";s:7:"giatri3";s:2:"99";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"H0h0GEUkJqqaD58zskTRokxOTCY8RW";}'),
+	('HfRMkKD1KxgS5Wsqs8KST9AswQjS8C', 'a:17:{s:6:"eg_acc";s:8:"88888888";s:11:"eg_acc_from";s:8:"33333333";s:7:"eg_amnt";s:3:"100";s:11:"eg_currency";s:3:"USD";s:11:"eg_comments";s:7:"hichihi";s:15:"eg_merchant_ref";s:4:"hehe";s:14:"eg_success_url";s:42:"http://localhost:8080/testdata/success.php";s:21:"eg_success_url_method";s:3:"GET";s:11:"eg_fail_url";s:39:"http://localhost:8080/testdata/fail.php";s:18:"eg_fail_url_method";s:4:"LINK";s:20:"eg_status_url_method";s:3:"GET";s:7:"giatri1";s:2:"10";s:7:"giatri2";s:2:"29";s:7:"giatri3";s:2:"99";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"HfRMkKD1KxgS5Wsqs8KST9AswQjS8C";}'),
+	('Hgx9D4rshBLcE6pd36YZmjIxV659G0', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:4:"POST";s:8:"url_fail";s:29:"http://localhost.com/fail.php";s:15:"fail_url_method";s:4:"LINK";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"Hgx9D4rshBLcE6pd36YZmjIxV659G0";}'),
+	('hwfUpQhuiUk7wboc3SCTUePpCPQXVq', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:4:"POST";s:8:"url_fail";s:29:"http://localhost.com/fail.php";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"hwfUpQhuiUk7wboc3SCTUePpCPQXVq";}'),
+	('HXD49TMFka1fYZNhGkMeGpjrbhDx6o', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:32:"http://www.example.com/fail.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"HXD49TMFka1fYZNhGkMeGpjrbhDx6o";}'),
+	('I9dSXiwGqYqMztYVLM0UdUhOaSePnj', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:8:"currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:35:"http://www.example.com/success.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"I9dSXiwGqYqMztYVLM0UdUhOaSePnj";}'),
+	('I9OIZjXFXPGrIo4EANFNcACaMNMzPP', 's:530:"acc_number=88888888,acc_customer=88888888,amount=100,currency=USD,forced=comment that will,merchant=HGF44556756,url_success=http://www.example.com/success.html,success_url_method=GET,url_fail=http://www.example.com/fail.html,fail_url_method=GET,store_name=Cya eglobalcash,email_link=http://www.example.com/status.aspx,status_url_method=GET,tuychon1=10,tuychon2=test2,tuychon3=test3,browser=Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4,token_sci=I9OIZjXFXPGrIo4EANFNcACaMNMzPP";'),
+	('ifwBETGZylnvffs6ugP4xYryrbWJZU', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:32:"http://www.example.com/fail.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"ifwBETGZylnvffs6ugP4xYryrbWJZU";}'),
+	('iRwAvdh3dqSePJQ0cFWov6vaEW2bGC', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:8:"currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:35:"http://www.example.com/success.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"iRwAvdh3dqSePJQ0cFWov6vaEW2bGC";}'),
+	('J2bq1tShRvTbSbpEE9BjKkBOcVSA0I', 'a:15:{s:6:"eg_acc";s:8:"14176198";s:11:"eg_acc_from";s:8:"14176198";s:7:"eg_amnt";s:5:"55555";s:11:"eg_currency";s:3:"USD";s:11:"eg_comments";s:15:"fsdfsdfsdfsdfsd";s:15:"eg_merchant_ref";s:12:"fsdfsdfsdfsd";s:14:"eg_success_url";s:16:"http://zodia.lc/";s:21:"eg_success_url_method";s:4:"POST";s:11:"eg_fail_url";s:16:"http://zodia.lc/";s:18:"eg_fail_url_method";s:3:"GET";s:13:"eg_status_url";s:16:"http://zodia.lc/";s:20:"eg_status_url_method";s:4:"POST";s:7:"ip_user";s:9:"127.0.0.1";s:7:"browser";s:79:"Mozilla/5.0 (Windows NT 6.1; rv:21.0) Gecko/20100101 Firefox/21.0 FirePHP/0.7.2";s:9:"token_sci";s:30:"J2bq1tShRvTbSbpEE9BjKkBOcVSA0I";}'),
+	('JdqQYBQWNe8xztZvDke4sSePklgB6m', 'a:15:{s:6:"eg_acc";s:8:"14176198";s:11:"eg_acc_from";s:8:"14176198";s:7:"eg_amnt";s:5:"55555";s:11:"eg_currency";s:3:"USD";s:11:"eg_comments";s:15:"fsdfsdfsdfsdfsd";s:15:"eg_merchant_ref";s:12:"fsdfsdfsdfsd";s:14:"eg_success_url";s:16:"http://zodia.lc/";s:21:"eg_success_url_method";s:4:"POST";s:11:"eg_fail_url";s:16:"http://zodia.lc/";s:18:"eg_fail_url_method";s:3:"GET";s:13:"eg_status_url";s:16:"http://zodia.lc/";s:20:"eg_status_url_method";s:4:"POST";s:7:"ip_user";s:9:"127.0.0.1";s:7:"browser";s:79:"Mozilla/5.0 (Windows NT 6.1; rv:21.0) Gecko/20100101 Firefox/21.0 FirePHP/0.7.2";s:9:"token_sci";s:30:"JdqQYBQWNe8xztZvDke4sSePklgB6m";}'),
+	('JJWuzbTOQVZ095fwHCyTuXElRxjMr2', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:8:"currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:32:"http://www.example.com/fail.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"JJWuzbTOQVZ095fwHCyTuXElRxjMr2";}'),
+	('JM4wyzBgQvdAwiTE4qR2GwOOzABNM9', 'a:17:{s:6:"eg_acc";s:8:"88888888";s:11:"eg_acc_from";s:8:"33333333";s:7:"eg_amnt";s:3:"100";s:11:"eg_currency";s:3:"USD";s:11:"eg_comments";s:7:"hichihi";s:15:"eg_merchant_ref";s:4:"hehe";s:14:"eg_success_url";s:42:"http://localhost:8080/testdata/success.php";s:21:"eg_success_url_method";s:3:"GET";s:11:"eg_fail_url";s:39:"http://localhost:8080/testdata/fail.php";s:18:"eg_fail_url_method";s:3:"GET";s:20:"eg_status_url_method";s:3:"GET";s:7:"giatri1";s:2:"10";s:7:"giatri2";s:2:"29";s:7:"giatri3";s:2:"99";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"JM4wyzBgQvdAwiTE4qR2GwOOzABNM9";}'),
+	('JmnS4uPyqE1qiF2eq6zpjVbKIvzYC3', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:4:"POST";s:8:"url_fail";s:29:"http://localhost.com/fail.php";s:15:"fail_url_method";s:4:"LINK";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"JmnS4uPyqE1qiF2eq6zpjVbKIvzYC3";}'),
+	('K31J9fTCZ4xswhzfMLiBQYdR4WlHos', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:8:"currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:35:"http://www.example.com/success.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"K31J9fTCZ4xswhzfMLiBQYdR4WlHos";}'),
+	('L2QD2AZ2eICX27CpFG2soo15LR3hVz', 'a:9:{s:6:"eg_acc";s:8:"11111111";s:11:"eg_currency";s:3:"USD";s:14:"eg_success_url";s:42:"http://localhost:8080/testdata/success.php";s:21:"eg_success_url_method";s:4:"POST";s:11:"eg_fail_url";s:39:"http://localhost:8080/testdata/fail.php";s:18:"eg_fail_url_method";s:4:"POST";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"L2QD2AZ2eICX27CpFG2soo15LR3hVz";}'),
+	('l8AbNVmyT51Pz1M2TfjpoVO1dBmwu5', 'a:16:{s:6:"eg_acc";s:8:"33333333";s:11:"eg_acc_from";s:8:"33333333";s:7:"eg_amnt";s:3:"100";s:11:"eg_currency";s:3:"USD";s:11:"eg_comments";s:7:"hichihi";s:14:"eg_success_url";s:42:"http://localhost:8080/testdata/success.php";s:21:"eg_success_url_method";s:3:"GET";s:11:"eg_fail_url";s:39:"http://localhost:8080/testdata/fail.php";s:18:"eg_fail_url_method";s:3:"GET";s:20:"eg_status_url_method";s:3:"GET";s:7:"giatri1";s:2:"10";s:7:"giatri2";s:2:"29";s:7:"giatri3";s:2:"99";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"l8AbNVmyT51Pz1M2TfjpoVO1dBmwu5";}'),
+	('LRei2lhf5AbkdyZj23cF0SzHZaE9ku', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:4:"POST";s:8:"url_fail";s:29:"http://localhost.com/fail.php";s:15:"fail_url_method";s:4:"LINK";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"LRei2lhf5AbkdyZj23cF0SzHZaE9ku";}'),
+	('mw9b3Cqom9Smh6cxVqpMDHnFcdTtX6', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:4:"POST";s:8:"url_fail";s:29:"http://localhost.com/fail.php";s:15:"fail_url_method";s:4:"POST";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"mw9b3Cqom9Smh6cxVqpMDHnFcdTtX6";}'),
+	('mZJNSmypcMgVDmcktrpHu7kPEwDKDf', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:4:"POST";s:8:"url_fail";s:29:"http://localhost.com/fail.php";s:15:"fail_url_method";s:4:"LINK";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"mZJNSmypcMgVDmcktrpHu7kPEwDKDf";}'),
+	('nHxACTP4xp5K7jgeUbbJHxdZx0BlFj', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:4:"POST";s:8:"url_fail";s:29:"http://localhost.com/fail.php";s:15:"fail_url_method";s:4:"LINK";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"nHxACTP4xp5K7jgeUbbJHxdZx0BlFj";}'),
+	('nIZJYc81MNCPAYsAt9ydKhnasvh5dS', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:4:"POST";s:8:"url_fail";s:29:"http://localhost.com/fail.php";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"nIZJYc81MNCPAYsAt9ydKhnasvh5dS";}'),
+	('NJHZl9KIDgQns9uJeBMO3QuDTJUzgm', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:32:"http://www.example.com/fail.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"NJHZl9KIDgQns9uJeBMO3QuDTJUzgm";}'),
+	('nOYhffFNFwnUZ0Z0xniLA67hmqnBGk', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:32:"http://www.example.com/fail.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"nOYhffFNFwnUZ0Z0xniLA67hmqnBGk";}'),
+	('nTNDCuEhdozX88tco3OMkR3k5TLXhB', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:32:"http://www.example.com/fail.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"nTNDCuEhdozX88tco3OMkR3k5TLXhB";}'),
+	('o3ntSb0ZqCALKQc88j0guN0h7YxcCq', 'a:17:{s:6:"eg_acc";s:8:"88888888";s:11:"eg_acc_from";s:8:"33333333";s:7:"eg_amnt";s:3:"100";s:11:"eg_currency";s:3:"USD";s:11:"eg_comments";s:7:"hichihi";s:15:"eg_merchant_ref";s:4:"hehe";s:14:"eg_success_url";s:42:"http://localhost:8080/testdata/success.php";s:21:"eg_success_url_method";s:3:"GET";s:11:"eg_fail_url";s:39:"http://localhost:8080/testdata/fail.php";s:18:"eg_fail_url_method";s:4:"POST";s:20:"eg_status_url_method";s:3:"GET";s:7:"giatri1";s:2:"10";s:7:"giatri2";s:2:"29";s:7:"giatri3";s:2:"99";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"o3ntSb0ZqCALKQc88j0guN0h7YxcCq";}'),
+	('O8m6nh1SzgwKil6o4qCRSZSmdx94cT', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:4:"POST";s:8:"url_fail";s:29:"http://localhost.com/fail.php";s:15:"fail_url_method";s:4:"LINK";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"O8m6nh1SzgwKil6o4qCRSZSmdx94cT";}'),
+	('o9iKRiHVjpvmHdpGq97rjjydP1rxo1', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:4:"POST";s:8:"url_fail";s:29:"http://localhost.com/fail.php";s:15:"fail_url_method";s:4:"LINK";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"o9iKRiHVjpvmHdpGq97rjjydP1rxo1";}'),
+	('OlcDJwT42CKLXfskkftNIXrhXhqCuA', 'a:15:{s:6:"eg_acc";s:8:"14176198";s:11:"eg_acc_from";s:8:"14176198";s:7:"eg_amnt";s:5:"55555";s:11:"eg_currency";s:3:"USD";s:11:"eg_comments";s:15:"fsdfsdfsdfsdfsd";s:15:"eg_merchant_ref";s:12:"fsdfsdfsdfsd";s:14:"eg_success_url";s:16:"http://zodia.lc/";s:21:"eg_success_url_method";s:4:"POST";s:11:"eg_fail_url";s:16:"http://zodia.lc/";s:18:"eg_fail_url_method";s:3:"GET";s:13:"eg_status_url";s:16:"http://zodia.lc/";s:20:"eg_status_url_method";s:4:"POST";s:7:"ip_user";s:9:"127.0.0.1";s:7:"browser";s:79:"Mozilla/5.0 (Windows NT 6.1; rv:21.0) Gecko/20100101 Firefox/21.0 FirePHP/0.7.2";s:9:"token_sci";s:30:"OlcDJwT42CKLXfskkftNIXrhXhqCuA";}'),
+	('OYo1nC5RfxAIzfdPWhOqAYlIVPMDPt', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:29:"http://localhost.com/fail.php";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"OYo1nC5RfxAIzfdPWhOqAYlIVPMDPt";}'),
+	('p3EAQwPbG3w3hDb9vTVT6171vUTj5j', 'a:9:{s:6:"eg_acc";s:8:"88888888";s:11:"eg_currency";s:3:"USD";s:14:"eg_success_url";s:42:"http://localhost:8080/testdata/success.php";s:21:"eg_success_url_method";s:4:"POST";s:11:"eg_fail_url";s:39:"http://localhost:8080/testdata/fail.php";s:18:"eg_fail_url_method";s:4:"POST";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"p3EAQwPbG3w3hDb9vTVT6171vUTj5j";}'),
+	('PEl6o3SthFD2Qsj7K8AD1B4CB3o9SM', 'a:16:{s:6:"eg_acc";s:8:"88888888";s:11:"eg_acc_from";s:8:"33333333";s:7:"eg_amnt";s:3:"100";s:11:"eg_currency";s:3:"USD";s:11:"eg_comments";s:7:"hichihi";s:14:"eg_success_url";s:42:"http://localhost:8080/testdata/success.php";s:21:"eg_success_url_method";s:3:"GET";s:11:"eg_fail_url";s:39:"http://localhost:8080/testdata/fail.php";s:18:"eg_fail_url_method";s:3:"GET";s:20:"eg_status_url_method";s:3:"GET";s:7:"giatri1";s:2:"10";s:7:"giatri2";s:2:"29";s:7:"giatri3";s:2:"99";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"PEl6o3SthFD2Qsj7K8AD1B4CB3o9SM";}'),
+	('pm1KNQCIxJPvDLy8cnQto0LOBuU0ys', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:32:"http://www.example.com/fail.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"pm1KNQCIxJPvDLy8cnQto0LOBuU0ys";}'),
+	('PsFfGT4OuH2X6hleKtD4AQ705bCj7F', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:32:"http://www.example.com/fail.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"PsFfGT4OuH2X6hleKtD4AQ705bCj7F";}'),
+	('qKvNNElJkS1k3KuEfyBlXbzO5rqyJ4', 'a:16:{s:6:"eg_acc";s:8:"88888888";s:11:"eg_acc_from";s:8:"33333333";s:7:"eg_amnt";s:3:"100";s:11:"eg_currency";s:3:"USD";s:11:"eg_comments";s:7:"hichihi";s:14:"eg_success_url";s:42:"http://localhost:8080/testdata/success.php";s:21:"eg_success_url_method";s:3:"GET";s:11:"eg_fail_url";s:39:"http://localhost:8080/testdata/fail.php";s:18:"eg_fail_url_method";s:3:"GET";s:20:"eg_status_url_method";s:3:"GET";s:7:"giatri1";s:2:"10";s:7:"giatri2";s:2:"29";s:7:"giatri3";s:2:"99";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"qKvNNElJkS1k3KuEfyBlXbzO5rqyJ4";}'),
+	('Rd86TwkhNky5EJrBfTgc7ezDzrZwSO', 'a:17:{s:6:"eg_acc";s:8:"88888888";s:11:"eg_acc_from";s:8:"33333333";s:7:"eg_amnt";s:3:"100";s:11:"eg_currency";s:3:"USD";s:11:"eg_comments";s:7:"hichihi";s:15:"eg_merchant_ref";s:4:"hehe";s:14:"eg_success_url";s:42:"http://localhost:8080/testdata/success.php";s:21:"eg_success_url_method";s:3:"GET";s:11:"eg_fail_url";s:39:"http://localhost:8080/testdata/fail.php";s:18:"eg_fail_url_method";s:3:"GET";s:20:"eg_status_url_method";s:3:"GET";s:7:"giatri1";s:2:"10";s:7:"giatri2";s:2:"29";s:7:"giatri3";s:2:"99";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"Rd86TwkhNky5EJrBfTgc7ezDzrZwSO";}'),
+	('re0oH6m5yFVHM8pEsa475XbesLs0Q2', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:8:"currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:35:"http://www.example.com/success.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"re0oH6m5yFVHM8pEsa475XbesLs0Q2";}'),
+	('RogwiykWaOEcKLLZPcnP5raYmC55wf', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:8:"currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:35:"http://www.example.com/success.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"RogwiykWaOEcKLLZPcnP5raYmC55wf";}'),
+	('s6Mihdq2Q83KxEmFWHT9WhEywljdWq', 'a:15:{s:6:"eg_acc";s:8:"14176198";s:11:"eg_acc_from";s:8:"14176198";s:7:"eg_amnt";s:5:"55555";s:11:"eg_currency";s:3:"USD";s:11:"eg_comments";s:15:"fsdfsdfsdfsdfsd";s:15:"eg_merchant_ref";s:12:"fsdfsdfsdfsd";s:14:"eg_success_url";s:16:"http://zodia.lc/";s:21:"eg_success_url_method";s:4:"POST";s:11:"eg_fail_url";s:16:"http://zodia.lc/";s:18:"eg_fail_url_method";s:3:"GET";s:13:"eg_status_url";s:16:"http://zodia.lc/";s:20:"eg_status_url_method";s:4:"POST";s:7:"ip_user";s:9:"127.0.0.1";s:7:"browser";s:79:"Mozilla/5.0 (Windows NT 6.1; rv:21.0) Gecko/20100101 Firefox/21.0 FirePHP/0.7.2";s:9:"token_sci";s:30:"s6Mihdq2Q83KxEmFWHT9WhEywljdWq";}'),
+	('slIyiGHpGh0nkrIjtSkbDbep1p8VUO', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:32:"http://www.example.com/fail.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"slIyiGHpGh0nkrIjtSkbDbep1p8VUO";}'),
+	('szADXR7ox76eh8PD42ybvoNR5Zgvp7', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:32:"http://www.example.com/fail.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"szADXR7ox76eh8PD42ybvoNR5Zgvp7";}'),
+	('t3lqIYbrrvx592qgp8KaM4DyAOrQnt', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:4:"POST";s:8:"url_fail";s:29:"http://localhost.com/fail.php";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"t3lqIYbrrvx592qgp8KaM4DyAOrQnt";}'),
+	('T5s5jxrWmnlp51YLK8oPgeh1cQzAU6', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:8:"currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:32:"http://www.example.com/fail.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"T5s5jxrWmnlp51YLK8oPgeh1cQzAU6";}'),
+	('t8Pgi79tMOWnifUz993aUH6hk7C701', 'a:17:{s:6:"eg_acc";s:8:"88888888";s:11:"eg_acc_from";s:8:"33333333";s:7:"eg_amnt";s:3:"100";s:11:"eg_currency";s:3:"USD";s:11:"eg_comments";s:7:"hichihi";s:15:"eg_merchant_ref";s:4:"hehe";s:14:"eg_success_url";s:42:"http://localhost:8080/testdata/success.php";s:21:"eg_success_url_method";s:3:"GET";s:11:"eg_fail_url";s:39:"http://localhost:8080/testdata/fail.php";s:18:"eg_fail_url_method";s:4:"LINK";s:20:"eg_status_url_method";s:3:"GET";s:7:"giatri1";s:2:"10";s:7:"giatri2";s:2:"29";s:7:"giatri3";s:2:"99";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"t8Pgi79tMOWnifUz993aUH6hk7C701";}'),
+	('TdHXYz1CSC6VzRIISTZUEKYGxl04Gg', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:32:"http://www.example.com/fail.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"TdHXYz1CSC6VzRIISTZUEKYGxl04Gg";}'),
+	('Tladm8lcqF2ok2ccoRM0UaPNWd6sFD', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:4:"POST";s:8:"url_fail";s:29:"http://localhost.com/fail.php";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"Tladm8lcqF2ok2ccoRM0UaPNWd6sFD";}'),
+	('u3xMwyps0MqBEgJS57voewIms8VZgT', 'a:15:{s:6:"eg_acc";s:8:"14176198";s:11:"eg_acc_from";s:8:"14176198";s:7:"eg_amnt";s:5:"55555";s:11:"eg_currency";s:3:"USD";s:11:"eg_comments";s:15:"fsdfsdfsdfsdfsd";s:15:"eg_merchant_ref";s:12:"fsdfsdfsdfsd";s:14:"eg_success_url";s:16:"http://zodia.lc/";s:21:"eg_success_url_method";s:4:"POST";s:11:"eg_fail_url";s:16:"http://zodia.lc/";s:18:"eg_fail_url_method";s:3:"GET";s:13:"eg_status_url";s:16:"http://zodia.lc/";s:20:"eg_status_url_method";s:4:"POST";s:7:"ip_user";s:9:"127.0.0.1";s:7:"browser";s:79:"Mozilla/5.0 (Windows NT 6.1; rv:21.0) Gecko/20100101 Firefox/21.0 FirePHP/0.7.2";s:9:"token_sci";s:30:"u3xMwyps0MqBEgJS57voewIms8VZgT";}'),
+	('UKCpTXU1KfemsTNDfyQJrMNd2pGXq4', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:32:"http://www.example.com/fail.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"UKCpTXU1KfemsTNDfyQJrMNd2pGXq4";}'),
+	('UlnDM1APvIZ0SlhM2OzR8hsr3lgoIO', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"33333333";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:4:"POST";s:8:"url_fail";s:29:"http://localhost.com/fail.php";s:15:"fail_url_method";s:4:"LINK";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"UlnDM1APvIZ0SlhM2OzR8hsr3lgoIO";}'),
+	('uOoZiH2u1xnZQJRF606qo5W9ANbiUn', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:4:"POST";s:8:"url_fail";s:29:"http://localhost.com/fail.php";s:15:"fail_url_method";s:4:"LINK";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"uOoZiH2u1xnZQJRF606qo5W9ANbiUn";}'),
+	('UsuhJIFtE3mGRnbmCvq4XVAbIrcjfX', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:8:"currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:32:"http://www.example.com/fail.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"UsuhJIFtE3mGRnbmCvq4XVAbIrcjfX";}'),
+	('UtSCkG9KVzCVeAySAamCiaryYLMs8z', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:32:"http://www.example.com/fail.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"UtSCkG9KVzCVeAySAamCiaryYLMs8z";}'),
+	('vePm7wTLl03LtpXLcSiL4fCLGtFosd', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:32:"http://www.example.com/fail.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"vePm7wTLl03LtpXLcSiL4fCLGtFosd";}'),
+	('vllXsQGLhvUh6aGbRWwCKubF6khPDa', 'a:16:{s:6:"eg_acc";s:8:"88888888";s:11:"eg_acc_from";s:8:"33333333";s:7:"eg_amnt";s:3:"100";s:11:"eg_currency";s:3:"USD";s:11:"eg_comments";s:7:"hichihi";s:14:"eg_success_url";s:42:"http://localhost:8080/testdata/success.php";s:21:"eg_success_url_method";s:3:"GET";s:11:"eg_fail_url";s:39:"http://localhost:8080/testdata/fail.php";s:18:"eg_fail_url_method";s:3:"GET";s:20:"eg_status_url_method";s:3:"GET";s:7:"giatri1";s:2:"10";s:7:"giatri2";s:2:"29";s:7:"giatri3";s:2:"99";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"vllXsQGLhvUh6aGbRWwCKubF6khPDa";}'),
+	('vxHkjH1MjeocLuDfZVFaLdNQEUGPxo', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:29:"http://localhost.com/fail.php";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"vxHkjH1MjeocLuDfZVFaLdNQEUGPxo";}'),
+	('W0pfmtcUku7SiKTk7ozNKgpVVMJh5b', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:8:"currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:35:"http://www.example.com/success.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"W0pfmtcUku7SiKTk7ozNKgpVVMJh5b";}'),
+	('w9sF6JBbqiIKjDjrY2QEr27FoFs8Y1', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:4:"POST";s:8:"url_fail";s:29:"http://localhost.com/fail.php";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"w9sF6JBbqiIKjDjrY2QEr27FoFs8Y1";}'),
+	('whpO1sVxyInWIkJFLFkj7WmxbfnpLg', 'a:17:{s:6:"eg_acc";s:8:"88888888";s:11:"eg_acc_from";s:8:"33333333";s:7:"eg_amnt";s:3:"100";s:11:"eg_currency";s:3:"USD";s:11:"eg_comments";s:7:"hichihi";s:15:"eg_merchant_ref";s:4:"hehe";s:14:"eg_success_url";s:42:"http://localhost:8080/testdata/success.php";s:21:"eg_success_url_method";s:3:"GET";s:11:"eg_fail_url";s:39:"http://localhost:8080/testdata/fail.php";s:18:"eg_fail_url_method";s:3:"GET";s:20:"eg_status_url_method";s:3:"GET";s:7:"giatri1";s:2:"10";s:7:"giatri2";s:2:"29";s:7:"giatri3";s:2:"99";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"whpO1sVxyInWIkJFLFkj7WmxbfnpLg";}'),
+	('WhRdViduKYUV5ug3qs46Tw3SyTvVAi', 'a:16:{s:6:"eg_acc";s:8:"88888888";s:11:"eg_acc_from";s:8:"33333333";s:7:"eg_amnt";s:3:"100";s:11:"eg_currency";s:3:"USD";s:11:"eg_comments";s:7:"hichihi";s:14:"eg_success_url";s:42:"http://localhost:8080/testdata/success.php";s:21:"eg_success_url_method";s:3:"GET";s:11:"eg_fail_url";s:39:"http://localhost:8080/testdata/fail.php";s:18:"eg_fail_url_method";s:3:"GET";s:20:"eg_status_url_method";s:3:"GET";s:7:"giatri1";s:2:"10";s:7:"giatri2";s:2:"29";s:7:"giatri3";s:2:"99";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"WhRdViduKYUV5ug3qs46Tw3SyTvVAi";}'),
+	('wnHdxhzgCv2KBXzGWKUN13Kv20aBNR', 'a:9:{s:6:"eg_acc";s:8:"88888888";s:11:"eg_currency";s:3:"USD";s:14:"eg_success_url";s:42:"http://localhost:8080/testdata/success.php";s:21:"eg_success_url_method";s:4:"POST";s:11:"eg_fail_url";s:39:"http://localhost:8080/testdata/fail.php";s:18:"eg_fail_url_method";s:4:"POST";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"wnHdxhzgCv2KBXzGWKUN13Kv20aBNR";}'),
+	('wQM5FqbQuJCqmgyas60Mklvuz09Xv3', 's:530:"acc_number=88888888,acc_customer=88888888,amount=100,currency=USD,forced=comment that will,merchant=HGF44556756,url_success=http://www.example.com/success.html,success_url_method=GET,url_fail=http://www.example.com/fail.html,fail_url_method=GET,store_name=Cya eglobalcash,email_link=http://www.example.com/status.aspx,status_url_method=GET,tuychon1=10,tuychon2=test2,tuychon3=test3,browser=Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4,token_sci=wQM5FqbQuJCqmgyas60Mklvuz09Xv3";'),
+	('WXLIzdi0vh9b8HP0QvYhpB8KGko5O1', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:4:"POST";s:8:"url_fail";s:29:"http://localhost.com/fail.php";s:15:"fail_url_method";s:4:"LINK";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"WXLIzdi0vh9b8HP0QvYhpB8KGko5O1";}'),
+	('x2wRCunHrpiNuqP3bvARFHjZLNBqcJ', 'a:17:{s:6:"eg_acc";s:8:"88888888";s:11:"eg_acc_from";s:8:"33333333";s:7:"eg_amnt";s:3:"100";s:11:"eg_currency";s:3:"USD";s:11:"eg_comments";s:7:"hichihi";s:15:"eg_merchant_ref";s:4:"hehe";s:14:"eg_success_url";s:42:"http://localhost:8080/testdata/success.php";s:21:"eg_success_url_method";s:3:"GET";s:11:"eg_fail_url";s:39:"http://localhost:8080/testdata/fail.php";s:18:"eg_fail_url_method";s:4:"POST";s:20:"eg_status_url_method";s:3:"GET";s:7:"giatri1";s:2:"10";s:7:"giatri2";s:2:"29";s:7:"giatri3";s:2:"99";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"x2wRCunHrpiNuqP3bvARFHjZLNBqcJ";}'),
+	('X3wJhFPcAdenR1ji57WqftYRapqJqp', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:32:"http://www.example.com/fail.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"X3wJhFPcAdenR1ji57WqftYRapqJqp";}'),
+	('X99JlPIFmUQELrrx2aXSlMr7j2A3N9', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:4:"POST";s:8:"url_fail";s:29:"http://localhost.com/fail.php";s:15:"fail_url_method";s:4:"LINK";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"X99JlPIFmUQELrrx2aXSlMr7j2A3N9";}'),
+	('XIdcAyrWuf12xo1MwSgT6AvNOgDcbN', 'a:15:{s:6:"eg_acc";s:8:"14176198";s:11:"eg_acc_from";s:8:"14176198";s:7:"eg_amnt";s:5:"55555";s:11:"eg_currency";s:3:"USD";s:15:"eg_merchant_ref";s:12:"fsdfsdfsdfsd";s:11:"eg_comments";s:15:"fsdfsdfsdfsdfsd";s:14:"eg_success_url";s:18:"http://cyasoft.com";s:21:"eg_success_url_method";s:3:"GET";s:13:"eg_status_url";s:18:"http://cyasoft.com";s:20:"eg_status_url_method";s:3:"GET";s:11:"eg_fail_url";s:18:"http://cyasoft.com";s:18:"eg_fail_url_method";s:40:"GET4234=42342342342=4234234242342=424234";s:7:"ip_user";s:9:"127.0.0.1";s:7:"browser";s:79:"Mozilla/5.0 (Windows NT 6.1; rv:21.0) Gecko/20100101 Firefox/21.0 FirePHP/0.7.2";s:9:"token_sci";s:30:"XIdcAyrWuf12xo1MwSgT6AvNOgDcbN";}'),
+	('xWmiQOIdieI9IBmG84aHkYHO2EFfn7', 's:530:"acc_number=88888888,acc_customer=88888888,amount=100,currency=USD,forced=comment that will,merchant=HGF44556756,url_success=http://www.example.com/success.html,success_url_method=GET,url_fail=http://www.example.com/fail.html,fail_url_method=GET,store_name=Cya eglobalcash,email_link=http://www.example.com/status.aspx,status_url_method=GET,tuychon1=10,tuychon2=test2,tuychon3=test3,browser=Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4,token_sci=xWmiQOIdieI9IBmG84aHkYHO2EFfn7";'),
+	('YNPlMlPB9o7h4hVm0FsfeeNMvoUkY0', 'a:9:{s:6:"eg_acc";s:8:"11111111";s:11:"eg_currency";s:3:"USD";s:14:"eg_success_url";s:42:"http://localhost:8080/testdata/success.php";s:21:"eg_success_url_method";s:4:"POST";s:11:"eg_fail_url";s:39:"http://localhost:8080/testdata/fail.php";s:18:"eg_fail_url_method";s:4:"POST";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"YNPlMlPB9o7h4hVm0FsfeeNMvoUkY0";}'),
+	('YNw5jYckAJHY20wz482Mz0gkJKKvCb', 'a:17:{s:6:"eg_acc";s:8:"88888888";s:11:"eg_acc_from";s:8:"33333333";s:7:"eg_amnt";s:3:"100";s:11:"eg_currency";s:3:"USD";s:11:"eg_comments";s:7:"hichihi";s:15:"eg_merchant_ref";s:4:"hehe";s:14:"eg_success_url";s:42:"http://localhost:8080/testdata/success.php";s:21:"eg_success_url_method";s:3:"GET";s:11:"eg_fail_url";s:39:"http://localhost:8080/testdata/fail.php";s:18:"eg_fail_url_method";s:3:"GET";s:20:"eg_status_url_method";s:3:"GET";s:7:"giatri1";s:2:"10";s:7:"giatri2";s:2:"29";s:7:"giatri3";s:2:"99";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"YNw5jYckAJHY20wz482Mz0gkJKKvCb";}'),
+	('YPCTD7gVNxdU03XMenrcJGXfbSJWym', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:4:"POST";s:8:"url_fail";s:29:"http://localhost.com/fail.php";s:15:"fail_url_method";s:4:"POST";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"YPCTD7gVNxdU03XMenrcJGXfbSJWym";}'),
+	('yrweIyoWzaQLcItqWmI4S7USacDuLr', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:4:"POST";s:8:"url_fail";s:29:"http://localhost.com/fail.php";s:15:"fail_url_method";s:4:"LINK";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"yrweIyoWzaQLcItqWmI4S7USacDuLr";}'),
+	('yUqw1wCrwsNuLZezREA1V7ryvm4rFC', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:4:"POST";s:8:"url_fail";s:29:"http://localhost.com/fail.php";s:15:"fail_url_method";s:4:"LINK";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"yUqw1wCrwsNuLZezREA1V7ryvm4rFC";}'),
+	('yw2tVshaxLm3WJEJNnB7RvDOmwYncF', 'a:15:{s:6:"eg_acc";s:8:"14176198";s:11:"eg_acc_from";s:8:"14176198";s:7:"eg_amnt";s:5:"55555";s:11:"eg_currency";s:3:"USD";s:11:"eg_comments";s:15:"fsdfsdfsdfsdfsd";s:15:"eg_merchant_ref";s:12:"fsdfsdfsdfsd";s:14:"eg_success_url";s:16:"http://zodia.lc/";s:21:"eg_success_url_method";s:4:"POST";s:11:"eg_fail_url";s:16:"http://zodia.lc/";s:18:"eg_fail_url_method";s:3:"GET";s:13:"eg_status_url";s:16:"http://zodia.lc/";s:20:"eg_status_url_method";s:4:"POST";s:7:"ip_user";s:9:"127.0.0.1";s:7:"browser";s:79:"Mozilla/5.0 (Windows NT 6.1; rv:21.0) Gecko/20100101 Firefox/21.0 FirePHP/0.7.2";s:9:"token_sci";s:30:"yw2tVshaxLm3WJEJNnB7RvDOmwYncF";}'),
+	('z1jMoq5lomVg2QKJc9SZi6bR9ApImt', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:8:"currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:35:"http://www.example.com/success.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"z1jMoq5lomVg2QKJc9SZi6bR9ApImt";}'),
+	('zkrAhqVNBnLBwNZYPTeSNxptAxtJ0y', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:11:"eg_currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:4:"POST";s:8:"url_fail";s:29:"http://localhost.com/fail.php";s:15:"fail_url_method";s:4:"LINK";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:101:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11";s:9:"token_sci";s:30:"zkrAhqVNBnLBwNZYPTeSNxptAxtJ0y";}'),
+	('Zork5XjDazxHaHsRqjYclKxDzcI6u5', 'a:19:{s:10:"acc_number";s:8:"88888888";s:12:"acc_customer";s:8:"88888888";s:6:"amount";s:3:"100";s:8:"currency";s:3:"USD";s:6:"forced";s:17:"comment that will";s:8:"merchant";s:11:"HGF44556756";s:11:"url_success";s:35:"http://www.example.com/success.html";s:18:"success_url_method";s:3:"GET";s:8:"url_fail";s:35:"http://www.example.com/success.html";s:15:"fail_url_method";s:3:"GET";s:10:"store_name";s:15:"Cya eglobalcash";s:10:"email_link";s:34:"http://www.example.com/status.aspx";s:17:"status_url_method";s:3:"GET";s:8:"tuychon1";s:2:"10";s:8:"tuychon2";s:5:"test2";s:8:"tuychon3";s:5:"test3";s:7:"ip_user";s:7:"0.0.0.0";s:7:"browser";s:99:"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.94 Safari/537.4";s:9:"token_sci";s:30:"Zork5XjDazxHaHsRqjYclKxDzcI6u5";}');
 /*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
 
 
--- Dumping structure for table eglobal_main_new.transactions
+-- Dumping structure for table global.transactions
 DROP TABLE IF EXISTS `transactions`;
 CREATE TABLE IF NOT EXISTS `transactions` (
   `transaction_id` int(11) NOT NULL AUTO_INCREMENT,
-  `batch_number` varchar(16) NOT NULL,
+  `batch_number` varchar(16) COLLATE utf8_unicode_ci NOT NULL,
   `from_userid` int(11) NOT NULL,
   `to_userid` int(11) NOT NULL,
   `amount` float NOT NULL,
   `transaction_time` datetime NOT NULL,
-  `transaction_memo` mediumtext NOT NULL,
-  `from_account` varchar(16) NOT NULL,
-  `to_account` varchar(16) NOT NULL,
-  `transaction_status` varchar(16) NOT NULL,
-  `transaction_currency` varchar(3) NOT NULL,
-  `amount_text` varchar(32) NOT NULL,
+  `transaction_memo` text COLLATE utf8_unicode_ci NOT NULL,
+  `from_account` varchar(16) COLLATE utf8_unicode_ci NOT NULL,
+  `to_account` varchar(16) COLLATE utf8_unicode_ci NOT NULL,
+  `transaction_status` varchar(16) COLLATE utf8_unicode_ci NOT NULL,
+  `transaction_currency` varchar(3) COLLATE utf8_unicode_ci NOT NULL,
+  `amount_text` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   `fee` float NOT NULL,
-  `fee_text` varchar(32) NOT NULL,
+  `payment` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `fee_transfer` float NOT NULL,
+  `fee_text` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`transaction_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=183 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table eglobal_main_new.transactions: 164 rows
+-- Dumping data for table global.transactions: 8 rows
 /*!40000 ALTER TABLE `transactions` DISABLE KEYS */;
-INSERT INTO `transactions` (`transaction_id`, `batch_number`, `from_userid`, `to_userid`, `amount`, `transaction_time`, `transaction_memo`, `from_account`, `to_account`, `transaction_status`, `transaction_currency`, `amount_text`, `fee`, `fee_text`) VALUES
-	(17, '00448984283', -1, 3, 1000, '2010-02-26 21:33:56', 'my first test transaction from admin', 'GWebcash Service', '8072229', 'completed', 'JPY', 'JPY10001000', 0, ''),
-	(18, '71949099554', -1, 4, 100, '2010-02-26 21:47:24', '', 'GWebcash Service', '6433175', 'completed', 'USD', '$100.00', 0, ''),
-	(19, '12462925052', 4, 5, 10, '2010-02-26 23:35:09', '', '6433175', '3662730', 'completed', 'USD', '$10.00', 0, ''),
-	(20, '21933866631', -1, 3, 100, '2010-02-27 00:44:06', 'new testing payment', 'GWebcash Service', '8072229', 'completed', 'USD', '$100.00', 0, ''),
-	(21, '86615212163', -1, 3, 100, '2010-02-27 00:45:33', 'new testing payment', 'GWebcash Service', '8072229', 'completed', 'USD', '$100.00', 0, ''),
-	(22, '36579637099', -1, 4, 1000, '2010-02-27 00:51:51', 'testing admin transfer email', 'GWebcash Service', '6433175', 'completed', 'JPY', 'Â¥1,000.00', 0, ''),
-	(23, '84766864887', -1, 1, 200, '2010-02-28 09:13:10', 'testing transfer', 'GWebcash Service', '4185045', 'completed', 'GPB', 'Â£200.00', 0, ''),
-	(24, '31080825229', 1, 3, 20, '2010-02-28 09:24:15', 'payment from OSCcoder', '4185045', '8072229', 'completed', 'GPB', 'Â£20.00', 0, ''),
-	(25, '08612754486', 3, 1, 4, '2010-02-28 09:41:19', 'back money', '8072229', '4185045', 'completed', 'USD', '$4.00', 0, ''),
-	(26, '84234720223', -1, 6, 100, '2010-03-01 02:14:58', '', 'GWebcash Service', '0359677', 'completed', 'USD', '$100.00', 0, ''),
-	(27, '05522985636', -1, 7, 10000, '2010-03-11 17:41:23', '', 'GWebcash Service', '0820079', 'completed', 'JPY', 'Â¥10,000.00', 0, ''),
-	(28, '29901724451', 7, 4, 5000, '2010-03-11 18:07:09', '', '0820079', '6433175', 'completed', 'JPY', 'Â¥5,000.00', 0, ''),
-	(29, '57432139538', -1, 11, 500, '2010-07-17 19:53:18', '', 'GWebcash Service', '5584729', 'completed', 'USD', '$500.00', 0, ''),
-	(30, '45974257758', 11, 34, 200, '2010-09-08 20:55:22', 'gomkets', '5584729', '2904235', 'completed', 'USD', '$200.00', 0, ''),
-	(31, '93797215477', -1, 43, 2350, '2011-03-02 20:01:28', 'Reffer by Shin', 'GWebcash Service', '9554997', 'completed', 'USD', '$2,350.00', 0, ''),
-	(32, '75893646576', -1, 5, 10000, '2011-09-11 11:00:35', '', 'GWebcash Service', '3662730', 'completed', 'RMB', 'Â¥10,000.00', 0, ''),
-	(33, '99889166272', -1, 55, 10, '2011-09-13 02:01:19', '', 'GWebcash Service', '9124181', 'completed', 'USD', '$10.00', 0, ''),
-	(34, '16938093065', -1, 55, 36058, '2011-09-13 02:30:22', 'Deposit by 450000JPY', 'GWebcash Service', '9124181', 'completed', 'RMB', 'Â¥36,058.00', 0, ''),
-	(35, '95428346902', -1, 55, 2400, '2011-09-13 02:47:06', 'Direct Deposit', 'GWebcash Service', '9124181', 'completed', 'USD', '$2,400.00', 0, ''),
-	(36, '21479091735', -1, 5, 10000, '2012-03-25 08:40:08', 'Initial founds to Cyber Exchange Service', 'GWebcash Service', '3662730', 'completed', 'USD', '$10,000.00', 0, ''),
-	(37, '61584935263', -1, 5, 10000, '2012-03-25 08:42:02', 'Initial founds to cyberex.jp (2)', 'GWebcash Service', '3662730', 'completed', 'USD', '$10,000.00', 0, ''),
-	(38, '60276557960', -1, 5, 10000, '2012-03-25 08:42:38', 'Initial founds to cyberex.jp (3)', 'GWebcash Service', '3662730', 'completed', 'USD', '$10,000.00', 0, ''),
-	(39, '48094462006', -1, 5, 10000, '2012-03-25 08:43:11', 'Initial founds to cyberex.jp (3)', 'GWebcash Service', '3662730', 'completed', 'USD', '$10,000.00', 0, ''),
-	(40, '11663318244', -1, 5, 10000, '2012-03-25 08:43:43', '', 'GWebcash Service', '3662730', 'completed', 'USD', '$10,000.00', 0, ''),
-	(41, '13993470516', -1, 3, 10000, '2012-03-26 06:38:28', 'testing', 'GWebcash Service', '8072229', 'completed', 'USD', '$10,000.00', 0, ''),
-	(42, '49411394998', -1, 5, 5000000, '2012-03-26 09:29:03', '', 'GWebcash Service', '3662730', 'completed', 'JPY', 'Â¥5,000,000.00', 0, ''),
-	(43, '78509731293', 5, 57, 10, '2012-03-26 09:54:09', 'initial deposit', '3662730', '1971164', 'completed', 'USD', '$10.00', 0, ''),
-	(44, '80319225319', -1, 56, 10, '2012-03-26 22:34:08', 'chuyen tien', 'GWebcash Service', '1321481', 'completed', 'USD', '$10.00', 0, ''),
-	(45, '68303120454', -1, 56, 10, '2012-03-26 22:35:38', 'chuyen tien', 'GWebcash Service', '1321481', 'completed', 'USD', '$10.00', 0, ''),
-	(46, '85140037023', -1, 56, 1, '2012-03-26 22:41:21', 'dsfsdf', 'GWebcash Service', '1321481', 'completed', 'USD', '$1.00', 0, ''),
-	(47, '64429152604', 56, 1, 1, '2012-03-28 02:14:12', 'aaaaaaaaaa', '1321481', '4185045', 'completed', 'USD', '$1.00', 0, ''),
-	(48, '62459089833', -1, 61, 10000, '2012-05-22 05:44:45', 'Transfer from Cyberex.jp', 'GWebcash Service', '8923022', 'completed', 'USD', '$10,000.00', 0, ''),
-	(49, '53167024837', -1, 61, 10000, '2012-05-22 05:46:48', 'Request from CybereEx.jp', 'GWebcash Service', '8923022', 'completed', 'JPY', 'Â¥10,000.00', 0, ''),
-	(50, '33779935481', -1, 61, 10000, '2012-05-22 05:47:32', 'Request from CybereEx.jp', 'GWebcash Service', '8923022', 'completed', 'USD', '$10,000.00', 0, ''),
-	(51, '96221024048', -1, 61, 10000, '2012-05-22 05:48:37', 'Request from CybereEx.jp', 'GWebcash Service', '8923022', 'completed', 'USD', '$10,000.00', 0, ''),
-	(52, '98351907041', -1, 61, 10000, '2012-05-22 05:49:33', 'Request from CybereEx.jp', 'GWebcash Service', '8923022', 'completed', 'USD', '$10,000.00', 0, ''),
-	(53, '87835280901', -1, 61, 10000, '2012-05-22 05:50:02', 'Request from CybereEx.jp', 'GWebcash Service', '8923022', 'completed', 'USD', '$10,000.00', 0, ''),
-	(54, '03213114505', -1, 5, 10000, '2012-05-22 05:52:31', '', 'GWebcash Service', '3662730', 'completed', 'EUR', 'â‚¬10,000.00', 0, ''),
-	(55, '73611604667', -1, 5, 10000, '2012-05-22 05:52:56', '', 'GWebcash Service', '3662730', 'completed', 'EUR', 'â‚¬10,000.00', 0, ''),
-	(56, '88415180072', -1, 5, 10000, '2012-05-22 05:53:15', '', 'GWebcash Service', '3662730', 'completed', 'EUR', 'â‚¬10,000.00', 0, ''),
-	(57, '91600013503', -1, 5, 10000, '2012-05-22 05:53:32', '', 'GWebcash Service', '3662730', 'completed', 'EUR', 'â‚¬10,000.00', 0, ''),
-	(58, '63051139499', -1, 5, 10000, '2012-05-22 05:53:51', '', 'GWebcash Service', '3662730', 'completed', 'EUR', 'â‚¬10,000.00', 0, ''),
-	(59, '20528820614', 61, 62, 500, '2012-05-22 06:53:31', 'forex master', '8923022', '3255851', 'completed', 'USD', '$500.00', 0, ''),
-	(60, '29084876903', 61, 66, 100, '2012-05-23 06:13:12', 'YANG ,CHEOUL BAE', '8923022', '8020309', 'completed', 'USD', '$100.00', 0, ''),
-	(61, '86999204972', 61, 63, 100, '2012-05-23 06:15:03', 'YANG,CHEOUL BAE', '8923022', '1250457', 'completed', 'USD', '$100.00', 0, ''),
-	(62, '45192804038', 61, 64, 100, '2012-05-23 06:18:54', 'YANG,CHEOUL BAE', '8923022', '6853310', 'completed', 'USD', '$100.00', 0, ''),
-	(63, '40203864054', 61, 60, 9100, '2012-05-23 06:49:59', 'FOREX MASTER', '8923022', '7635351', 'completed', 'USD', '$9,100.00', 0, ''),
-	(64, '88902336636', 60, 68, 500, '2012-05-24 23:07:43', 'YANG,CHEOUL BAE', '7635351', '5200777', 'completed', 'USD', '$500.00', 0, ''),
-	(65, '60212342177', 60, 66, 2000, '2012-05-25 02:00:55', 'YANG,CHEOUL BAE', '7635351', '8020309', 'completed', 'USD', '$2,000.00', 0, ''),
-	(66, '71927022912', 61, 69, 300, '2012-05-25 07:14:26', 'ALEX', '8923022', '7785649', 'completed', 'USD', '$300.00', 0, ''),
-	(67, '82318828410', 5, 6, 40671.3, '2012-06-05 09:49:48', 'From Shin transaction record document', '3662730', '0359677', 'completed', 'USD', '$40,671.33', 0, ''),
-	(68, '90783604740', -1, 5, 50000, '2012-06-10 13:44:57', 'Add founds', 'GWebcash Service', '3662730', 'completed', 'USD', '$50,000.00', 0, ''),
-	(69, '61002257554', 5, 72, 463.52, '2012-06-10 14:04:00', 'Tracking Number# 925989186', '3662730', '7537591', 'completed', 'USD', '$463.52', 0, ''),
-	(70, '60649890044', 5, 73, 439.12, '2012-06-10 14:26:59', 'Tracking Number# 724516857', '3662730', '5911250', 'completed', 'USD', '$439.12', 0, ''),
-	(71, '80302391395', 5, 71, 439.12, '2012-06-10 14:30:10', 'Tracking Number# 708220711', '3662730', '4908529', 'completed', 'USD', '$439.12', 0, ''),
-	(72, '57152152634', 5, 74, 426.92, '2012-06-14 09:10:14', 'Tracking Number# 1751841043', '3662730', '6285350', 'completed', 'USD', '$426.92', 0, ''),
-	(73, '81721577804', 5, 75, 414.73, '2012-06-14 09:19:26', 'Tracking Number# 44223785', '3662730', '4967616', 'completed', 'USD', '$414.73', 0, ''),
-	(74, '67370235809', 5, 76, 439.12, '2012-06-14 09:25:32', 'Tracking Number# 1404221093', '3662730', '4969932', 'completed', 'USD', '$439.12', 0, ''),
-	(75, '29504567706', 5, 77, 463.52, '2012-06-14 09:35:45', 'Tracking Number# 1102237556', '3662730', '4475462', 'completed', 'USD', '$463.52', 0, ''),
-	(76, '89046806710', 5, 78, 439.12, '2012-06-14 09:38:54', 'Tracking Number# 1351126051', '3662730', '4691531', 'completed', 'USD', '$439.12', 0, ''),
-	(77, '89938029061', 5, 79, 426.92, '2012-06-14 09:43:46', 'Tracking Number# 282440595', '3662730', '5969323', 'completed', 'USD', '$426.92', 0, ''),
-	(78, '36166223869', 5, 80, 439.12, '2012-06-14 09:48:03', 'Tracking Number# 807781567', '3662730', '8716565', 'completed', 'USD', '$439.12', 0, ''),
-	(79, '85247066837', 5, 81, 481, '2012-06-14 09:59:19', 'Tracking Number# 418940574', '3662730', '1252487', 'completed', 'USD', '$481.00', 0, ''),
-	(80, '98671536819', 5, 83, 481.01, '2012-06-14 10:22:39', 'Tracking Number# 692728472', '3662730', '6695927', 'completed', 'USD', '$481.01', 0, ''),
-	(81, '65860433307', 5, 84, 456.96, '2012-06-14 10:34:08', 'Tracking Number# 1671959922', '3662730', '7784137', 'completed', 'USD', '$456.96', 0, ''),
-	(82, '59794954873', 5, 85, 481.01, '2012-06-14 10:42:47', 'Tracking Number# 689100828', '3662730', '4673628', 'completed', 'USD', '$481.01', 0, ''),
-	(83, '50976288065', 5, 86, 481.01, '2012-06-14 10:50:10', 'Tracking Number# 2027166934', '3662730', '9071540', 'completed', 'USD', '$481.01', 0, ''),
-	(84, '85576546248', -1, 5, 50000, '2012-06-17 09:15:47', '', 'GWebcash Service', '3662730', 'completed', 'USD', '$50,000.00', 0, ''),
-	(85, '54032289667', -1, 5, 50000, '2012-06-17 09:16:07', '', 'GWebcash Service', '3662730', 'completed', 'EUR', 'â‚¬50,000.00', 0, ''),
-	(86, '98175080766', 5, 121, 11500, '2012-06-17 09:19:03', 'Tracking Number# 984733820', '3662730', '9665891', 'completed', 'USD', '$11,500.00', 0, ''),
-	(87, '22575659513', 5, 121, 13071, '2012-06-17 09:25:38', 'Tracking Number# 1252644322', '3662730', '9665891', 'completed', 'USD', '$13,071.04', 0, ''),
-	(88, '73863960725', 5, 87, 451.32, '2012-06-18 10:51:37', 'Tracking Number# 238360975', '3662730', '1099927', 'completed', 'USD', '$451.32', 0, ''),
-	(89, '38370716040', 5, 88, 463.52, '2012-06-18 10:55:01', 'Tracking Number# 419980749', '3662730', '1380096', 'completed', 'USD', '$463.52', 0, ''),
-	(90, '79432095902', 5, 96, 439.12, '2012-06-18 11:01:30', 'Tracking Number# 61682918', '3662730', '7201724', 'completed', 'USD', '$439.12', 0, ''),
-	(91, '79310699851', 5, 95, 390.33, '2012-06-18 11:04:25', 'Tracking Number# 2085129113', '3662730', '2633129', 'completed', 'USD', '$390.33', 0, ''),
-	(92, '28103009958', 5, 94, 451.32, '2012-06-18 11:27:10', 'Tracking Number# 814352808', '3662730', '1566958', 'completed', 'USD', '$451.32', 0, ''),
-	(93, '26978942547', 5, 93, 439.12, '2012-06-18 11:30:51', 'Tracking Number# 1904455284', '3662730', '1328184', 'completed', 'USD', '$439.12', 0, ''),
-	(94, '04006847767', 5, 92, 451.32, '2012-06-18 11:33:48', 'Tracking Number# 2122262282', '3662730', '2802391', 'completed', 'USD', '$451.32', 0, ''),
-	(95, '93009693131', 5, 91, 463.52, '2012-06-18 11:36:40', 'Tracking Number# 909174205', '3662730', '6233120', 'completed', 'USD', '$463.52', 0, ''),
-	(96, '62213102782', 5, 97, 439.12, '2012-06-18 11:39:36', 'Tracking Number# 209200753', '3662730', '5220119', 'completed', 'USD', '$439.12', 0, ''),
-	(97, '28417259203', 5, 98, 463.52, '2012-06-18 11:43:04', 'Tracking Number# 1618636505', '3662730', '1436865', 'completed', 'USD', '$463.52', 0, ''),
-	(98, '79992086656', 5, 99, 402.53, '2012-06-18 11:50:16', 'Tracking Number# 484295469', '3662730', '7332323', 'completed', 'USD', '$402.53', 0, ''),
-	(99, '21287065416', 5, 100, 463.52, '2012-06-18 11:54:13', 'Tracking Number# 429994539', '3662730', '5765525', 'completed', 'USD', '$463.52', 0, ''),
-	(100, '18620811923', 5, 101, 426.92, '2012-06-18 11:59:10', 'Tracking Number# 299125129', '3662730', '1372066', 'completed', 'USD', '$426.92', 0, ''),
-	(101, '77525523820', 5, 102, 439.12, '2012-06-18 12:01:48', 'Tracking Number# 1164420612', '3662730', '0901098', 'completed', 'USD', '$439.12', 0, ''),
-	(102, '12788856692', 5, 103, 439.12, '2012-06-18 12:04:24', 'Tracking Number# 1756725519', '3662730', '2175604', 'completed', 'USD', '$439.12', 0, ''),
-	(103, '18701990033', 5, 104, 439.12, '2012-06-18 12:08:36', 'Tracking Number# 1074224822', '3662730', '8181083', 'completed', 'USD', '$439.12', 0, ''),
-	(104, '28707395304', 5, 106, 373.25, '2012-06-18 12:23:32', 'Tracking Number# 2124398581', '3662730', '3647803', 'completed', 'USD', '$373.25', 0, ''),
-	(105, '18304955802', 5, 107, 396.43, '2012-06-18 12:27:04', 'Tracking Number# 973206429', '3662730', '0371068', 'completed', 'USD', '$396.43', 0, ''),
-	(106, '81271508720', 5, 108, 451.32, '2012-06-18 12:29:24', 'Tracking Number# 1520869505', '3662730', '1095132', 'completed', 'USD', '$451.32', 0, ''),
-	(107, '42020652202', 5, 109, 451.32, '2012-06-18 12:32:58', 'Tracking Number# 2014664587', '3662730', '0147328', 'completed', 'USD', '$451.32', 0, ''),
-	(108, '21673348435', 5, 110, 463.52, '2012-06-18 12:35:36', 'Tracking Number# 518704381', '3662730', '7761987', 'completed', 'USD', '$463.52', 0, ''),
-	(109, '39223700142', 5, 111, 414.73, '2012-06-18 12:38:28', 'Tracking Number# 318029698', '3662730', '8530358', 'completed', 'USD', '$414.73', 0, ''),
-	(110, '42530151042', 5, 112, 451.32, '2012-06-18 12:42:01', 'Tracking Number# 877177300', '3662730', '9313379', 'completed', 'USD', '$451.32', 0, ''),
-	(111, '41004600526', 5, 113, 414.73, '2012-06-18 12:44:51', 'Tracking Number# 1072291387', '3662730', '0126889', 'completed', 'USD', '$414.73', 0, ''),
-	(112, '31664553212', 5, 114, 463.52, '2012-06-18 12:47:20', 'Tracking Number# 1166436011', '3662730', '1811576', 'completed', 'USD', '$463.52', 0, ''),
-	(113, '41368549581', 5, 115, 439.12, '2012-06-18 12:50:02', 'Tracking Number# 903533429', '3662730', '3127211', 'completed', 'USD', '$439.12', 0, ''),
-	(114, '11465549818', 5, 116, 439.12, '2012-06-18 12:54:40', 'Tracking Number# 921655660', '3662730', '0882829', 'completed', 'USD', '$439.12', 0, ''),
-	(115, '50340502389', 5, 117, 426.92, '2012-06-18 12:57:13', 'Tracking Number# 1492763230', '3662730', '7022758', 'completed', 'USD', '$426.92', 0, ''),
-	(116, '91151809013', 5, 118, 414.73, '2012-06-18 13:01:21', 'Tracking Number# 559081520', '3662730', '1456894', 'completed', 'USD', '$414.73', 0, ''),
-	(117, '15873053696', 5, 119, 414.73, '2012-06-18 13:05:25', 'Tracking Number# 1367976725', '3662730', '8816568', 'completed', 'USD', '$414.73', 0, ''),
-	(118, '19749262366', 5, 120, 451.32, '2012-06-18 13:08:36', 'Tracking Number# 759031533', '3662730', '8081015', 'completed', 'USD', '$451.32', 0, ''),
-	(119, '49386074674', 5, 122, 451.32, '2012-06-26 05:53:15', 'Tracking Number# 110373201', '3662730', '3844133', 'completed', 'USD', '$451.32', 0, ''),
-	(120, '97773355507', 5, 123, 463.52, '2012-06-26 05:57:05', 'Tracking Number# 121097479', '3662730', '2239191', 'completed', 'USD', '$463.52', 0, ''),
-	(121, '87092608351', 5, 124, 426.92, '2012-06-26 06:30:01', 'Tracking Number# 621107250', '3662730', '0305387', 'completed', 'USD', '$426.92', 0, ''),
-	(122, '07075987448', 5, 125, 451.32, '2012-06-26 06:33:43', 'Tracking Number# 1187290823', '3662730', '4011145', 'completed', 'USD', '$451.32', 0, ''),
-	(123, '12854817029', 5, 126, 378.13, '2012-06-26 06:36:30', 'Tracking Number# 102870505', '3662730', '0282492', 'completed', 'USD', '$378.13', 0, ''),
-	(124, '63248787655', 5, 129, 414.73, '2012-06-26 06:46:53', 'Tracking Number# 1370757672', '3662730', '9764216', 'completed', 'USD', '$414.73', 0, ''),
-	(125, '63837227735', 5, 132, 296.87, '2012-06-26 06:55:19', 'Tracking Number# 39447115', '3662730', '4347127', 'completed', 'USD', '$296.87', 0, ''),
-	(126, '45022553704', 5, 133, 36100, '2012-06-26 07:01:45', 'Tracking Number# 1321564806', '3662730', '4161929', 'completed', 'USD', '$36,100.00', 0, ''),
-	(127, '86540861996', 5, 134, 226.19, '2012-06-26 07:16:43', 'Tracking Number# 1279234147', '3662730', '8794623', 'completed', 'USD', '$226.19', 0, ''),
-	(128, '96306517421', 5, 134, 222.61, '2012-06-26 07:18:37', 'Tracking Number# 1135315239', '3662730', '8794623', 'completed', 'USD', '$222.61', 0, ''),
-	(129, '24683669559', 5, 134, 222.04, '2012-06-26 07:21:14', 'Tracking Number# 1142123932', '3662730', '8794623', 'completed', 'USD', '$222.04', 0, ''),
-	(130, '01542287987', 5, 135, 468.98, '2012-06-28 11:30:25', 'Tracking Number# 1098615271', '3662730', '6050304', 'completed', 'USD', '$468.98', 0, ''),
-	(131, '62943786432', 5, 136, 468.98, '2012-06-28 11:33:44', 'Tracking Number# 1923132731', '3662730', '1316626', 'completed', 'USD', '$468.98', 0, ''),
-	(132, '72519998204', 5, 137, 456.96, '2012-06-28 11:36:51', 'Tracking Number# 792186317', '3662730', '5635662', 'completed', 'USD', '$456.96', 0, ''),
-	(133, '34265915063', 5, 138, 468.98, '2012-06-28 11:40:09', 'Tracking Number# 1021781234', '3662730', '2444409', 'completed', 'USD', '$468.98', 0, ''),
-	(134, '24230646649', 5, 139, 468.98, '2012-06-28 11:43:23', 'Tracking Number# 1402303343', '3662730', '4200461', 'completed', 'USD', '$468.98', 0, ''),
-	(135, '02473526244', 5, 140, 468.98, '2012-06-28 11:45:55', 'Tracking Number# 431482151', '3662730', '5971929', 'completed', 'USD', '$468.98', 0, ''),
-	(136, '74365377775', 5, 141, 456.96, '2012-06-28 11:49:43', 'Tracking Number# 215830628', '3662730', '9899110', 'completed', 'USD', '$456.96', 0, ''),
-	(137, '09711080685', 5, 142, 456.96, '2012-06-28 11:52:08', 'Tracking Number# 2006318852', '3662730', '0021215', 'completed', 'USD', '$456.96', 0, ''),
-	(138, '46779291332', 5, 143, 481.01, '2012-06-28 11:55:34', 'Tracking Number# 299542772', '3662730', '2682664', 'completed', 'USD', '$481.01', 0, ''),
-	(139, '64312230321', 5, 144, 468.98, '2012-06-28 11:58:23', 'Tracking Number# 2045938416', '3662730', '5191067', 'completed', 'USD', '$468.98', 0, ''),
-	(140, '42204600886', 5, 145, 492.89, '2012-06-28 12:01:46', 'Tracking Number# 1076836217', '3662730', '4871016', 'completed', 'USD', '$492.89', 0, ''),
-	(141, '14726962337', 5, 146, 113.08, '2012-06-28 12:04:57', 'Tracking Number# 2033287020', '3662730', '1633793', 'completed', 'USD', '$113.08', 0, ''),
-	(142, '77429880047', 5, 147, 101.77, '2012-06-28 12:07:52', 'Tracking Number# 629938211', '3662730', '1373725', 'completed', 'USD', '$101.77', 0, ''),
-	(143, '11259228997', 5, 148, 113.08, '2012-06-28 12:11:04', 'Tracking Number# 898085696', '3662730', '8431998', 'completed', 'USD', '$113.08', 0, ''),
-	(144, '60628299234', 5, 149, 282.71, '2012-06-28 12:14:20', 'Tracking Number# 472845013', '3662730', '3355823', 'completed', 'USD', '$282.71', 0, ''),
-	(145, '98167874800', 5, 150, 113.08, '2012-06-28 12:17:15', 'Tracking Number# 652989461', '3662730', '2142641', 'completed', 'USD', '$113.08', 0, ''),
-	(146, '89786902540', 5, 151, 114.45, '2012-06-28 12:20:05', 'Tracking Number# 379825652', '3662730', '2149852', 'completed', 'USD', '$114.45', 0, ''),
-	(147, '90789646902', 5, 153, 452.1, '2012-06-28 12:53:32', 'Tracking Number# 522282334', '3662730', '0797204', 'completed', 'USD', '$452.10', 0, ''),
-	(148, '69452539828', 5, 154, 113.09, '2012-06-28 12:57:24', 'Tracking Number# 1706168033', '3662730', '5390870', 'completed', 'USD', '$113.09', 0, ''),
-	(149, '54976368983', 5, 155, 113.09, '2012-06-28 13:00:20', 'Tracking Number# 1018717132', '3662730', '8079568', 'completed', 'USD', '$113.09', 0, ''),
-	(150, '29375466047', 5, 156, 678.57, '2012-06-28 13:03:38', 'Tracking Number# 1023083881', '3662730', '2761006', 'completed', 'USD', '$678.57', 0, ''),
-	(151, '57899738718', 5, 157, 2432, '2012-06-28 13:06:45', 'Tracking Number# 378555383', '3662730', '8978774', 'completed', 'USD', '$2,432.00', 0, ''),
-	(152, '60618943562', 5, 158, 972.8, '2012-06-28 13:11:17', 'Tracking Number# 1396391023', '3662730', '3223223', 'completed', 'USD', '$972.80', 0, ''),
-	(153, '65781416511', 5, 159, 5635.3, '2012-06-28 13:14:46', 'Tracking Number# 2122922129', '3662730', '2081268', 'completed', 'USD', '$5,635.30', 0, ''),
-	(154, '39968757732', 5, 160, 1444, '2012-06-28 13:18:03', 'Tracking Number# 991709596', '3662730', '0370399', 'completed', 'USD', '$1,444.00', 0, ''),
-	(155, '29843011188', 5, 161, 328.23, '2012-06-28 13:23:10', 'Tracking Number# 1227117459', '3662730', '9394936', 'completed', 'USD', '$328.23', 0, ''),
-	(156, '77744757203', 5, 161, 328.23, '2012-06-28 13:24:43', 'Tracking Number# 1248280662', '3662730', '9394936', 'completed', 'USD', '$328.23', 0, ''),
-	(157, '03150308463', 5, 162, 625.85, '2012-06-28 13:28:26', 'Tracking Number# 500990570', '3662730', '1317379', 'completed', 'USD', '$625.85', 0, ''),
-	(158, '30618292499', 5, 163, 5162.77, '2012-06-28 13:31:58', 'Tracking Number# 921006456', '3662730', '0918720', 'completed', 'USD', '$5,162.77', 0, ''),
-	(159, '91966333626', -1, 5, 50000, '2012-06-28 13:34:07', '', 'GWebcash Service', '3662730', 'completed', 'USD', '$50,000.00', 0, ''),
-	(160, '40197181088', 5, 163, 2891.15, '2012-06-28 13:35:25', 'Tracking Number# 1538350483', '3662730', '0918720', 'completed', 'USD', '$2,891.15', 0, ''),
-	(161, '85052840561', 5, 165, 2758.06, '2012-06-28 13:38:24', 'Tracking Number# 972819890', '3662730', '2920069', 'completed', 'USD', '$2,758.06', 0, ''),
-	(162, '82244258052', 5, 166, 2021.27, '2012-06-28 13:41:36', 'Tracking Number# 1299353322', '3662730', '9567307', 'completed', 'USD', '$2,021.27', 0, ''),
-	(163, '15128199126', 5, 167, 1819.14, '2012-06-28 13:45:06', 'Tracking Number# 1564470725', '3662730', '1247440', 'completed', 'USD', '$1,819.14', 0, ''),
-	(164, '69866033978', 5, 169, 485.2, '2012-06-28 22:36:19', 'From Investment account 7095465 Request Withdraw', '3662730', '0928520', 'completed', 'USD', '$485.20', 0, ''),
-	(165, '53364238265', 169, 5, 485.2, '2012-06-30 06:10:23', '', '0928520', '3662730', 'completed', 'USD', '$485.20', 0, ''),
-	(166, '35129176306', 5, 169, 600, '2012-07-20 10:22:04', 'From Investment Account Number: 7095465', '3662730', '0928520', 'completed', 'USD', '$600.00', 0, ''),
-	(167, '59770326950', 169, 5, 600, '2012-07-20 19:42:14', '', '0928520', '3662730', 'completed', 'USD', '$600.00', 0, ''),
-	(168, '43599547587', -1, 179, 2400, '2012-09-07 03:24:30', 'Deposit by Cash 2011.09.10', 'GWebcash Service', '1477967', 'completed', 'USD', '$2,400.00', 0, ''),
-	(169, '36437993205', -1, 179, 36058, '2012-09-07 03:25:44', 'Deposit by Cash 2011.09.10', 'GWebcash Service', '1477967', 'completed', 'RMB', 'Â¥36,058.00', 0, ''),
-	(170, '98288551297', 5, 169, 810, '2012-09-12 15:49:01', 'Investment Plan Acc# 7095465', '3662730', '0928520', 'completed', 'USD', '$810.00', 0, ''),
-	(171, '68964310073', 5, 169, 1080, '2012-10-20 00:47:31', 'Investment plan account# 7095465 Request Withdraw\r\nBatch# 13599329901', '3662730', '0928520', 'completed', 'USD', '$1,080.00', 0, ''),
-	(172, '85536283721', 169, 5, 810, '2012-10-20 02:00:01', '', '0928520', '3662730', 'completed', 'USD', '$810.00', 0, ''),
-	(173, '04215021513', 169, 5, 1080, '2012-10-20 02:03:05', '', '0928520', '3662730', 'completed', 'USD', '$1,080.00', 0, ''),
-	(174, '66039041701', -1, 5, 80000, '2012-10-29 08:19:21', '', 'GWebcash Service', '3662730', 'completed', 'USD', '$80,000.00', 0, ''),
-	(175, '98355950993', 5, 186, 18025.7, '2012-10-31 11:03:43', 'Tracking Number# 186453257', '3662730', '0783811', 'completed', 'USD', '$18,025.72', 0, ''),
-	(176, '61990286239', 186, 5, 50, '2012-11-06 10:00:58', '', '0783811', '3662730', 'completed', 'USD', '$50.00', 0, ''),
-	(177, '75674447645', 186, 5, 15000, '2012-11-07 02:18:30', '', '0783811', '3662730', 'completed', 'USD', '$15,000.00', 0, ''),
-	(178, '55380925952', 61, 200, 1000, '2013-04-23 11:55:43', 'FOREX MASTER', '8923022', '2507705', 'completed', 'USD', '$1,000.00', 0, ''),
-	(179, '27446753798', 5, 203, 81.78, '2013-05-27 08:28:19', 'Tracking Number# 1425813795', '3662730', '4165599', 'completed', 'USD', '$81.78', 0, ''),
-	(182, '40110701660', 211, 197, 20, '2013-07-02 09:48:26', '', '3156245', '9073297', 'completed', 'USD', '$20.00', 0, ''),
-	(181, '97406921492', 211, 197, 20, '2013-07-02 09:45:30', '', '3156245', '9073297', 'completed', 'USD', '$20.00', 0, '');
+INSERT INTO `transactions` (`transaction_id`, `batch_number`, `from_userid`, `to_userid`, `amount`, `transaction_time`, `transaction_memo`, `from_account`, `to_account`, `transaction_status`, `transaction_currency`, `amount_text`, `fee`, `payment`, `fee_transfer`, `fee_text`) VALUES
+	(1, '93167598034007', 2, 3, 1003, '2012-11-15 09:44:33', 'test', '33333333', '11111111', 'completed', 'USD', '$1,000.00', 0, 'Gift/Donation', 0.5, ''),
+	(2, '36939035512526', 2, 3, 578, '2012-11-15 09:55:12', 'Test luc chua han che', '33333333', '11111111', 'completed', 'USD', '$578.00', 0, 'Gift/Donation', 0.5, ''),
+	(3, '15834883197827', 2, 3, 999, '2012-11-15 09:58:31', 'Test chuyen bang so tien co', '33333333', '11111111', 'completed', 'USD', '$999.00', 0, 'Refund/Reimbursement', 0.5, ''),
+	(4, '09974448404298', 2, 1, 100, '2012-11-15 11:02:09', '1234', '33333333', '88888888', 'completed', 'USD', '$100.00', 0, 'Gift/Donation', 0.5, ''),
+	(5, '99030640695509', 2, 1, 100, '2012-11-20 11:57:24', 'dâsdads', '33333333', '88888888', 'completed', 'USD', '$100.00', 0, 'Gift/Donation', 0.5, ''),
+	(6, '54507967048002', 4, 4, 55555, '2013-06-28 04:29:00', '', '14176198', '14176198', 'completed', 'USD', '$55,555.00', 0, ' Purchase of goods', 0.5, ''),
+	(7, '32192543964088', 4, 4, 55555, '2013-06-28 04:34:53', '', '14176198', '14176198', 'completed', 'USD', '$55,555.00', 0, 'Purchase of services', 0.5, ''),
+	(8, '00339707480355', 4, 4, 55555, '2013-07-01 10:06:40', '', '14176198', '14176198', 'completed', 'USD', '$55,555.00', 0, 'Gift/Donation', 0.5, '');
 /*!40000 ALTER TABLE `transactions` ENABLE KEYS */;
 
 
--- Dumping structure for table eglobal_main_new.transactions_history
-DROP TABLE IF EXISTS `transactions_history`;
-CREATE TABLE IF NOT EXISTS `transactions_history` (
-  `history_id` int(11) NOT NULL AUTO_INCREMENT,
-  `batch_number` varchar(16) NOT NULL,
-  `from_userid` int(11) DEFAULT NULL,
-  `transaction_id` int(11) DEFAULT NULL,
-  `to_userid` int(11) NOT NULL,
-  `amount` float NOT NULL,
-  `transaction_time` datetime NOT NULL,
-  `transaction_memo` mediumtext NOT NULL,
-  `from_account` varchar(16) NOT NULL,
-  `to_account` varchar(16) NOT NULL,
-  `transaction_status` varchar(16) NOT NULL,
-  `description` text,
-  `transaction_currency` varchar(3) NOT NULL,
-  `amount_text` varchar(32) NOT NULL,
-  `fee` float NOT NULL,
-  `fee_text` varchar(32) NOT NULL,
-  `cancel_url` varchar(500) DEFAULT NULL,
-  `fail_url` varchar(500) DEFAULT NULL,
-  `success_url` varchar(500) DEFAULT NULL,
-  `status_url` varchar(500) DEFAULT NULL,
-  `extra_fields` text,
-  `status` tinyint(4) NOT NULL DEFAULT '0',
-  `status_method` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`history_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+-- Dumping structure for table global.transfer_limit
+DROP TABLE IF EXISTS `transfer_limit`;
+CREATE TABLE IF NOT EXISTS `transfer_limit` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `enabled` int(10) DEFAULT '0',
+  `user_id` int(10) DEFAULT NULL,
+  `type_limit` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- Dumping data for table eglobal_main_new.transactions_history: 0 rows
-/*!40000 ALTER TABLE `transactions_history` DISABLE KEYS */;
-INSERT INTO `transactions_history` (`history_id`, `batch_number`, `from_userid`, `transaction_id`, `to_userid`, `amount`, `transaction_time`, `transaction_memo`, `from_account`, `to_account`, `transaction_status`, `description`, `transaction_currency`, `amount_text`, `fee`, `fee_text`, `cancel_url`, `fail_url`, `success_url`, `status_url`, `extra_fields`, `status`, `status_method`) VALUES
-	(1, '97406921492', 211, 181, 197, 20, '2013-07-02 09:45:30', '', '3156245', '9073297', 'completed', '', 'USD', '$20.00', 0, '', 'http://global.lc/cancel.php', 'http://zodia.lc/fail.php', 'http://zodia.lc/success.php', 'http://zodia.lc/status.php', 'a:1:{s:6:"action";s:7:"process";}', 0, 'POST'),
-	(2, '40110701660', 211, 182, 197, 20, '2013-07-02 09:48:26', '', '3156245', '9073297', 'completed', '', 'USD', '$20.00', 0, '', 'http://global.lc/cancel.php', 'http://zodia.lc/fail.php', 'http://zodia.lc/success.php', 'http://zodia.lc/status.php', 'a:1:{s:6:"action";s:7:"process";}', 0, 'POST');
-/*!40000 ALTER TABLE `transactions_history` ENABLE KEYS */;
+-- Dumping data for table global.transfer_limit: ~1 rows (approximately)
+/*!40000 ALTER TABLE `transfer_limit` DISABLE KEYS */;
+INSERT INTO `transfer_limit` (`id`, `enabled`, `user_id`, `type_limit`) VALUES
+	(1, 1, 2, 1);
+/*!40000 ALTER TABLE `transfer_limit` ENABLE KEYS */;
 
 
--- Dumping structure for table eglobal_main_new.users
+-- Dumping structure for table global.transfer_limit_currency
+DROP TABLE IF EXISTS `transfer_limit_currency`;
+CREATE TABLE IF NOT EXISTS `transfer_limit_currency` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `code` varchar(10) COLLATE utf8_bin NOT NULL,
+  `user_id` int(20) DEFAULT NULL,
+  `value` float DEFAULT NULL,
+  PRIMARY KEY (`id`,`code`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- Dumping data for table global.transfer_limit_currency: ~10 rows (approximately)
+/*!40000 ALTER TABLE `transfer_limit_currency` DISABLE KEYS */;
+INSERT INTO `transfer_limit_currency` (`id`, `code`, `user_id`, `value`) VALUES
+	(1, 'CHF', 2, 0),
+	(1, 'EUR', 2, 0),
+	(1, 'GPB', 2, 0),
+	(1, 'HKD', 2, 0),
+	(1, 'KRW', 2, 0),
+	(1, 'RMB', 2, 0),
+	(1, 'THB', 2, 0),
+	(1, 'USD', 2, 3000),
+	(1, 'VND', 2, 0),
+	(1, 'ZAR', 2, 0);
+/*!40000 ALTER TABLE `transfer_limit_currency` ENABLE KEYS */;
+
+
+-- Dumping structure for table global.users
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
-  `user_id` int(11) NOT NULL AUTO_INCREMENT,
-  `account_name` varchar(32) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `status` tinyint(4) NOT NULL,
-  `signup_date` datetime NOT NULL,
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `first_name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `last_name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `company` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `phone` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `mobile` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `group_id` int(11) NOT NULL DEFAULT '2',
+  `account_number` varchar(8) COLLATE utf8_unicode_ci NOT NULL,
+  `master_key` varchar(6) COLLATE utf8_unicode_ci NOT NULL,
+  `activation_code` varchar(40) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `forgotten_password_code` varchar(40) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `remember_code` varchar(40) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `active` tinyint(1) unsigned DEFAULT NULL,
   `dob` date NOT NULL,
-  `address` varchar(255) NOT NULL,
-  `firstname` varchar(32) NOT NULL,
-  `lastname` varchar(32) NOT NULL,
-  `city` varchar(32) NOT NULL,
   `state` int(11) NOT NULL,
   `country` int(11) NOT NULL,
-  `welcome_message` varchar(255) NOT NULL,
-  `language` varchar(2) NOT NULL DEFAULT 'en',
-  `phone` varchar(32) NOT NULL,
-  `mobile` varchar(32) NOT NULL,
-  `postcode` varchar(16) NOT NULL,
-  `company` varchar(255) NOT NULL,
-  `security_question` varchar(255) NOT NULL,
-  `security_answer` varchar(255) NOT NULL,
-  `login_pin` varchar(8) NOT NULL,
-  `master_key` varchar(6) NOT NULL,
-  `account_number` varchar(8) NOT NULL,
-  `account_type` varchar(32) NOT NULL,
+  `city` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `welcome_message` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `security_question` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `security_answer` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `login_pin` varchar(8) COLLATE utf8_unicode_ci NOT NULL,
+  `account_type` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   `referral_count` int(11) NOT NULL,
-  `additional_information` varchar(255) NOT NULL,
-  `reset_code` varchar(20) NOT NULL,
-  PRIMARY KEY (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=212 DEFAULT CHARSET=latin1;
+  `address` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `postcode` varchar(16) COLLATE utf8_unicode_ci NOT NULL,
+  `additional_infor` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `ip_address` int(10) unsigned NOT NULL,
+  `created_on` int(11) unsigned NOT NULL,
+  `last_login` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table eglobal_main_new.users: 200 rows
+-- Dumping data for table global.users: ~4 rows (approximately)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` (`user_id`, `account_name`, `password`, `email`, `status`, `signup_date`, `dob`, `address`, `firstname`, `lastname`, `city`, `state`, `country`, `welcome_message`, `language`, `phone`, `mobile`, `postcode`, `company`, `security_question`, `security_answer`, `login_pin`, `master_key`, `account_number`, `account_type`, `referral_count`, `additional_information`, `reset_code`) VALUES
-	(1, 'MinhMT \'s Business', '9a3a3596e8fe97935ca1081c242215ee:de', 'minhmt@gmail.com', 0, '0000-00-00 00:00:00', '1981-01-14', 'Tho Quan, Kham Thien', 'Minh', 'Mai Tri', 'Ha Noi', 3776, 230, 'Welcome MinhMt\'s Business', 'en', '+12345678', '', '10000', 'DevsoftVN', 'Mother\'s Miden Name', 'Vu', '40527', '946', '4185045', '', 0, 'testing account', '3514916754'),
-	(3, 'Osccoder\'s Payment', '80f9d9188687a75e7f848e70c02a9716:38', 'osccoder@yahoo.com', 0, '0000-00-00 00:00:00', '1982-06-10', 'Tho Quan, Kham Thien', 'Minh', 'Tri', 'Texas', 57, 223, 'Hey Man!', 'en', '+8412345678', '', '', '', 'My Date\'s Name', 'Yen', '20378', '657', '8072229', 'user', 0, '', ''),
-	(4, 'Shinei Shibata', '0173ef4534881d86372af9e587933a97:be', 'shibata.shinei@gmail.com', 0, '2010-02-25 19:27:29', '1973-09-29', '#204 5-18-5 Ueno', 'Shinei', 'Shibata', 'Taito-ku', 1840, 107, 'Welcome Shibata world!!', 'en', '0081-3-3835-3568', '0081-80-3098-7565', '', '', 'Mother\\\'s Miden Name', 'numata', '34345', '653', '6433175', 'user', 0, '', ''),
-	(5, 'Cyber Exchange Service Japan', '2254f75a1c313d01c78863e9bd8f024a:fc', 'admin@cyberex.jp', 0, '2010-02-26 23:23:35', '1973-09-29', '#204 5-18-5 Ueno', 'Shinei', 'Shibata', 'Taito-ku', 1840, 107, 'Welcome Shin World', 'en', '0081-3-3835-3568', '', '110-0005', '', 'Mother\\\'s Miden Name', 'numata', '73625', '122', '3662730', 'user', 0, '', ''),
-	(6, 'Goldmediator', '9f44ec76c81e60e3987f1dbfc3c366a6:12', 'cssupport@goldmediator.com', 0, '2010-03-01 01:33:08', '1969-11-22', 'Jl. Srondol Indah 17', 'Sutrisno', 'Suryoputro', 'Semarang', 1659, 100, 'Terpujilah Kristus Tuhan, Raja Mulia dan Kekal.', 'en', '62247464279', '62811290189', '', '', 'Favorite Pet', '2277027', '18570', '649', '0359677', 'user', 0, '', ''),
-	(7, 'Bark Gichool', '8e4aee3d582e53c86e6afb6cf1c498ab:7a', 'uniq114@gmail.com', 0, '2010-03-11 17:33:43', '1967-12-06', '#204 5-18-5 Ueno', 'Gichool', 'Bark', 'Taito-ku', 1840, 107, 'Welcome Gmail', 'en', '+81-3-3835-3568', '', '', '', 'Mother\\\'s Miden Name', 'Kim', '30256', '435', '0820079', 'user', 0, '', ''),
-	(8, 'Jim Casey', '4e8c831360e57dd2ca4388d61843326c:e7', 'jimcasey001@aol.com', 0, '2010-03-23 04:52:45', '1975-01-01', '11 Greenlands Road', 'Jim', 'Casey', 'London', 3618, 222, 'Hi Jim', 'en', '447759806363', '', '', '', 'Favorite Pet', 'Dog', '34740', '951', '8596350', 'user', 0, '', ''),
-	(9, 'Actop IMIC', '9061979f0df3f465fd20d8158c04be9f:9e', 'mga.ptc@gmail.com', 0, '2010-03-24 10:38:14', '1955-01-17', 'Ostvagen 151', 'Mats', 'Ahlqvist', 'Umea', 3182, 203, 'Namo Amitabha for Christ cause.\r\nMystCode :"Daimon".', 'en', '46-0730-852713', '', '', 'Mats G Ahlqvist', 'City Of Birth', 'Stockholm', '18849', '647', '5437885', 'user', 0, '', ''),
-	(10, 'HYIPBreaker', '662648001802f868d4a6bd8572ec6471:c5', 'hyipbreaker@gmail.com', 0, '2010-03-29 00:56:41', '1989-07-07', 'Komp. Saung Gintung E-8', 'Dwi Redjeki', 'Prabaswera', 'Tangerang', 1652, 100, 'time to break', 'en', '+62217402103', '', '', '', 'City Of Birth', 'Tangerang', '58609', '321', '1415193', 'user', 0, '', ''),
-	(11, 'happymoney', 'eb47255c85c8424c1e2e8a737de60395:fb', 'alexyim@naver.com', 0, '2010-07-17 05:11:14', '1965-08-15', 'Guangzhou China', 'alex', 'yim', 'Guangzhou', 848, 44, 'happymoney', 'en', '86-158-0025-7840', '86-158-0025-7840', '', 'forex auto money', 'Mother\\\'s Miden Name', 'Ha', '76856', '482', '5584729', 'user', 0, '', ''),
-	(12, 'Gold E Forex', '36b572ff05ce446fb14a28498570aeb5:55', 'goldeforex11@gmail.com', 0, '2010-07-19 07:09:29', '1963-12-28', 'Suite 21 Lords Business Centre Lords House 665 North Circular Road', 'Mogan', 'Solo', 'London', 3605, 222, 'Good Investment', 'en', '+44 20 3286 9684', '', '', 'Goldeforex Ltd', 'Favorite Pet', 'dog', '52114', '691', '9321549', 'user', 0, '', ''),
-	(23, 'Beckham', '63a5602fa0d36b51e0938b268cb97e9c:f8', 'phamhongthang@gmail.com', 0, '2010-07-20 01:35:50', '1937-01-19', 'trung kinh', 'david', 'beckham', 'ha noi', 492, 18, 'hi all', 'en', '0986727497', '', '', 'devsoftvn', 'Mother\\\'s Miden Name', 'Pham', '51210', '483', '8984853', 'user', 0, '', ''),
-	(24, 'Beckham', '73643ef4b176a976c8a485ec8be6b25d:07', 'phamhongthang@gmail.com', 0, '2010-07-20 01:37:45', '1937-01-19', 'trung kinh', 'david', 'beckham', 'ha noi', 492, 18, 'hi all', 'en', '0986727497', '', '', 'devsoftvn', 'Mother\\\'s Miden Name', 'Pham', '36890', '370', '0995962', 'user', 0, '', ''),
-	(25, 'Beckham', 'a477002c4570ffad6958bc93f864a72a:6d', 'phamhongthang@gmail.com', 0, '2010-07-20 01:38:33', '1937-01-19', 'trung kinh', 'david', 'beckham', 'ha noi', 492, 18, 'hi all', 'en', '0986727497', '', '', 'devsoftvn', 'Mother\\\'s Miden Name', 'Pham', '72741', '832', '6851818', 'user', 0, '', ''),
-	(26, 'Beckham', '1fc16b21661665d6d2614768be0cacff:21', 'phamhongthang@gmail.com', 0, '2010-07-20 01:38:38', '1937-01-19', 'trung kinh', 'david', 'beckham', 'ha noi', 492, 18, 'hi all', 'en', '0986727497', '', '', 'devsoftvn', 'Mother\\\'s Miden Name', 'Pham', '06727', '806', '7416735', 'user', 0, '', ''),
-	(27, 'Beckham', '4cb2e6a94520746e5ca8e249c32a2373:6e', 'phamhongthang@gmail.com', 0, '2010-07-20 01:39:28', '1937-01-19', 'trung kinh', 'david', 'beckham', 'ha noi', 492, 18, 'hi all', 'en', '0986727497', '', '', 'devsoftvn', 'Mother\\\'s Miden Name', 'Pham', '07462', '585', '2876676', 'user', 0, '', ''),
-	(28, 'Beckham', 'eba24849c2cb7622a1540511f1c530ed:bf', 'phamhongthang@gmail.com', 0, '2010-07-20 01:40:09', '1937-01-19', 'trung kinh', 'david', 'beckham', 'ha noi', 492, 18, 'hi all', 'en', '0986727497', '', '', 'devsoftvn', 'Mother\\\'s Miden Name', 'Pham', '10998', '056', '7681565', 'user', 0, '', ''),
-	(29, 'mallegold', '5b8f6398c609986b1fc106571eac766e:5a', 'mallegold@yahoo.com', 0, '2010-08-08 08:55:19', '1979-03-09', 'Perum Griya Shanta Blok-C 102', 'Imamul', 'Yaqin', 'Malang', 1660, 100, 'welcome', 'en', '+62341579501', '', '61542', '', 'where i am born', 'kasur', '18354', '214', '8351185', 'user', 0, '', ''),
-	(30, 'orala', '3373ff7efffc19aaaccfc9d9bf463749:74', 'robertoestrella70@yahoo.com', 0, '2010-08-17 16:35:58', '1984-03-08', '7547 southaven cir w', 'oralia', 'estrella', 'southaven', 35, 223, 'hola', 'en', '9012103498', '9012193761', '', 'estrella', 'Mother\\\'s Miden Name', 'olga', '76187', '144', '8737290', 'user', 0, '', ''),
-	(31, 'hamid2006', 'f337e405a421aff75f2fb2a397ff126e:29', '2006hgh@gmail.com', 0, '2010-09-03 13:05:01', '1980-12-12', '8gerd', 'hamid', 'gh', '8gerd', 1681, 101, '123', 'en', '00989356464381', '', '445544551237', '', 'Mother\\\'s Miden Name', 'azam', '51146', '135', '2293836', 'user', 0, 'KOK\'', ''),
-	(32, 'harshdeep04', 'f8bd1b644e451098dd818d125b0193c7:9d', 'harshdeep2006@gmail.com', 0, '2010-09-04 02:46:42', '1985-05-05', 'G 4 street no. 7 vikas puri', 'harsh', 'singh', 'delhi', 1626, 99, 'welome to all', 'en', '9818528362', '', '', '', 'Favorite Pet', 'dogi', '24202', '399', '5710458', 'user', 0, '', ''),
-	(33, 'mahmudgh', 'a93e0cad75dd9160601fa5d6b512237d:01', 'darjestan@gmail.com', 0, '2010-09-04 03:19:29', '1980-12-12', 'zanjani sq #223', 'mahmud', 'gh', '8gerd', 1681, 101, 'my wel', 'en', '00983967115487', '', '', '', 'Mother\\\'s Miden Name', 'azam', '45547', '366', '7430989', 'user', 0, '', ''),
-	(34, '8807', '29ee1016bfe48ebd0c0b5a7f1d589334:a0', '01031248807@paran.com', 0, '2010-09-08 07:33:03', '1973-05-15', '201ho 105-dong Seonggeobyeoksan APT. 3-3beonji. Sinwol-ri Seonggeo-eup Seobuk-gu', 'JUYEON', 'KIM', 'Cheonan-si', 1917, 113, 'good', 'en', '82-10-3124-8807', '', '330-835', '', 'Mother\\\'s Miden Name', 'good', '07379', '858', '2904235', 'user', 0, '', ''),
-	(35, 'angelslash', '467db891b680df6a1ed2d81fc6da5ca1:f8', 'angel_93.lara@hotmail.com', 0, '2010-09-09 12:44:26', '1991-05-25', 'ave.obregon #310', 'Angel', 'Lopez', 'Santa Ana', 2313, 138, 'hi what\'up?', 'en', '6413271863', '', '', '', 'City Of Birth', 'calorca', '03710', '057', '6235957', 'user', 0, '', ''),
-	(36, 'personal', 'cb78c6d2b5eff06ee78f8a309a4c3944:d4', 'daisyzia@gmail.com', 0, '2010-09-14 22:30:16', '1966-12-16', '2239 e. muir field dr', 'shanna', 'scott', 'fresno', 12, 223, 'hello', 'en', '559-473-7773', '559-312-8598', '', 'n/a', 'Mother\\\'s Miden Name', 'richardson', '36680', '149', '2182811', 'user', 0, '', ''),
-	(37, 'Support', 'e916d0fd7a9f39d852ab40df595a2802:ca', 'support@accelerit.in', 0, '2010-09-20 07:52:52', '1986-11-01', '22/c Tradeland', 'soham', 'dasgupta', 'kolkata', 1649, 99, 'Welcome to Support', 'en', '+917278431802', '+917278431802', '', 'accelerIT', 'Mother\\\'s Miden Name', 'dg', '48031', '795', '6481405', 'user', 0, '', ''),
-	(38, 'First citizens bank', 'ab08b08b443d3c2c3b52941dd483cf9c:42', 'devildogslima3127@yahoo.com', 0, '2010-09-27 09:39:26', '1978-02-08', '4247 s kedzie', 'Gabriel', 'Salinas', 'chicago', 23, 223, 'semper fidelis', 'en', '708-654-1225', '708-717-5530', '', 'primary staffing', 'Mother\\\'s Miden Name', 'moreno', '76283', '630', '6535284', 'user', 0, '', ''),
-	(39, 'ssiexports', '4fe2a697de3b04b84bd3114a4ee9676b:af', 'ssiclothing@gmail.com', 0, '2010-10-17 07:03:49', '1962-06-27', '7.pallatharu/neyvacherry/thirunallar', 'sselvarasu', 'rasu', 'karaikal', 1642, 99, 'exports', 'en', '9080691216', '9841810832', '', 'ssiclothing7', 'Mother\\\'s Miden Name', 'annamal', '42714', '519', '9406480', 'user', 0, '', ''),
-	(40, 'test', 'ae4610f81b178a90e94fc99919af4092:97', 'hoswalt@hotmail.com', 0, '2010-12-31 07:38:09', '1920-01-01', '123 test', 'test', 'test', 'test', 3257, 209, 'test', 'en', '000000000000', '', '', '', 'Favorite Pet', 'test', '72448', '217', '7368962', 'user', 0, '', ''),
-	(41, 'christopher', '1a4de24e27e0a9cdde1a337fce6d1e79:dc', 'cmosby71@yahoo.com', 0, '2011-02-08 14:39:42', '1980-12-12', '3823 charlestown rd', 'chris', 'mosby', 'new albany', 24, 223, 'cash', 'en', '502-7141779', '', '', 'crown personnel sevice,inc', 'Mother\\\'s Miden Name', 'shirley mosby', '38067', '470', '4123105', 'user', 0, '', ''),
-	(42, 'privato', 'f10753e3dedbc87c843648dd3aee1d56:76', 'enzo@4securemail.com', 0, '2011-02-11 17:14:47', '1957-04-01', 'via gioacchino belli 29', 'enzo', 'tatangelo', 'tivoli terme roma', 1772, 105, 'ciao', 'en', '390774013007', '393342575557', '', '', 'City Of Birth', 'roma', '00287', '489', '1120097', 'user', 0, '', ''),
-	(43, 'KYUSOOK LEE', '6d7f3e78f877b439fcb9e6e05ebebc4f:75', 'leekyusook07@gmail.com', 0, '2011-03-02 19:53:23', '1933-12-08', 'Nippori', 'KYUSOOK', 'LEE', 'Arakawa-ku', 1840, 107, 'Welcome EGC', 'en', '080-1832-8049', '', '', '', 'Mother\\\'s Miden Name', 'lee', '58120', '555', '9554997', 'user', 0, '', ''),
-	(44, 'rocio zermeno', 'dff2aa181464cae2579bdc7f8fc76842:8e', 'ramch_mx@hotmail.com', 0, '2011-03-03 17:44:08', '1965-03-26', '628 1/2 E. San Ysidro Blvd. # 719', 'Rocio', 'Zermeno', 'San Ysidro', 12, 223, 'cuidemos la tierra', 'en', '619-764-3367', '', '', '', 'City Of Birth', 'cerroazul veracruz', '21464', '106', '6402524', 'user', 0, '', ''),
-	(45, 'Cornelio', '97efaeabd6b08c40c91297558ece1050:1b', 'cmendoza682009@gmail.com', 0, '2011-03-11 11:25:50', '1978-03-10', '201 Circle rd', 'Cornelio', 'Mendoza', 'Moultrie', 19, 223, 'ya llegue', 'en', '2295299850', '2295299850', '', 'Universal Forest Products', 'City Of Birth', 'nequeteje', '56226', '564', '0372925', 'user', 0, '', ''),
-	(46, 'amy J Newman', '26423e4f0893d2da7e32dfe3a14c63c9:ed', 'tmnets3@yahoo.com', 0, '2011-04-06 05:08:42', '1979-12-03', '1900 Melady Ave,', 'amy', 'Newman', 'Sebring FL', 18, 223, 'i love this', 'en', '5016945430', '', '', '', 'City Of Birth', 'nnewi', '92601', '029', '6123870', 'user', 0, '', ''),
-	(47, 'Pirat_SG', 'db768a0835dfce438c8f57c113993ecf:d9', 'jhnmyers83@aol.com', 0, '2011-04-08 12:12:07', '1983-04-11', 'eldasdada', 'Samantha', 'Yu', 'Los Angeles', 12, 223, 'SG', 'en', '13022333', '', '', '', 'Mother\\\'s Miden Name', 'silvia', '65326', '848', '4077979', 'user', 0, '', ''),
-	(48, 'Scott Coady', '5418007d12e4a66595671bf101851902:6a', 'scottfcoady@yahoo.com', 0, '2011-04-11 08:25:03', '1987-12-19', '945 HWY 25 N. Apt.', 'scott', 'coady', 'Waynesboro', 19, 223, 'Im rich snitch', 'en', '706-871-6433', '706-871-6433', '', 'MAU', 'Mother\\\'s Miden Name', 'carter', '57424', '013', '3385470', 'user', 0, '', ''),
-	(49, 'Mina Waje', '37329cf8e50f3cef83e135c1feeffc65:21', 'minawaje@yahoo.com', 0, '2011-05-06 07:58:35', '1968-03-28', '922 Louise Ave.', 'Mina', 'Waje', 'Northridge, CA', 12, 223, 'This is Mina Waje.', 'en', '818605-7533', '818-605-7533', '', 'CPI', 'Mother\\\'s Miden Name', 'Pacheco', '66807', '453', '2860567', 'user', 0, '', ''),
-	(50, 'Isaura Flores', '47022af3925155eabc20e18f60d2a1c8:b7', 'okmiar@hotmail.com', 0, '2011-05-19 05:49:59', '1963-12-29', 'P.O. Box 13', 'Isaura', 'Flores', 'Southwest City', 36, 223, 'Simmons', 'en', '4176692204', '', '', 'Simmon\'s Foods', 'Mother\\\'s Miden Name', 'valenzuela', '10681', '192', '0802273', 'user', 0, '', ''),
-	(51, 'Bernita Young', '4ef98a798cb0ccdf54d26d00a1b997aa:a8', 'bryblessed40223@yahoo.com', 0, '2011-05-20 11:47:20', '1958-09-03', '131 MacArthur Dr.', 'Bernita', 'Young', 'Hinesville', 19, 223, '18', 'en', '912-432-3431', '', '', 'TF&S Transportation', 'Mother\\\'s Miden Name', 'Davis', '16937', '067', '6702437', 'user', 0, '', ''),
-	(52, 'Tallisa Cleveland', '1a1037e9a0d700b5c4c2bd1a4cde0334:3d', 'tallisacleveland2005@yahoo.com', 0, '2011-05-20 12:57:02', '1987-07-29', '3820 State Street', 'Tallisa', 'Cleveland', 'Santa Barbara', 12, 223, 'goodevening', 'en', '6628970759', '6628970759', '', 'Select Staffing', 'City Of Birth', 'fortsill', '72530', '261', '5967708', 'user', 0, '', ''),
-	(53, 'Global Cash', '5fe32c64fa966855417d69c7bf8e9738:45', 'mrsroro1973@yahoo.com', 0, '2011-05-23 08:56:39', '1970-08-27', '1501 e hillsborough ave', 'cwan', 'dewberry', 'tampa', 18, 223, 'Mr. Dewberry', 'en', '8132381701', '', '', 'Wendys', 'Mother\\\'s Miden Name', 'essie', '25158', '735', '3224780', 'user', 0, '', ''),
-	(54, 'Nori', 'ba158915f85c3c30e685b7a424a3539a:eb', 'info@moneyexchange.jp', 0, '2011-09-11 11:39:51', '1948-12-29', 'xxxxx', 'Nori', 'Taneichi', 'Misawa', 1802, 107, 'Welcome Ryogae Service', 'en', '000000000', '', '', '', 'City Of Birth', 'Misawa', '31568', '815', '7836480', 'user', 0, '', '2314483215'),
-	(55, 'nori', '3bcf3e3c6539510c3959ff4550f345f5:97', 'info@moneyexchange.jp', 0, '2011-09-13 01:30:32', '1985-05-02', 'misawa', 'Norihisa', 'Taneichi', 'misawa', 1802, 107, 'Welcome Misawa', 'en', '0176500232', '', '0330021', 'nori', 'City Of Birth', 'Misawa', '78844', '758', '9124181', 'user', 0, '', '3843343486'),
-	(56, 'donghp', 'cc76addd8e23574a03ae720b88581772:8f', 'donghp712@gmail.com', 0, '2012-03-26 03:47:47', '1980-01-01', '277 Trung Kinh Cau Giay', 'Hong', 'Dong', 'Ha Noi', 3776, 230, 'Hello world', 'en', '0984509988', '', '', 'CYA', 'Mother\'s Miden Name', 'Sang', '12345', '123', '1321481', 'user', 0, '', '0112540862'),
-	(57, 'Escrow, Inc.', '74b5fd619cc3bd613fa03d685b2f1ba6:3a', 'escrowinc1@gmail.com', 0, '2012-03-26 09:47:06', '1973-09-29', '#204 5-18-5 Ueno', 'Shinei', 'Shibata', 'Taito-ku', 1840, 107, 'Welcome shin page', 'en', '03-3835-3568', '', '', '', 'Mother\'s Miden Name', 'numata', '49667', '051', '1971164', 'user', 0, '', ''),
-	(58, 'Middleman', 'b3049ca6d4aec7557d669a62da48da9c:14', 'tradingci@gmail.com', 0, '2012-05-01 10:56:52', '1974-07-02', '23 P.O Box 1798 Abidjan 23', 'Ndri', 'Anon Kouakou Mathieu', 'Abidjan', 949, 52, 'God is One', 'en', '+22523535930', '+22507464467', '', 'Individual Sales', 'City Of Birth', 'Ivory Coast', '42432', '609', '8074605', 'user', 0, '', ''),
-	(59, 'minhth', 'fec0e49082af6f72ce889c5c30ea13c5:a8', 'minhthtin@gmail.com', 0, '2012-05-07 01:44:04', '1981-11-23', 'Hn', 'Trinh Huy', 'Minh', 'Hn', 3776, 230, 'Xin chao minhth cheer', 'en', '6666666666666666', '6666666666666666', '', 'test', 'Favorite Pet', 'dog', '44367', '692', '1965346', 'user', 0, '', ''),
-	(60, 'win for life', '201a46f76b2c819a9465c28eb4f1c7dd:86', 'albert57@hanmail.net', 0, '2012-05-18 06:26:29', '1957-10-09', 'china', 'cheoul bae', 'yang', 'dongkwan', 848, 44, 'happy', 'en', '8613421928050', '', '', '', 'Mother\'s Miden Name', 'kwon', '12345', '007', '7635351', 'user', 0, '', '9462065084'),
-	(61, 'forex master', 'e1a5f48da3dd9872d73c57f71da56b30:dd', 'forex_master@naver.com', 0, '2012-05-22 05:23:15', '1965-08-15', 'China', 'hansik', 'yim', 'China', 867, 44, 'happy', 'en', '8613631751715', '', '', '', 'Mother\'s Miden Name', 'ha', '79985', '243', '8923022', 'user', 0, '', ''),
-	(62, 'jungil', '03aeceeb8e9bee6485d707b631edf9c6:62', 'il5252@naver.com', 0, '2012-05-22 06:45:55', '1976-10-20', 'harari1808', 'il', 'jung', 'seogwopo', 1918, 113, 'goodnews', 'en', '01035603093', '', '', '', 'Mother\'s Miden Name', 'park', '85676', '190', '3255851', 'user', 0, '', ''),
-	(63, 'milk2080', '75e112fe0cfaf8240b9f9d0498803fd9:10', 'keys79@naver.com', 0, '2012-05-22 18:40:05', '1979-05-26', '565-1,Deungchon-dong, Gangseo-gu', 'soohyun', 'Lee', 'seoul', 1928, 113, 'Hello~', 'en', '82 70 7554 2275', '', '', '', 'City Of Birth', 'busan', '89334', '702', '1250457', 'user', 0, '', ''),
-	(64, 'lso93410', 'b38707684ff19e62ca3c2e4cafd1c47c:0f', 'lso93410@gmail.com', 0, '2012-05-22 18:54:14', '1957-10-19', 'Wongok-myeon 73', 'sang ong', 'Lee', 'Anseong-si', 1924, 113, 'Hello~', 'en', '82 70 4069 3148', '', '', '', 'City Of Birth', 'Anseong', '51230', '851', '6853310', 'user', 0, '', ''),
-	(65, 'kim hakche', 'e5804cbbbda1bde4f466844267c5cbfc:f9', 'chinapro@chol.com', 0, '2012-05-23 02:26:37', '1948-05-11', '#24-303, hwakok-dong, gangseo-gu,', 'kim', 'hakche', 'seoul', 1922, 113, 'I love my daughter and my wife', 'en', '07075169081', '01058758070', '', '', 'Mother\'s Miden Name', 'young', '25483', '208', '1332219', 'user', 0, '', ''),
-	(66, 'ladysue3037', '70e2fdadfa4cdb490ca57928c237d03d:ee', 'ladysue3037@gmail.com', 0, '2012-05-23 02:43:50', '1964-02-25', 'Gokbanjeong-dong, Gwonseon-gu, 513-11 203ho', 'suemi', 'roh', 'suwon', 1924, 113, 'hi everyone', 'en', '82-10-2550-3037', '', '', '', 'Mother\'s Miden Name', 'yi', '76108', '512', '8020309', 'user', 0, '', ''),
-	(67, 'gold', '00ef5301bc3ed7890729ca49be37f06a:07', 'kksks3939@naver.com', 0, '2012-05-23 07:29:36', '1961-01-19', '56-5,Yongdu-dong, Jung-gu', 'kang', 'sanggoo', 'Daejeon', 1930, 113, 'ceoitbiz', 'en', '+82 10 3423 1192', '', '', 'money', 'Mother\'s Miden Name', 'gold', '78957', '545', '6112280', 'user', 0, '', ''),
-	(68, 'MW6179', 'e53d52c7b42952d104296e209ea224a9:f4', 'plmw2001@hanmail.net', 0, '2012-05-24 09:33:15', '1957-10-13', 'Joaquim Murtinho67 Sala3 Bom Retiro', 'Lee', 'Man U', 'Sao Paulo', 636, 30, 'Happy Day!', 'en', '55-11-3228-0924', '55-11-9963-6179', '', '', 'City Of Birth', 'city', '23113', '814', '5200777', 'user', 0, '', ''),
-	(69, 'gold', '10ad06b09d594d85e4415eefc5746f80:2d', 'vcar2012@gmail.com', 0, '2012-05-25 07:04:23', '1975-09-21', 'Beomeo-dong, Suseong-gu', 'rain', 'mark', 'Daegu', 1929, 113, 'hi', 'en', '821083887179', '821083887179', '', '', 'Mother\'s Miden Name', 'sun', '60731', '798', '7785649', 'user', 0, '', ''),
-	(70, 'mylexxus128', 'd7365101a865d602d4c37b0e0fe268d4:10', 'maxmaikl-777@yandex.ru', 0, '2012-06-03 03:44:12', '1954-10-22', 'Pecherskay str.8-7', 'Mikhail', 'Sadykov', 'Samara', 2924, 176, 'Hi,mylexxus128', 'en', '79050177134', '79050177134', '443079', 'Ruskollektors.com', 'Mother\'s Miden Name', 'Sadykova', '82118', '442', '2893315', 'user', 0, '', ''),
-	(71, 'Gray', '67e4711b708daa204c55455fae59553d:07', 'Randolph.Schmid@yahoo.com', 0, '2012-06-10 12:52:34', '1945-08-15', 'none', 'Randolph', 'Schmid', 'none', 1553, 96, 'none', 'en', '0000000', '', '', '', 'Mother\'s Miden Name', 'none', '40809', '394', '4908529', 'user', 0, '', ''),
-	(72, 'Gray', '8950bf169cd497262d638f285cd8e398:fa', 'george.smith1980@hotmail.com', 0, '2012-06-10 13:13:37', '1945-08-15', 'none', 'Gray', 'Gray', 'none', 1553, 96, 'none', 'en', '0000000', '', '', '', 'Mother\'s Miden Name', 'none', '51051', '665', '7537591', 'user', 0, '', ''),
-	(73, 'mike', '78e073f8ba415475d78ac40a5bb51808:de', 'mikepaule16@yahoo.com', 0, '2012-06-10 13:20:25', '1945-08-15', 'none', 'mike', 'mike', 'none', 1553, 96, 'none', 'en', '00000000', '', '', '', 'Mother\'s Miden Name', 'none', '44821', '524', '5911250', 'user', 0, '', ''),
-	(74, 'Prao', 'b8ff977c0821d797245c9b1f4693c088:5d', 'rao.prakash58@yahoo.com', 0, '2012-06-14 05:49:41', '1945-08-15', 'Hong Kong', 'Prakash', 'Rao', 'Hong Kong', 1553, 96, 'none', 'en', '0000000', '', '', '', 'Mother\'s Miden Name', 'none', '81741', '636', '6285350', 'user', 0, '', ''),
-	(75, 'colinelniger', '9e5dd1939c9c51a356b4ae91a3fd48b2:3c', 'colinelniger@yahoo.com', 0, '2012-06-14 08:12:23', '1945-08-15', 'Hong Kong', 'Collin', 'Elniger', 'Hong Kong', 1553, 96, 'none', 'en', '0000000', '', '', '', 'Mother\'s Miden Name', 'none', '99230', '781', '4967616', 'user', 0, '', ''),
-	(76, 'YuenmengWant', '600cdf68979b59268e5a0c3915b477fc:e8', 'yuenmeng192@sina.cn', 0, '2012-06-14 08:17:18', '1945-08-15', 'none', 'Yuenmeng', 'Wang', 'none', 1553, 96, 'none', 'en', '0000000000', '', '', '', 'Mother\'s Miden Name', 'none', '82342', '499', '4969932', 'user', 0, '', ''),
-	(77, 'JaneMac2', '3eac56129310b3f785eff29ecf79ab6e:f8', 'janemaccom@yahoo.com', 0, '2012-06-14 08:22:12', '1945-08-15', 'none', 'Jane', 'MacComak', 'none', 1553, 96, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '63930', '634', '4475462', 'user', 0, '', ''),
-	(78, 'TimeDonover', 'f8da4c3a3891f60b50f54297870270b5:0e', 'donover10@yahoo.com', 0, '2012-06-14 08:27:55', '1945-08-15', 'none', 'Tim', 'Donover', 'none', 1553, 96, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '64809', '446', '4691531', 'user', 0, '', ''),
-	(79, 'JeremyPet', 'ec76c2a5db5dc8148f6eda06e4d8e579:de', 'jeremy.petruchi@mail.com', 0, '2012-06-14 08:50:03', '1945-08-15', 'none', 'Jeremy', 'Petruchi', 'none', 1553, 96, 'none', 'en', '00000000', '', '', '', 'Mother\'s Miden Name', 'none', '92920', '494', '5969323', 'user', 0, '', ''),
-	(80, 'tonyclapton', '63e515b8e01b33badc062d17c13debd8:e9', 'tonyclapton@163.com', 0, '2012-06-14 08:54:52', '1945-08-15', 'none', 'Tony', 'Clapton', 'none', 1553, 96, 'none', 'en', '00000000', '', '', '', 'Mother\'s Miden Name', 'none', '36695', '057', '8716565', 'user', 0, '', ''),
-	(81, 'Robin lohan', '46614bb378a3f0ad54b9740dcd27f5ab:ec', 'orcid.vine121@yahoo.com', 0, '2012-06-14 09:54:36', '1945-08-15', 'none', 'Robin', 'lohan', 'none', 1553, 96, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '87425', '311', '1252487', 'user', 0, '', ''),
-	(82, 'Magan daniel', 'de7edc81e6e112c8ea9d6fdab8fcbeca:d4', 'radishman109@yahoo.com', 0, '2012-06-14 10:09:37', '1945-08-15', 'none', 'Magan', 'daniel', 'none', 1553, 96, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '49356', '553', '0684211', 'user', 0, '', ''),
-	(83, 'Jim Morris', 'ce7e6f3742643f66012297268f53b966:9f', 'spinach.tree101028@yahoo.com', 0, '2012-06-14 10:19:16', '1945-08-15', 'none', 'Jim', 'Morris', 'none', 1840, 107, 'none', 'en', '0000000', '', '', '', 'Mother\'s Miden Name', 'none', '32119', '675', '6695927', 'user', 0, '', ''),
-	(84, 'Kate Middleton', '557fe14a8609d48e12035086a56da295:bf', 'cotton.seeding@yahoo.com', 0, '2012-06-14 10:29:21', '1945-08-15', 'none', 'Kate', 'Middleton', 'none', 1840, 107, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '11620', '152', '7784137', 'user', 0, '', ''),
-	(85, 'Wayne robert', 'b3b7fb1f12dcf7b23e7b381e2f206f0f:83', 'lilylohana@yahoo.com', 0, '2012-06-14 10:38:26', '1945-08-15', 'none', 'Wayne', 'robert', 'none', 1553, 96, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '64011', '354', '4673628', 'user', 0, '', ''),
-	(86, 'James Kelly', '1cfa526dc79c809b70657497e5c06824:7e', 'james843@163.com', 0, '2012-06-14 10:46:08', '1945-08-15', 'none', 'James', 'Kelly', 'none', 1840, 107, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '47339', '755', '9071540', 'user', 0, '', ''),
-	(87, 'michaelcol', 'df058ed36f28ae4675cfd7d71d19ee5e:91', 'michaelcol@163.com', 0, '2012-06-14 21:29:23', '1945-08-15', 'none', 'Michael', 'Col', 'Hong Kong', 1553, 96, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '18268', '982', '1099927', 'user', 0, '', ''),
-	(88, 'chrispine', 'be9e0acd424ca3360abb5d7eeb8cdf21:71', 'chrispine@126.com', 0, '2012-06-14 21:59:40', '1945-08-15', 'none', 'Chris', 'Pine', 'Hong Kong', 1553, 96, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '44970', '725', '1380096', 'user', 0, '', ''),
-	(89, 'mtoldo41', '08c91bc772a43b72d2a300cb8697cdf3:e8', 'mtoldo41@yahoo.com', 0, '2012-06-14 22:23:02', '1945-08-15', 'none', 'Mike', 'Toldo', 'none', 1553, 96, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '83628', '365', '3912964', 'user', 0, '', ''),
-	(90, 'John.white1693', '8edf822e9b7e8257924b08e5f4db35af:93', 'john.white1693@yahoo.com', 0, '2012-06-14 22:26:44', '1945-08-15', 'none', 'John', 'White', 'none', 1553, 96, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '86254', '508', '7956912', 'user', 0, '', ''),
-	(91, 'pamela.randy', 'eca69968e79af6050fa4eae8e7f904ad:8f', 'pamela.randy@yahoo.com', 0, '2012-06-15 00:41:01', '1945-08-15', 'none', 'Pamela', 'Randy', 'none', 1553, 96, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '92684', '422', '6233120', 'user', 0, '', ''),
-	(92, 'Nicholas', '5485d2db3751a510d737256ea442bda9:79', 'nicholas.lewis15@yahoo.com', 0, '2012-06-15 00:46:15', '1945-08-15', 'none', 'Nicholas', 'Lewis', 'none', 1553, 96, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '83487', '032', '2802391', 'user', 0, '', ''),
-	(93, 'Avery', 'f94328427671665eeaab4fde12283111:4c', 'avery_kerr@yahoo.com', 0, '2012-06-15 00:51:16', '1945-08-15', 'none', 'Avery', 'Kerr', 'Hong Kong', 1553, 96, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '75557', '231', '1328184', 'user', 0, '', ''),
-	(94, 'Zoe', '056692d0dc136ca72b01ee322b8931b9:9e', 'zoejacson@yahoo.com', 0, '2012-06-15 00:57:25', '1945-08-25', 'none', 'Zoe', 'Jacson', 'Hong Kong', 1553, 96, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '26987', '915', '1566958', 'user', 0, '', ''),
-	(95, 'aaronalponso', '388c4922239f967714b62d19554693ac:28', 'aaronhong11@126.com', 0, '2012-06-15 01:00:52', '1945-08-15', 'none', 'Aaron', 'Alponso', 'Hong Kong', 1553, 96, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '31414', '465', '2633129', 'user', 0, '', ''),
-	(96, 'Madison', '4f4d87107443c1ccdb966231df5e170f:b9', 'madisoningram93@yahoo.com', 0, '2012-06-17 07:20:24', '1945-08-15', 'none', 'Madison', 'Ingram', 'Hong Kong', 1553, 96, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '09520', '586', '7201724', 'user', 0, '', ''),
-	(97, 'schiedam334', 'ed0ed65c08bdf8be6da732bccbd3f8f0:34', 'schiedam334@yahoo.com', 0, '2012-06-17 07:24:20', '1945-08-15', 'none', 'Jim', 'Rudensky', 'none', 1553, 96, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '56850', '171', '5220119', 'user', 0, '', ''),
-	(98, 'VictorStrauffen', '8d130c96d6e78f1a7254796bc51be0cb:80', 'strauffen.kiev@mail.ru', 0, '2012-06-17 07:27:24', '1945-08-15', 'none', 'Victor', 'Strauffen', 'Hong Kong', 1553, 96, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '29728', '734', '1436865', 'user', 0, '', ''),
-	(99, 'Annatian', '1eddd9b741314b3af749f30a9b4e4307:4e', 'anna33tianjin@qq.com', 0, '2012-06-17 07:31:00', '1945-08-15', 'none', 'Anna', 'Rosenberg', 'Hong Kong', 1553, 96, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '34659', '700', '7332323', 'user', 0, '', ''),
-	(100, 'Caden', '5f414812efe077e5c438de5ecc17f270:58', 'cadenhopkins@yahoo.com', 0, '2012-06-17 07:35:08', '1945-08-15', 'none', 'Caden', 'Hopkins', 'Hong Kong', 1553, 96, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '57873', '936', '5765525', 'user', 0, '', ''),
-	(101, 'nathan', 'f49f0d1deaf13809e453878bd0111f53:75', 'nathan.green87@yahoo.com', 0, '2012-06-17 07:40:48', '1945-08-15', 'none', 'Nathan', 'Green', 'Hong Kong', 1553, 96, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '10248', '126', '1372066', 'user', 0, '', ''),
-	(102, 'salmandihal', '0b866ca57aba31578a67bbb745666a65:4b', 'dihal4029@india.com', 0, '2012-06-17 07:44:36', '1945-08-15', 'none', 'salman', 'dihal', 'Hong Kong', 1553, 96, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '53167', '604', '0901098', 'user', 0, '', ''),
-	(103, 'steven.parker2020', '01d28b56b8820a33f281e2594694d6bf:97', 'steven.parker2020@yahoo.com', 0, '2012-06-17 07:54:29', '1945-08-15', 'none', 'Steven', 'Parker', 'Hong Kong', 1553, 96, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '02473', '687', '2175604', 'user', 0, '', ''),
-	(104, 'Giovanni Rossi', '4e092704ffd03ca66d7b4a9c161ec0a7:f4', 'giovannimunch@mail.com', 0, '2012-06-17 07:57:04', '1945-08-15', 'none', 'Giovanni', 'Rossi', 'Hong Kong', 1553, 96, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '80088', '897', '8181083', 'user', 0, '', ''),
-	(105, 'albertcamelon', '39154845a71e563434417d490aecde7b:6b', 'albertcamelon@yahoo.com', 0, '2012-06-17 08:01:06', '1945-08-15', 'none', 'Albert', 'Camelon', 'Hong Kong', 1553, 96, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '81091', '926', '6244413', 'user', 0, '', ''),
-	(106, 'haodin43', 'e83d6896cc4dea45839413eb7a407d04:9b', 'haodinjiajia@sina.com', 0, '2012-06-17 08:04:20', '1945-08-15', 'none', 'Haodin', 'Sgan', 'Hong Kong', 1553, 96, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '87061', '675', '3647803', 'user', 0, '', ''),
-	(107, 'igorzwin', 'f4f3083ff051beded5d1995a65b8637b:6a', 'igorvic@mail.com', 0, '2012-06-17 08:07:24', '1945-08-15', 'none', 'Igor', 'Zwinsky', 'Hong Kong', 1553, 96, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '40541', '592', '0371068', 'user', 0, '', ''),
-	(108, 'Lily', '41e816c853f4c8b831b5d865787e4a5d:21', 'LilyDalton23@yahoo.com', 0, '2012-06-17 08:10:46', '1945-08-15', 'none', 'Lily', 'Dalton', 'Hong Kong', 1553, 96, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '74870', '205', '1095132', 'user', 0, '', ''),
-	(109, 'JulianTheng', '20a991f5a7d098f28d3b7d63ac8cf912:69', 'juliantheng@yahoo.com', 0, '2012-06-17 08:13:50', '1945-08-15', 'none', 'Julian', 'Theng', 'Hong Kong', 1553, 96, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '78479', '919', '0147328', 'user', 0, '', ''),
-	(110, 'StacyHedrick', 'a715aac4b40b4bb89ba172afa3d36ba9:92', 'stacyhedrick@ymail.com', 0, '2012-06-17 08:16:38', '1945-08-15', 'none', 'Stacy', 'Hedrick', 'Hong Kong', 1553, 96, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '33565', '086', '7761987', 'user', 0, '', ''),
-	(111, 'DavidLilly', '0eb3c5eedc6fa8c3fc95554f432829e9:76', 'dlilly@gmx.us', 0, '2012-06-17 08:20:07', '1945-08-15', 'none', 'David', 'Lilly', 'Hong Kong', 1553, 96, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '37356', '483', '8530358', 'user', 0, '', ''),
-	(112, 'Alamgir', 'c92b1ac5757e27e929c60a971ce80dfd:5d', 'alamgirfariba@yahoo.com', 0, '2012-06-17 08:24:52', '1945-08-15', 'none', 'Fariba', 'Alamgir', 'Hong Kong', 1553, 96, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '94758', '828', '9313379', 'user', 0, '', ''),
-	(113, 'John', '739bd5306975240e67590e5e0a4c7514:d7', 'john.waldoff@yahoo.com', 0, '2012-06-17 08:30:30', '1945-08-15', 'none', 'John', 'Waldoff', 'Hong Kong', 1553, 96, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '49142', '732', '0126889', 'user', 0, '', ''),
-	(114, 'WilliamJakes', '3ab36ccc1a4c2831648561478a3f920f:f6', 'w.jakes1@yahoo.com', 0, '2012-06-17 08:33:36', '1945-08-15', 'none', 'William', 'Jakes', 'Hong Kong', 1553, 96, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '27449', '002', '1811576', 'user', 0, '', ''),
-	(115, 'Jose', 'd96e2565b3b20b65767443dcf0ff59d4:a6', 'jose.burrow@yahoo.com', 0, '2012-06-17 08:36:34', '1945-08-15', 'none', 'Jose', 'Burrow', 'Hong Kong', 1553, 96, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '06911', '064', '3127211', 'user', 0, '', ''),
-	(116, 'YangZhenMing', 'b9e8846f5c35924f4037533fefabf6c8:af', 'yang.zm123@yahoo.com', 0, '2012-06-17 08:39:27', '1945-08-15', 'none', 'zhen ming', 'Yang', 'Hong Kong', 1553, 96, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '26507', '555', '0882829', 'user', 0, '', ''),
-	(117, 'AmyLing', '218b244a57eb20f46de463a1493adcfc:68', 'amyling@gmx.com', 0, '2012-06-17 08:44:15', '1945-08-15', 'none', 'Amy', 'Ling', 'Hong Kong', 1553, 96, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '39045', '876', '7022758', 'user', 0, '', ''),
-	(118, 'kevin.durant', 'e9b6326db329b02b52d314712801516f:1e', 'kevin.durant@mail.com', 0, '2012-06-17 08:47:31', '1945-08-15', 'none', 'Kevin', 'Durant', 'Hong Kong', 1553, 96, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '96671', '961', '1456894', 'user', 0, '', ''),
-	(119, 'mtoldo41', '2638707706802d4374ddac26b351913c:be', 'mtoldo41@yahoo.com', 0, '2012-06-17 08:52:56', '1945-08-15', 'none', 'Mike', 'Toldo', 'Hong Kong', 1553, 96, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '30010', '106', '8816568', 'user', 0, '', ''),
-	(120, 'ShenZh449', '0f8f5c04837318d0ca84935eb383d699:e4', 'shenmong241@126.com', 0, '2012-06-17 08:57:36', '1945-08-15', 'none', 'Shenmong', 'Zheung', 'Hong Kong', 1553, 96, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '44998', '041', '8081015', 'user', 0, '', ''),
-	(121, 'Vasileios Giannoulis', '7bb2c41784b0e5ea12ad6a8d6d536b6f:02', 'lakisg2@yahoo.com', 0, '2012-06-17 09:08:49', '1945-08-15', 'none', 'Vasileios', 'Giannoulis', 'none', 1424, 84, 'none', 'en', '210-8957140', '', '', '', 'Mother\'s Miden Name', 'none', '26114', '940', '9665891', 'user', 0, '', ''),
-	(122, 'John.white1693', '5bb522775212792e7927f43afaac729c:c4', 'john.white1693@yahoo.com', 0, '2012-06-20 23:27:17', '1945-08-15', 'none', 'John', 'White', 'Hong Kong', 1553, 96, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '86903', '267', '3844133', 'user', 0, '', ''),
-	(123, 'albertcamelon', '00067b4aadb0db6ed2a056b4fdda1b4d:ef', 'albertcamelon@yahoo.com', 0, '2012-06-20 23:31:33', '1945-08-15', 'none', 'Albert', 'Camelon', 'Hong Kong', 1553, 96, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '62901', '160', '2239191', 'user', 0, '', ''),
-	(124, 'Peter', '50d7fbc343c301e52c297f79899f8caf:56', 'peter.shiffer@yahoo.com', 0, '2012-06-20 23:37:08', '1945-08-15', 'none', 'Peter', 'Shiffer', 'Hong Kong', 1553, 96, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '67567', '372', '0305387', 'user', 0, '', ''),
-	(125, 'Cathy', '79d3a587cceb3ec81ea8b88d941e2118:9c', 'c.gordon@gmx.com', 0, '2012-06-20 23:41:55', '1945-08-15', 'none', 'Cathy', 'Gordon', 'Hong Kong', 1553, 96, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '48985', '104', '4011145', 'user', 0, '', ''),
-	(126, 'Hankgoodman', '70a3586257aedbcb4a9214196ce0387b:a4', 'MysoreGoodman@india.com', 0, '2012-06-20 23:46:02', '1945-08-15', 'none', 'Hank', 'Goodman', 'none', 1622, 99, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '55940', '777', '0282492', 'user', 0, '', ''),
-	(127, 'albertcamelon', '75c147ccb9062af2f711eb640e58820b:58', 'albertcamelon@yahoo.com', 0, '2012-06-25 04:38:39', '1945-08-15', 'none', 'Albert', 'Camelon', 'none', 1, 223, 'none', 'en', '00000000000000', '', '', '', 'Mother\'s Miden Name', 'none', '58738', '066', '6697213', 'user', 0, '', ''),
-	(128, 'Peter', '0050b9491cec93a8ad0a48358d9b192c:35', 'peter.shiffer@yahoo.com', 0, '2012-06-25 06:06:30', '1945-08-15', 'none', 'Peter', 'Shiffer', 'none', 182, 1, 'none', 'en', '00000000', '', '', '', 'Mother\'s Miden Name', 'none', '53014', '653', '4189431', 'user', 0, '', ''),
-	(129, 'KwanChen', '055ed99b0251cb988b754ed112b4e57a:5f', 'ckwanfy@yahoo.com', 0, '2012-06-25 06:09:19', '1945-08-15', 'none', 'Kwan', 'Chen', 'none', 182, 1, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '06249', '894', '9764216', 'user', 0, '', ''),
-	(130, 'Cathy', '3f64cde94a428881a15fc15105a0ced4:3e', 'c.gordon@gmx.com', 0, '2012-06-25 06:14:30', '1945-08-15', 'none', 'Cathy', 'Gordon', 'none', 2431, 147, 'none', 'en', '00000000', '', '', '', 'Mother\'s Miden Name', 'none', '31118', '708', '6204728', 'user', 0, '', ''),
-	(131, 'Hankgoodman', '5287e28ef4de645d62ad6637654cfc2b:57', 'MysoreGoodman@india.com', 0, '2012-06-25 06:18:09', '1945-08-15', 'none', 'Hank', 'Goodman', 'none', 1618, 99, 'none', 'en', '00000000', '', '', '', 'Mother\'s Miden Name', 'none', '40716', '950', '2835400', 'user', 0, '', ''),
-	(132, 'Naoki Endo', 'f3d32ea661e7f63c7b2b853fa2148404:84', 'sunnyarea2006@yahoo.co.jp', 0, '2012-06-25 06:21:00', '1945-08-15', 'none', 'Naoki', 'Endo', 'none', 1800, 107, 'none', 'en', '+81-090-1064-9245', '', '', '', 'Mother\'s Miden Name', 'none', '62722', '728', '4347127', 'user', 0, '', ''),
-	(133, 'aromarcus', '769c5b6ff4ab1da6baeb7723777396a4:99', 'aromarcus71@yahoo.com', 0, '2012-06-25 06:26:57', '1945-08-15', 'none', 'Aro', 'Marcus', 'none', 1800, 107, 'none', 'en', '00000000', '', '', '', 'Mother\'s Miden Name', 'none', '57909', '101', '4161929', 'user', 0, '', ''),
-	(134, 'taka', 'fbb461e1b925ba356112232e96e58a3d:e5', 'magnolia2lotus@yahoo.co.jp', 0, '2012-06-26 07:07:08', '1945-08-15', 'none', 'TAKAHIRO', 'OZAWA', 'none', 1840, 107, 'none', 'en', '00000000', '', '', '', 'Mother\'s Miden Name', 'none', '90203', '554', '8794623', 'user', 0, '', ''),
-	(135, 'georgefoeman', '2509f2043cf7a871ded9f33266fdc850:5e', 'george46@126.com', 0, '2012-06-27 02:14:25', '1945-08-15', 'none', 'George', 'Foeman', 'none', 1817, 107, 'none', 'en', '0000000000000000000', '', '', '', 'Mother\'s Miden Name', 'none', '33867', '815', '6050304', 'user', 0, '', ''),
-	(136, 'frankparker', 'eac4259f7467cf97264071fac7f5ec83:f5', 'frank482@163.com', 0, '2012-06-27 02:22:03', '1945-08-15', 'none', 'Frank', 'Parker', 'none', 1800, 107, 'none', 'en', '0000000000000000', '', '', '', 'Mother\'s Miden Name', 'none', '21599', '230', '1316626', 'user', 0, '', ''),
-	(137, 'breadsmith', '6a694bba5b238a4c94901946fc1d46eb:96', 'sbread67@yahoo.com', 0, '2012-06-27 02:25:54', '1945-08-15', 'none', 'Bread', 'Smith', 'none', 1807, 107, 'none', 'en', '000000000000', '', '', '', 'Mother\'s Miden Name', 'none', '59857', '281', '5635662', 'user', 0, '', ''),
-	(138, 'alannilson', 'e4e8525f98c7095c05639ab728f6f513:27', 'alan24834@yahoo.com', 0, '2012-06-27 02:31:03', '1945-08-15', 'none', 'Alan', 'Nilson', 'none', 1812, 107, 'none', 'en', '00000000000000', '', '', 'none', 'Mother\'s Miden Name', 'none', '91266', '399', '2444409', 'user', 0, '', ''),
-	(139, 'dextordavis', '1a84fac1765b25e168f920c103516df8:c0', 'dextor462@yahoo.com', 0, '2012-06-27 02:34:22', '1945-08-15', 'none', 'Dextor', 'davis', 'none', 1810, 107, 'none', 'en', '0000000000000000', '', '', 'none', 'Mother\'s Miden Name', 'none', '26086', '579', '4200461', 'user', 0, '', ''),
-	(140, 'John Baker', '2d304bebf27f6397e6744890ebfe7e0f:40', 'john794@163.com', 0, '2012-06-27 02:38:14', '1945-08-15', 'none', 'John', 'Baker', 'none', 300, 4, 'none', 'en', '00000000000000', '', '', 'none', 'Mother\'s Miden Name', 'none', '31465', '876', '5971929', 'user', 0, '', ''),
-	(141, 'Amory Blaine', 'b27b66a9457b5da0f91b9e317dcae6a6:db', 'amory376@163.com', 0, '2012-06-27 02:40:56', '1945-08-15', 'none', 'Amory', 'Blaine', 'none', 1804, 107, 'none', 'en', '00000000000000000', '', '', '', 'Mother\'s Miden Name', 'none', '22103', '806', '9899110', 'user', 0, '', ''),
-	(142, 'Jack Drake', '5bdbe917ba57fd1ce3d44d5064e7d5d0:0d', 'cucumber.plant@yahoo.com', 0, '2012-06-27 02:43:45', '1945-08-15', 'none', 'Jack', 'Drake', 'none', 1812, 107, 'none', 'en', '0000000000000000', '', '', 'none', 'Mother\'s Miden Name', 'none', '50075', '356', '0021215', 'user', 0, '', ''),
-	(143, 'Katty Lopez', '8017c3e38b01f5c26eff64c23cd07639:47', 'pumpkinjack12@yahoo.com', 0, '2012-06-27 02:46:26', '1945-08-15', 'none', 'Katty', 'Lopez', 'none', 1808, 107, 'none', 'en', '0000000000000000000', '', '', 'none', 'Mother\'s Miden Name', 'none', '01741', '542', '2682664', 'user', 0, '', ''),
-	(144, 'Liky Woods', 'fee15df30a453bed863b16c8d960298a:02', 'mushroomwoods1@yahoo.com', 0, '2012-06-27 02:49:15', '1945-08-15', 'none', 'Liky', 'Woods', 'none', 1815, 107, 'none', 'en', '000000000000', '', '', '', 'Mother\'s Miden Name', 'none', '98262', '039', '5191067', 'user', 0, '', ''),
-	(145, 'adams', 'a116988e9d31cb95665cb00277fcad3b:c0', 'dalaijoo@hotmail.com', 0, '2012-06-27 02:52:10', '1945-08-15', 'none', 'adams', 'smith', 'none', 1810, 107, 'none', 'en', '010-3424-9934', '', '', '', 'Mother\'s Miden Name', 'none', '95268', '267', '4871016', 'user', 0, '', ''),
-	(146, 'imana', '4d40787611841996f97c5c6d01521444:9b', 'gamou400@hotmail.co.jp', 0, '2012-06-27 03:28:38', '1945-08-15', 'none', 'Syuntarou', 'Ishidou', 'none', 1813, 107, 'none', 'en', '00000000000', '', '', '', 'Mother\'s Miden Name', 'none', '59232', '613', '1633793', 'user', 0, '', ''),
-	(147, 'knaka', 'ece9059ea4982e05d106ade742e9f4aa:e0', 'kotaryu@auone.jp', 0, '2012-06-27 03:33:49', '1945-08-15', 'none', 'Kuniko', 'Nakamura', 'none', 1816, 107, 'none', 'en', '00000000000', '', '', '', 'Mother\'s Miden Name', 'none', '73504', '426', '1373725', 'user', 0, '', ''),
-	(148, 'Punto Japon', '143ce385cdf50a342841cafdcb86c6a9:20', 'info@puntojapon.com', 0, '2012-06-27 03:37:37', '1945-08-15', 'none', 'JOSE ALBERTO', 'SUGAWARA', 'none', 1809, 107, 'none', 'en', '090-9863-4145', '', '', '', 'Mother\'s Miden Name', 'none', '00959', '686', '8431998', 'user', 0, '', ''),
-	(149, 'choko', '8276c396ce8d700c98fbb10bb16ae402:f9', 'rsb18867@nifty.com', 0, '2012-06-27 03:41:12', '1945-08-15', 'none', 'Mitoshi', 'Itou', 'none', 1804, 107, 'none', 'en', '09025838490', '', '', '', 'Mother\'s Miden Name', 'none', '05332', '380', '3355823', 'user', 0, '', ''),
-	(150, 'ktykj', '941f40fb9433d8b3ec3861686b0067f2:2e', 'ktykj@sand.ocn.ne.jp', 0, '2012-06-27 03:44:40', '1945-08-15', 'none', 'Kaoru', 'Takano', 'none', 1809, 107, 'none', 'en', '81-47-340-0833', '81-47-340-0833', '', '', 'Mother\'s Miden Name', 'none', '43725', '224', '2142641', 'user', 0, '', ''),
-	(151, 'Yasuhiko Yoshimura', '4e20ea99e3cf4e2f4e28c81b3f513631:c8', 'amberinbug@yahoo.co.jp', 0, '2012-06-27 03:47:00', '1945-08-15', 'none', 'Yasuhiko', 'Yoshimura', 'none', 1815, 107, 'none', 'en', '08053088567', '08053088567', '', '', 'Mother\'s Miden Name', 'none', '10137', '063', '2149852', 'user', 0, '', ''),
-	(152, 'I3DX2C7', '9aa7318a25a6181f755f4a228c0c353a:89', 'az29shinning@yahoo.co.jp', 0, '2012-06-27 03:49:18', '1945-08-15', 'none', 'Eiji', 'Tamada', 'none', 1808, 107, 'none', 'en', '00000000000', '', '', '', 'Mother\'s Miden Name', 'none', '22631', '811', '1737734', 'user', 0, '', ''),
-	(153, 'benge', '9117507e41493aa3fae10cbae994df86:71', 'hiroshi686@hotmail.com', 0, '2012-06-27 03:52:01', '1945-08-15', 'none', 'HIROSHI', 'YAMAMOTO', 'none', 1808, 107, 'none', 'en', '080-3071-0192', '080-3071-0192', '', '', 'Mother\'s Miden Name', 'none', '21288', '268', '0797204', 'user', 0, '', ''),
-	(154, 'xpsxpsxps', 'fc0890f6ec598af656b7e8d7a959a29c:6e', 'javaint@ezweb.ne.jp', 0, '2012-06-27 03:57:01', '1945-08-15', 'none', 'taku', 'taniguchi', 'none', 1816, 107, 'none', 'en', '08060121358', '08060121358', '', '', 'Mother\'s Miden Name', 'none', '09275', '155', '5390870', 'user', 0, '', ''),
-	(155, 'tophat', 'eda01536d899637ca1e8f6a8e1c481f7:11', 'zeekhat@gmail.com', 0, '2012-06-27 05:45:09', '1945-08-15', 'none', 'norifumchii', 'hamagu', 'none', 1800, 107, 'none', 'en', '81.9043318470', '81.9043318470', '', '', 'Mother\'s Miden Name', 'none', '51849', '046', '8079568', 'user', 0, '', ''),
-	(156, 'sat0pi', '48afd6b90df0befb3c56a706e6ec0899:ac', 'kurohara.brandon@gmail.com', 0, '2012-06-27 05:48:21', '1945-08-15', 'none', 'Brandon', 'Kurohara', 'none', 1800, 107, 'none', 'en', '819018343979', '', '', '', 'Mother\'s Miden Name', 'none', '74136', '239', '2761006', 'user', 0, '', '0417682350'),
-	(157, 'sano yuki', 'e8fe5eb768ad0f182f6dc1cd214fd6e0:69', 'uehara-ksc@corp.khi.co.jp', 0, '2012-06-27 05:52:17', '1945-08-15', 'none', 'takashi', 'uehara', 'none', 1800, 107, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '26468', '302', '8978774', 'user', 0, '', ''),
-	(158, 'Brenda VD Poel', 'ff9a3cbc79cd31c01d211fd783eb5625:b0', 'vdpoelb@yahoo.nl', 0, '2012-06-27 05:56:10', '1945-08-15', 'none', 'Brenda VD', 'Poel', 'none', 2472, 150, 'none', 'en', '+31 816 6752488', '', '', '', 'Mother\'s Miden Name', 'none', '38621', '927', '3223223', 'user', 0, '', '8545344109'),
-	(159, 'Yasuyuki Okamura', 'f066109f6ca89860415b0ac1a8cfa3e3:0a', 'scanfx@amail.plala.or.jp', 0, '2012-06-27 05:59:47', '1945-08-15', 'none', 'Yasuyuki', 'Okamura', 'none', 1800, 107, 'none', 'en', '09026932754', '', '', '', 'Mother\'s Miden Name', 'none', '23064', '114', '2081268', 'user', 0, '', '6442780365'),
-	(160, 'Jansen Pawda', 'd9ba4491363303d17523617ca1542145:40', 'pmjansen@engineer.com', 0, '2012-06-27 06:02:05', '1945-08-15', 'none', 'Jungsun', 'Shin', 'none', 182, 1, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '04616', '314', '0370399', 'user', 0, '', ''),
-	(161, 'ken akahori', '687d39fb0b1cddeb4d54542f94051c97:ca', 'active@carol.ocn.ne.jp', 0, '2012-06-27 06:04:17', '1945-08-15', 'none', 'ken', 'akahori', 'none', 1800, 107, 'none', 'en', '9058717700', '', '', '', 'Mother\'s Miden Name', 'none', '11831', '610', '9394936', 'user', 0, '', ''),
-	(162, 'e_lohas', '35f7339a53a5739910e8ea57dbeb3ecd:0c', 'japhic@e-lohas.co.jp', 0, '2012-06-27 06:06:51', '1945-08-15', 'none', 'TAKASHI', 'FUKUDA', 'none', 1800, 107, 'none', 'en', '81957427788', '', '', '', 'Mother\'s Miden Name', 'none', '64068', '772', '1317379', 'user', 0, '', ''),
-	(163, 'Iwabu Shohei', 'c3530abed4dcffe1ece816a2a376a60a:2f', 'dr.boosan@yahoo.com', 0, '2012-06-27 06:08:42', '1945-08-15', 'none', 'Iwabu', 'Shohei', 'none', 1800, 107, 'none', 'en', '000000000', '', '', '', 'Mother\'s Miden Name', 'none', '08331', '572', '0918720', 'user', 0, '', ''),
-	(164, 'pdbiz', 'a0c9c040c3ea7b23a36ddd118cc483d4:de', 'pdbiz@aol.com', 0, '2012-06-27 06:10:50', '1945-08-15', 'none', 'Paul', 'Emery', 'none', 2, 223, 'none', 'en', '817-944-2538', '', '', '', 'Mother\'s Miden Name', 'none', '37418', '554', '4768419', 'user', 0, '', ''),
-	(165, 'Kohzoh Tanaka', '3c31a4c07d9f538429d524016162e526:a4', 'kohzoh@san.bbiq.jp', 0, '2012-06-27 06:12:40', '1945-08-15', 'none', 'Kohzoh', 'Tanaka', 'none', 1800, 107, 'none', 'en', '939230598', '', '', '', 'Mother\'s Miden Name', 'none', '07301', '537', '2920069', 'user', 0, '', ''),
-	(166, 'Kazufumi Yoshida', 'cfc4d07285e716951ffe3ca3e7072715:37', 'kazkaz@mri.biglobe.ne.jp', 0, '2012-06-27 06:30:17', '1945-08-15', 'none', 'Kazufumi', 'Yoshida', 'none', 1800, 107, 'none', 'en', '818070269395', '', '', '', 'Mother\'s Miden Name', 'none', '04518', '617', '9567307', 'user', 0, '', '9443852604'),
-	(167, 'Masakazu Okamura', '5e68081bfb2c7b8e962190bb7eaae417:12', 'mo_post@i-ml.com', 0, '2012-06-27 06:33:58', '1945-08-15', 'none', 'Masakazu', 'Okamura', 'none', 1800, 107, 'none', 'en', '819010649245', '819010649245', '', '', 'Mother\'s Miden Name', 'none', '56558', '372', '1247440', 'user', 0, '', ''),
-	(168, 'gachinco', 'bf6cc4697c5a3e6c6de96b2698a780c0:fa', 'kazz0808@gmail.com', 0, '2012-06-28 16:28:17', '1955-01-01', 'sanjyo', 'kazufumi', 'yoshida', 'kawasaki', 1820, 107, 'hello', 'en', '09012342325', '', '', '', 'Mother\'s Miden Name', 'kuwabara', '48823', '273', '8484365', 'user', 0, '', ''),
-	(169, 'Nobutaka', '1d47921f6925f625c54fd0225e2917ef:9f', 'gsajapan@yahoo.co.jp', 0, '2012-06-28 22:16:22', '1973-08-26', '2-25-23 Hakuchodai', 'Nobutaka', 'Tanaka', 'Himeji', 1812, 107, 'hello', 'en', '09054631121', '', '', '', 'Favorite Pet', 'dog', '66505', '279', '0928520', 'user', 0, '', ''),
-	(170, 'Padamu', 'c84503248ed2da810104e2b720a3e027:5a', 'padamu_80@yahoo.com', 0, '2012-07-11 04:57:47', '1982-12-12', 'Jl.Kocok 12', 'anggi', 'suratan', 'Jakarta', 1656, 100, 'padamu', 'en', '021 5487545', '', '', 'Padamu', 'Mother\'s Miden Name', 'linda', '87506', '788', '0625870', 'user', 0, '', ''),
-	(171, 'SITIVENI MARETINO SARO', 'a405a266ace1feca25bdcb73cde54d63:cb', 'sitiveni@mail.com', 0, '2012-07-14 04:24:12', '1922-04-09', 'LABASA', 'sitiveni', 'maritino', 'SUVA', 1240, 71, 'i want to register in these account', 'en', '8860255', '9070932', '', 'ANZ', 'City Of Birth', 'suva', '00738', '408', '6164769', 'user', 0, '', ''),
-	(172, 'travayeur', '757ed1df882d063ee49583d4ed20c437:55', 'ericdeboti@yahoo.fr', 0, '2012-07-15 11:55:10', '1964-01-06', '23 grande rue 52140', 'matheoni', 'magali', 'is en bassigny', 1258, 73, 'hello', 'en', '0951557935', '', '', '', 'Mother\'s Miden Name', 'clementine', '50376', '834', '3637937', 'user', 0, '', ''),
-	(173, 'ShopKeyVN', '76ba2b3ceae795a0b72fca06c7111bcb:6e', 'k40ptnt@gmail.com', 0, '2012-07-27 03:29:39', '1990-10-15', 'Quyet Thang', 'Luong', 'Vi Van', 'Thai Nguyen', 3776, 230, 'Helllllll', 'en', '841647624053', '', '', '', 'Mother\'s Miden Name', 'nhanh', '62962', '358', '9643165', 'user', 0, '', ''),
-	(174, 'wasiu atoyegbe', '6a530a6ed8ad4647ca645ac461f2a633:0e', 'atowas@yahoo.com', 0, '2012-08-02 12:35:39', '1970-06-14', '66 baleayetoro street', 'wasiu', 'atoyegbe', 'lagos state', 2555, 156, 'i open this account to sell corence please can you \r\nlet me know oun much the profit', 'en', '2345769798327', '2348065988030', '', 'atowas@yahoo.com', 'City Of Birth', 'lagos', '95922', '663', '3482632', 'user', 0, '', '5258825120'),
-	(175, 'Omidijitobi', '9980e4281ba932db0a05352881fe2243:4b', 'Omidiji.tobi@gmail.com', 0, '2012-08-05 15:57:13', '1992-03-14', '1, Orelesi str., off ayepe road, ofin sagamu.', 'Omidiji', 'Tobi', 'Sagamu', 2558, 156, 'Happyness', 'en', '2348100744550', '', '', 'Negro World Computer Consultant', 'City Of Birth', 'Sagamu', '01815', '310', '9857693', 'user', 0, '', ''),
-	(176, 'orlando jauregui', '2bc00220e4146392174fdd1bc65d20d6:a9', 'orlando_jauregui@yahoo.com', 0, '2012-08-10 22:53:32', '1986-02-17', 'N3378 Apple Pl', 'orlando', 'jauregui', 'lake geneva', 64, 223, 'wui', 'en', '16465273586', '', '', '', 'Favorite Pet', 'ogo', '23062', '317', '0838948', 'user', 0, '', ''),
-	(177, 'Main Acct.', 'dbe35c14e91b9be3576081bd9f402e74:c4', 'helenemode@hush.com', 0, '2012-08-28 02:21:52', '1976-06-16', '1234 Main Ave.', 'Lindsey', 'Huang', 'Los Angeles', 12, 223, 'This is a person message lindsey.', 'en', '4368461602', '', '', '', 'Favorite Pet', 'bob', '97587', '017', '9429127', 'user', 0, '', ''),
-	(178, 'business it is', 'a8bf363a4dea3180baa187c432114ec9:90', 'blackferrari504@gmail.com', 0, '2012-08-29 04:15:24', '1988-10-31', 'p.o.box 122', 'Dela', 'Quarshie', 'Accra', 1417, 82, 'hi dee', 'en', '+233546999999', '', '', '', 'Mother\'s Miden Name', 'mavis', '44479', '309', '7594708', 'user', 0, '', ''),
-	(179, 'Nori', '6c2fb52dca7f45b8f3abfdb7328facd4:fe', 'nitrous333@gmail.com', 0, '2012-09-07 03:15:36', '1986-05-05', 'Okamiswa', 'Norihisa', 'Taneichi', 'Misawa', 1802, 107, 'Gyaran', 'en', '0176500232', '', '', '', 'City Of Birth', 'Misawa', '0502', '2989', '1477967', 'user', 0, '', '0297494517'),
-	(180, 'honestfaustina60', '5470bfc99d780fb4e8413dc9af09dd81:98', 'honest.faustina11@yahoo.com', 0, '2012-09-16 10:22:46', '1978-09-16', 'Nima Accra', 'Honest', 'Faustina', 'Accra', 1417, 82, 'God Is Great', 'en', '+233549746414', '', '', '', 'Mother\'s Miden Name', 'Faustina', '55217', '165', '5634221', 'user', 0, '', ''),
-	(181, 'tebihar', '40a31a32526ea550442370da335993bc:7d', 'toru@ebihar.org', 0, '2012-09-17 23:21:32', '1962-08-05', '102 Daini-Heim Konno, 3-6-19 Imagawa, Suginami-ku,', 'Toru', 'Ebihara', 'Tokyo', 1840, 107, 'ã“ã‚“ã«ã¡ã¯ã€‚', 'en', '+81-3-3397-3920', '+81-80-3356-3920', '', '', 'Favorite Pet', 'Tetsuro', '4128', '4213', '6978296', 'user', 0, '', '7809023100'),
-	(182, 'success', 'fea388ce2909220f0ce60e8b3d014b79:fb', 'vanway3@yahoo.com', 0, '2012-09-19 03:55:30', '1984-04-24', 'warri saepele road', 'frank', 'ben', 'warri', 2541, 156, 'love you', 'en', '234865432612', '', '', '', 'Mother\'s Miden Name', 'grace', '86618', '626', '0820829', 'user', 0, '', ''),
-	(183, 'md.nazim al helal', '5f43e2652a5afdc096fde08245d7b357:88', 'nazimalhelal@ymail.com', 0, '2012-09-19 08:43:54', '1987-08-03', 'mosuria para', 'nazim', 'alhelal', 'pabna', 496, 18, 'i m noyon', 'en', '880732664459', '01718809173', '6620', '', 'Favorite Pet', 'cat', '81210', '937', '4215643', 'user', 0, '', ''),
-	(184, 'u00256789', 'aecbe041d7efa428988a2206a9405b39:a3', 'muri0022@yahoo.co.jp', 0, '2012-09-28 02:35:16', '1967-08-12', 'hinodai4-11-16', 'Yosa', 'Yukio', 'hino-shi', 1840, 107, 'welcome', 'en', '08044532010', '', '', '', 'Favorite Pet', 'dog', '72918', '804', '7356522', 'user', 0, '', ''),
-	(185, 'Karry Smith', '217d50f9e6199ec3da220ce65a80ddef:a5', 'solo8262@gmail.com', 0, '2012-10-04 17:30:09', '1962-04-17', '1009 Culbreth Street', 'Karry', 'Smith', 'Dunn', 44, 223, 'Ultraconservative Global Cash Account', 'en', '9102924240', '9103048742', '', 'Karry Smith', 'Favorite Pet', 'trex', '94092', '890', '5547466', 'user', 0, '', ''),
-	(186, 'ZK2', 'e8defb18e7b30943beb71a68f182cb3f:13', 'x@zk2.me.uk', 0, '2012-10-31 10:58:18', '1922-01-01', '1-9-12 Higashichiba, Chuou-ku', 'Kenta', 'Shimomukai', 'Chiba', 1803, 107, 'none', 'en', '+819061278379', '', '260-0041', '', 'Mother\'s Miden Name', 'none', '5475', '184', '0783811', 'user', 0, '', '1562791042'),
-	(187, 'maputla', 'c97efeae4a8152164301b94ca7471de3:09', 'maputla@vodamail.co.za', 0, '2012-11-05 15:41:18', '1984-10-30', '721 lesedi', 'maputla bernard', 'kgatle', 'lenyenye', 3108, 193, 'well come to my wolrd', 'en', '0711418903', '0711418903', '', 'maputla constructions', 'Mother\'s Miden Name', 'nelly', '62891', '764', '3999944', 'user', 0, '', ''),
-	(188, 'saving', 'a202edf1c27716dcf41071d746161cc8:cb', 'shanmaduwantha2013@gmail.com', 0, '2012-11-06 10:18:48', '1993-06-08', 'kahatavila East, Lihiriyagama', 'Gayashan', 'Maduwantha', 'Dankotuwa', 3117, 196, 'hi', 'en', '+940772195407', '+940772195407', '', 'HNB', 'City Of Birth', 'Dankotuwa', '11857', '418', '8323931', 'user', 0, '', ''),
-	(189, 'xscxsc', 'eec6f56cd105074f482e8792fbeaa3fa:d8', 'xscxsc@bk.ru', 0, '2012-11-15 23:47:41', '1986-04-10', 'kupchinskaya ul.14 kv 152', 'rinat', 'muratov', 'stpeterburg', 2928, 176, 'privet', 'en', '79650252820', '', '', '', 'Mother\'s Miden Name', '3505752', '65632', '413', '6226272', 'user', 0, '', ''),
-	(190, 'wafaa2012', '336cab4a40ea16f3afe3d7df3c8cf2a2:9f', 'wafaa.amien@hotmail.com', 0, '2012-12-06 16:59:35', '1977-11-06', 'moubarak district', 'wafaa', 'amin', 'portsaid', 1178, 63, 'HI', 'en', '00201009666187', '00201009666187', '', 'benefits2all', 'City Of Birth', 'damietta', '69617', '967', '4083449', 'user', 0, '', ''),
-	(191, 'Ample Zest Resort Concepts', '0aaf7ec323e9ec0a291db9bc42773c7b:9c', 'amudabab@gmail.com', 0, '2012-12-14 07:05:36', '1988-11-21', 'Cooperative Shopping Complex owode oyo', 'Hammed', 'Azeez', 'oyo', 2561, 156, 'Fellow Nigerians,\r\n\r\nWe are the Leading Indigenous Nigerian company representing one of the world Forex Broker (AFBFX)and we are also Buying and Selling Digital Currency at a Cheaper rate such as: Libertyreserve, Perfectmoney and Okpay. Visit our website ', 'en', '08034091537', '08153536192', '', 'Ample Zest Resort Concepts', 'Mother\'s Miden Name', 'Azeez', '43402', '209', '1947178', 'user', 0, '', ''),
-	(192, 'pelegbar', 'c6d27fb6d9f9bc75c333e0223a0f3e9c:63', 'pelegbar@gmail.com', 0, '2012-12-27 04:24:33', '1940-02-19', 'Shderot tuta 3', 'Tamira', 'Shavit', 'Tel-Aviv', 1755, 104, 'Hey', 'en', '972504572062', '', '', '', 'Mother\'s Miden Name', 'osnat', '12345', '111', '3695131', 'user', 0, '', '9281061441'),
-	(193, 'simon-1953', 'c1cf622f456def9daf32ab54d86fb8bb:2d', 'simon-1953@mail.ru', 0, '2012-12-27 09:00:34', '1953-01-24', 'Nalichnaya 36/3/104', 'maksim', 'simonovich', 'Sankt-Peterburg', 2928, 176, 'vsem privet', 'en', '+78129022235', '+79219022235', '199226', '', 'Mother\'s Miden Name', 'Yarmolich', '41400', '669', '5030687', 'user', 0, '', ''),
-	(194, 'Marylou Furukawa', '0f6238bc9ddde7a95154e97f81932ee2:e6', 'myr_rym@yahoo.com', 0, '2013-02-23 05:16:06', '1962-03-16', 'Chiba Ken,Sakura shi,755-6 2F Kami shizu', 'Marylou', 'Furukawa', 'Sakura Shi', 1803, 107, 'Welcome to easypay Globalcash!!', 'en', '08035860379', '08035860379', '', 'Amillionaire Global inc.', 'City Of Birth', 'Laguna', '18898', '081', '9538354', 'user', 0, '', ''),
-	(195, 'djamel', 'ae089fdd47ac2bd5afce41388b70b4b0:bd', 'klindjamel@gmail.com', 0, '2013-03-09 11:51:16', '1982-05-08', 'p.box395cheria12002algeria', 'djamel', 'draifia', 'cheria', 291, 3, 'welcome', 'en', '+213666325035', '+213794728027', '', 'global cash', 'Mother\'s Miden Name', 'djamel', '37917', '144', '1457017', 'user', 0, '', '4381966829'),
-	(196, 'kanlaya', 'c4c32282fc89a29e6173cb1f47124b4c:44', 'kleelaporn1440@gmail.com', 0, '2013-03-10 07:17:46', '1947-09-12', '1440 elmhurst ave.', 'kanlaya', 'leelaporn', 'Duarte', 12, 223, 'kanlaya by Global cash', 'en', '16262468962', '', '', '', 'City Of Birth', 'duarte', '91517', '943', '7686572', 'user', 0, '', ''),
-	(197, 'mona newsome', '0429c58f99b536e6935d8421079d008f:88', 'wheelywoman@rocketmail.com', 0, '2013-03-17 08:10:11', '1965-08-24', '24 leveriza sy', 'mona', 'newsome', 'pasay city', 2756, 168, 'hello try this', 'en', '+639292846321', '+639292846321', '', 'n/a', 'Mother\'s Miden Name', 'aida veloso', '05055', '306', '9073297', 'user', 0, '', ''),
-	(198, 'Tofiness', '264e6bd9992fc1d022fa1eda1ab520c7:7b', 'enquiry.email2012@gmail.com', 0, '2013-04-04 03:21:54', '1986-02-01', 'Makati city', 'tofiness', 'Dela Cruz', 'Makati City`', 2696, 168, 'heloo welcome', 'en', '09324444555', '', '', '', 'crush', 'me', '76333', '369', '0841136', 'user', 0, '', ''),
-	(199, 'foad_0600', '331f7bd525ee4902e7a53aaeb7a0a0fc:54', 'foad_0600@yahoo.com', 0, '2013-04-08 14:47:28', '1937-08-16', 'jafar abad paloo goraz', 'jozet', 'jordani', 'maraghe', 1681, 101, 'abas ssalam', 'en', '9193123123', '', '', '', 'City Of Birth', 'gooz', '01576', '732', '2537989', 'user', 0, '', ''),
-	(200, 'cash', 'fd09bc5ccede60363365ebf3fe165031:b2', 'bjn35@hanmail.net', 0, '2013-04-23 11:52:41', '1961-01-19', '56 youngjen-dong', 'sanggu', 'kang', 'daejeon', 1930, 113, 'good!!!', 'en', '01034231192', '01034231192', '', 'ceo', 'Mother\'s Miden Name', 'kkran', '31192', '3914', '2507705', 'user', 0, '', '7773878050'),
-	(201, 'Chandraprakash', 'd2832d48995961e45963b67a73ab01e8:af', 'chandraprakashrana90@gmail.com', 0, '2013-05-01 22:22:16', '1990-01-05', 'Opp. Police choki ke samne Mhwo-Neemuch road Dalouda Station Distt Mandsour M.P.', 'Chandraprakash', 'Rana', 'City Of Birth', 1635, 99, 'Cnn', 'en', '8602839022', '+917828833320', '', 'RANA JI MOTORS', 'City Of Birth', 'Mandsour', '82060', '349', '6962328', 'user', 0, '', ''),
-	(202, 'VINCENT D. BASOC', '94cdece73f3532ab37533a786ba38a89:eb', 'INTENG_77@YAHOO.COM', 0, '2013-05-15 11:19:57', '1977-11-02', '9 CAMIA STREET GSIS MATINA APLAYA', 'VINCENT', 'BASOC', 'DAVAO CITY', 372, 13, 'MY USSC.GOV', 'en', '09326308380', '09998084775', '', 'MY VISA LIU', 'Favorite Pet', 'PETNET', '02516', '007', '6476564', 'user', 0, '', ''),
-	(203, 'Kaylie Prater', '2049b17606b429b683c021668ab06cc9:c7', 'delnorro@inbox.com', 0, '2013-05-25 13:08:41', '1984-05-22', '126 Grayton Ln', 'Kaylie', 'Prater', 'Enterprise', 1, 223, 'Hello', 'en', '2053323937', '', '', '', 'City Of Birth', 'Enterprise', '07801', '768', '4165599', 'user', 0, '', ''),
-	(204, 'thoaimedia', '7dcc528ece1b4e6c47a6f3926a5f860d:93', 'thoai.nguyenanh@gmail.com', 0, '2013-05-29 03:10:59', '1987-11-06', '150-3 Huynh Tan Phat, Tan Thuan Tay, Dist 7', 'Thoai', 'Nguyen Anh', 'Ho Chi Minh', 3780, 230, 'nothing', 'en', '+84908055080', '+84908055080', '70000', '', 'City Of Birth', 'mytho', '14475', '385', '9185833', 'user', 0, '', ''),
-	(205, 'CoCare', 'd853323bee362a5d8a1047c6be513d54:1d', 'cosandra724@gmail.com', 0, '2013-05-30 15:50:48', '1962-07-24', '1120 Jack Davis Rd', 'CoSandra', 'Thomas', 'Monroe', 44, 223, 'Thank you for having me I look forward working together.', 'en', '7047648173', '7047648173', '', '', 'what is month and date i meet my husband', 'July 23', '55299', '372', '1653384', 'user', 0, '', ''),
-	(206, 'Sanjay banerjee', 'b6387e0bb050cb26386fe980167f5c17:8b', 'sanju.banerjee27@gmail.com', 0, '2013-06-05 03:31:34', '1972-12-13', 'Qno3/b street 26 sector 8', 'Sanjay', 'Banerjee', 'Bhilai', 1623, 99, 'Hi', 'en', '919907940313', '919907940313', '', 'Attorney', 'Mother\'s Miden Name', 'Priti', '45039', '735', '9008251', 'user', 0, '', ''),
-	(207, 'ceferino tomas', 'ba2707315edcf4f8b481844fe1a14155:06', 'ceferinotomas191@hotmail.com', 0, '2013-06-11 05:31:43', '1946-08-02', '45 RUTH AVENUE', 'ceferino', 'tomas', 'CLIFTON', 41, 223, 'lets go there', 'en', '+1-973-797-9053', '', '', '', 'Favorite Pet', 'terry', '48535', '179', '5378279', 'user', 0, '', ''),
-	(208, 'globalfund', '64cb853f1256aebe1a454d8352b29540:87', 'shs10776@daum.net', 0, '2013-06-13 01:09:30', '1936-06-13', '1234 seoul', 'alex', 'shin', 'seoul', 1918, 113, 'happy', 'en', '07075793340', '', '', '', 'Mother\'s Miden Name', 'ha', '21425', '640', '5430784', 'user', 0, '', ''),
-	(209, 'freeman', '6753583b41841a57e7595d1fde9ee485:ec', 'vmonitor7@gmail.com', 0, '2013-06-21 23:52:08', '1979-02-04', 'korea', 'jae hoon', 'cha', 'korea', 1918, 113, 'hi', 'en', '821055163377', '', '', '', 'City Of Birth', 'korea', '92328', '961', '3578696', 'user', 0, '', ''),
-	(210, 'Wilmar', '405888b5b220b165ca1e72402d4ed262:d7', 'Wrendon87@gmail.com', 0, '2013-06-27 10:30:11', '1987-02-25', '5702 40th place', 'Wilmar', 'Rendon', 'Hyattsville', 31, 223, 'Welcome one four', 'en', '2027090894', '', '', '', 'Mother\'s Miden Name', 'Ramirez', '20280', '056', '7987933', 'user', 0, '', ''),
-	(211, 'rongandat', 'c62861c2b9106c3b16ce9b58b2a94e62:b5', 'rongandat@gmail.com', 0, '2013-07-02 09:38:59', '1940-02-16', 'Ha Noi', 'Khiem', 'Pham', 'Ha Noi', 499, 19, '54554353', 'en', '01694046627', '0122555222', '', 'CYA', 'Mother\'s Miden Name', '53454', '28329', '340', '3156245', 'user', 0, '', '');
+INSERT INTO `users` (`id`, `username`, `password`, `email`, `first_name`, `last_name`, `company`, `phone`, `mobile`, `group_id`, `account_number`, `master_key`, `activation_code`, `forgotten_password_code`, `remember_code`, `active`, `dob`, `state`, `country`, `city`, `welcome_message`, `security_question`, `security_answer`, `login_pin`, `account_type`, `referral_count`, `address`, `postcode`, `additional_infor`, `ip_address`, `created_on`, `last_login`) VALUES
+	(1, 'administrator', '2dcd129bcf58cec2216566d510ecdffa:8b', 'ngoclecong@gmail.com', 'Ngoc', 'Le Cong', '', '84-87951545', '84-84934476889', 1, '88888888', '678', NULL, '9929858278', NULL, 1, '1989-11-06', 0, 1, 'Ha Tinh', 'Xin chao ban Le Cong Ngoc', 'Mother&#039;s Maiden Name', 'Nguyen', '56789', '', 0, 'Xuan Loc', '10000', 'Tesst', 0, 1351667119, 1353486745),
+	(2, 'congngocvn', '2dcd129bcf58cec2216566d510ecdffa:8b', 'lecongngoc_vn@yahoo.com', 'Ngoc', 'Ngo', '', '84-84934476889', '84-84934476889', 2, '33333333', '123', NULL, NULL, NULL, 1, '1989-11-06', 0, 230, 'Tuyen Quang', 'Hi', 'Mother&#039;s Maiden Name', 'oke', '12345', '', 0, 'Viet Nam', '84', '', 0, 0, 1353480462),
+	(3, 'ngocngovn', '2dcd129bcf58cec2216566d510ecdffa:8b', 'congngocvn@gmail.com', 'Ngoc', 'Le', 'Cyasoft', '84-0983008234', '84-0934476889', 2, '11111111', '111', NULL, NULL, NULL, 1, '1989-11-06', 3778, 230, 'Tuyen Quang', 'Hi', 'Mother&#039;s Maiden Name', 'Hic', '11111', '', 0, 'Viet Nam', '84', '    Luuu', 0, 0, 1352273025),
+	(4, 'rongandat', 'eb42c6e52ce944f1b515e4a8c716a046:fe', 'rongandat@gmail.com', 'khem', 'pham', '', '84-32423', '', 2, '14176198', '918', NULL, NULL, '6f5db74a46c11bfd1b53d576f2dbdc4c2774e28e', 1, '2013-05-14', 305, 5, 'Ha Noi', '312313131', 'Highschool Name', '3131', '62961', '', 0, 'Ha Noi', '111111', '', 2130706433, 1372318056, 1372665966);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 
--- Dumping structure for table eglobal_main_new.user_balance
+-- Dumping structure for table global.users_groups
+DROP TABLE IF EXISTS `users_groups`;
+CREATE TABLE IF NOT EXISTS `users_groups` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` mediumint(8) unsigned NOT NULL,
+  `group_id` mediumint(8) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- Dumping data for table global.users_groups: ~4 rows (approximately)
+/*!40000 ALTER TABLE `users_groups` DISABLE KEYS */;
+INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
+	(1, 1, 1),
+	(2, 2, 2),
+	(3, 3, 2),
+	(4, 4, 2);
+/*!40000 ALTER TABLE `users_groups` ENABLE KEYS */;
+
+
+-- Dumping structure for table global.users_publish
+DROP TABLE IF EXISTS `users_publish`;
+CREATE TABLE IF NOT EXISTS `users_publish` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) NOT NULL DEFAULT '0',
+  `first_name_published` int(10) DEFAULT '0',
+  `last_name_published` int(10) DEFAULT '0',
+  `company_published` int(10) DEFAULT '0',
+  `phone_published` int(10) DEFAULT '0',
+  `mobile_published` int(10) DEFAULT '0',
+  `address_published` int(10) DEFAULT '0',
+  `city_published` int(10) DEFAULT '0',
+  `country_published` int(10) DEFAULT '0',
+  `states_published` int(10) DEFAULT '0',
+  `postcode_published` int(10) DEFAULT '0',
+  `infor_published` int(10) DEFAULT '0',
+  `email_published` int(10) DEFAULT '0',
+  PRIMARY KEY (`id`,`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- Dumping data for table global.users_publish: ~0 rows (approximately)
+/*!40000 ALTER TABLE `users_publish` DISABLE KEYS */;
+/*!40000 ALTER TABLE `users_publish` ENABLE KEYS */;
+
+
+-- Dumping structure for table global.user_api
+DROP TABLE IF EXISTS `user_api`;
+CREATE TABLE IF NOT EXISTS `user_api` (
+  `api_id` int(10) NOT NULL AUTO_INCREMENT,
+  `key_id` varchar(150) COLLATE utf8_bin NOT NULL,
+  `user_id` int(10) NOT NULL DEFAULT '0',
+  `apiname` varchar(150) COLLATE utf8_bin DEFAULT NULL,
+  `apiword` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `enabled` int(10) DEFAULT '0',
+  PRIMARY KEY (`api_id`,`user_id`,`key_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- Dumping data for table global.user_api: ~0 rows (approximately)
+/*!40000 ALTER TABLE `user_api` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user_api` ENABLE KEYS */;
+
+
+-- Dumping structure for table global.user_balance
 DROP TABLE IF EXISTS `user_balance`;
 CREATE TABLE IF NOT EXISTS `user_balance` (
   `user_id` int(11) NOT NULL,
   `currency_code` varchar(3) NOT NULL,
-  `balance` float NOT NULL,
+  `balance` double NOT NULL,
+  `published` int(11) NOT NULL DEFAULT '0',
   `last_updated` datetime NOT NULL,
   PRIMARY KEY (`user_id`,`currency_code`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- Dumping data for table eglobal_main_new.user_balance: 122 rows
+-- Dumping data for table global.user_balance: 6 rows
 /*!40000 ALTER TABLE `user_balance` DISABLE KEYS */;
-INSERT INTO `user_balance` (`user_id`, `currency_code`, `balance`, `last_updated`) VALUES
-	(3, 'JPY', 1000, '2010-02-26 21:33:56'),
-	(4, 'USD', 90, '2010-02-26 23:35:09'),
-	(5, 'USD', 117973, '2013-05-27 08:28:19'),
-	(3, 'USD', 10196, '2012-03-26 06:38:28'),
-	(4, 'JPY', 6000, '2010-03-11 18:07:09'),
-	(1, 'GPB', 180, '2010-02-28 09:24:15'),
-	(3, 'GPB', 20, '2010-02-28 09:24:15'),
-	(1, 'USD', 5, '2012-03-28 02:14:12'),
-	(211, 'USD', 40731.3, '2013-07-02 09:48:26'),
-	(7, 'JPY', 5000, '2010-03-11 18:07:09'),
-	(11, 'USD', 300, '2010-09-08 20:55:22'),
-	(34, 'USD', 200, '2010-09-08 20:55:22'),
-	(43, 'USD', 2350, '2011-03-02 20:01:28'),
-	(5, 'RMB', 10000, '2011-09-11 11:00:35'),
-	(55, 'USD', 2410, '2011-09-13 02:47:06'),
-	(55, 'RMB', 36058, '2011-09-13 02:30:22'),
-	(5, 'JPY', 5000000, '2012-03-26 09:29:03'),
-	(57, 'USD', 10, '2012-03-26 09:54:09'),
-	(56, 'USD', 20, '2012-03-28 02:14:12'),
-	(61, 'USD', 38800, '2013-04-23 11:55:43'),
-	(61, 'JPY', 10000, '2012-05-22 05:46:48'),
-	(5, 'EUR', 100000, '2012-06-17 09:16:07'),
-	(62, 'USD', 500, '2012-05-22 06:53:31'),
-	(66, 'USD', 2100, '2012-05-25 02:00:55'),
-	(63, 'USD', 100, '2012-05-23 06:15:03'),
-	(64, 'USD', 100, '2012-05-23 06:18:54'),
-	(60, 'USD', 6600, '2012-05-25 02:00:55'),
-	(68, 'USD', 500, '2012-05-24 23:07:43'),
-	(69, 'USD', 300, '2012-05-25 07:14:26'),
-	(72, 'USD', 463.52, '2012-06-10 14:04:00'),
-	(73, 'USD', 439.12, '2012-06-10 14:26:59'),
-	(71, 'USD', 439.12, '2012-06-10 14:30:10'),
-	(74, 'USD', 426.92, '2012-06-14 09:10:14'),
-	(75, 'USD', 414.73, '2012-06-14 09:19:26'),
-	(76, 'USD', 439.12, '2012-06-14 09:25:32'),
-	(77, 'USD', 463.52, '2012-06-14 09:35:45'),
-	(78, 'USD', 439.12, '2012-06-14 09:38:54'),
-	(79, 'USD', 426.92, '2012-06-14 09:43:46'),
-	(80, 'USD', 439.12, '2012-06-14 09:48:03'),
-	(81, 'USD', 481, '2012-06-14 09:59:19'),
-	(83, 'USD', 481.01, '2012-06-14 10:22:39'),
-	(84, 'USD', 456.96, '2012-06-14 10:34:08'),
-	(85, 'USD', 481.01, '2012-06-14 10:42:47'),
-	(86, 'USD', 481.01, '2012-06-14 10:50:10'),
-	(121, 'USD', 24571, '2012-06-17 09:25:38'),
-	(87, 'USD', 451.32, '2012-06-18 10:51:37'),
-	(88, 'USD', 463.52, '2012-06-18 10:55:01'),
-	(96, 'USD', 439.12, '2012-06-18 11:01:30'),
-	(95, 'USD', 390.33, '2012-06-18 11:04:25'),
-	(94, 'USD', 451.32, '2012-06-18 11:27:10'),
-	(93, 'USD', 439.12, '2012-06-18 11:30:51'),
-	(92, 'USD', 451.32, '2012-06-18 11:33:48'),
-	(91, 'USD', 463.52, '2012-06-18 11:36:40'),
-	(97, 'USD', 439.12, '2012-06-18 11:39:36'),
-	(98, 'USD', 463.52, '2012-06-18 11:43:04'),
-	(99, 'USD', 402.53, '2012-06-18 11:50:16'),
-	(100, 'USD', 463.52, '2012-06-18 11:54:13'),
-	(101, 'USD', 426.92, '2012-06-18 11:59:10'),
-	(102, 'USD', 439.12, '2012-06-18 12:01:48'),
-	(103, 'USD', 439.12, '2012-06-18 12:04:24'),
-	(104, 'USD', 439.12, '2012-06-18 12:08:36'),
-	(106, 'USD', 373.25, '2012-06-18 12:23:32'),
-	(107, 'USD', 396.43, '2012-06-18 12:27:04'),
-	(108, 'USD', 451.32, '2012-06-18 12:29:24'),
-	(109, 'USD', 451.32, '2012-06-18 12:32:58'),
-	(110, 'USD', 463.52, '2012-06-18 12:35:36'),
-	(111, 'USD', 414.73, '2012-06-18 12:38:28'),
-	(112, 'USD', 451.32, '2012-06-18 12:42:01'),
-	(113, 'USD', 414.73, '2012-06-18 12:44:51'),
-	(114, 'USD', 463.52, '2012-06-18 12:47:20'),
-	(115, 'USD', 439.12, '2012-06-18 12:50:02'),
-	(116, 'USD', 439.12, '2012-06-18 12:54:40'),
-	(117, 'USD', 426.92, '2012-06-18 12:57:13'),
-	(118, 'USD', 414.73, '2012-06-18 13:01:21'),
-	(119, 'USD', 414.73, '2012-06-18 13:05:25'),
-	(120, 'USD', 451.32, '2012-06-18 13:08:36'),
-	(122, 'USD', 451.32, '2012-06-26 05:53:15'),
-	(123, 'USD', 463.52, '2012-06-26 05:57:05'),
-	(124, 'USD', 426.92, '2012-06-26 06:30:01'),
-	(125, 'USD', 451.32, '2012-06-26 06:33:43'),
-	(126, 'USD', 378.13, '2012-06-26 06:36:30'),
-	(129, 'USD', 414.73, '2012-06-26 06:46:53'),
-	(132, 'USD', 296.87, '2012-06-26 06:55:19'),
-	(133, 'USD', 36100, '2012-06-26 07:01:45'),
-	(134, 'USD', 670.84, '2012-06-26 07:21:14'),
-	(135, 'USD', 468.98, '2012-06-28 11:30:25'),
-	(136, 'USD', 468.98, '2012-06-28 11:33:44'),
-	(137, 'USD', 456.96, '2012-06-28 11:36:51'),
-	(138, 'USD', 468.98, '2012-06-28 11:40:09'),
-	(139, 'USD', 468.98, '2012-06-28 11:43:23'),
-	(140, 'USD', 468.98, '2012-06-28 11:45:55'),
-	(141, 'USD', 456.96, '2012-06-28 11:49:43'),
-	(142, 'USD', 456.96, '2012-06-28 11:52:08'),
-	(143, 'USD', 481.01, '2012-06-28 11:55:34'),
-	(144, 'USD', 468.98, '2012-06-28 11:58:23'),
-	(145, 'USD', 492.89, '2012-06-28 12:01:46'),
-	(146, 'USD', 113.08, '2012-06-28 12:04:57'),
-	(147, 'USD', 101.77, '2012-06-28 12:07:52'),
-	(148, 'USD', 113.08, '2012-06-28 12:11:04'),
-	(149, 'USD', 282.71, '2012-06-28 12:14:20'),
-	(150, 'USD', 113.08, '2012-06-28 12:17:15'),
-	(151, 'USD', 114.45, '2012-06-28 12:20:05'),
-	(153, 'USD', 452.1, '2012-06-28 12:53:32'),
-	(154, 'USD', 113.09, '2012-06-28 12:57:24'),
-	(155, 'USD', 113.09, '2012-06-28 13:00:20'),
-	(156, 'USD', 678.57, '2012-06-28 13:03:38'),
-	(157, 'USD', 2432, '2012-06-28 13:06:45'),
-	(158, 'USD', 972.8, '2012-06-28 13:11:17'),
-	(159, 'USD', 5635.3, '2012-06-28 13:14:46'),
-	(160, 'USD', 1444, '2012-06-28 13:18:03'),
-	(161, 'USD', 656.46, '2012-06-28 13:24:43'),
-	(162, 'USD', 625.85, '2012-06-28 13:28:26'),
-	(163, 'USD', 8053.92, '2012-06-28 13:35:25'),
-	(165, 'USD', 2758.06, '2012-06-28 13:38:24'),
-	(166, 'USD', 2021.27, '2012-06-28 13:41:36'),
-	(167, 'USD', 1819.14, '2012-06-28 13:45:06'),
-	(169, 'USD', 0, '2012-10-20 02:03:05'),
-	(179, 'USD', 2400, '2012-09-07 03:24:30'),
-	(179, 'RMB', 36058, '2012-09-07 03:25:44'),
-	(186, 'USD', 2975.72, '2012-11-07 02:18:30'),
-	(200, 'USD', 1000, '2013-04-23 11:55:43'),
-	(203, 'USD', 81.78, '2013-05-27 08:28:19'),
-	(197, 'USD', 40, '2013-07-02 09:48:26');
+INSERT INTO `user_balance` (`user_id`, `currency_code`, `balance`, `published`, `last_updated`) VALUES
+	(1, 'USD', 896296, 1, '2013-07-01 10:06:40'),
+	(2, 'USD', 5799, 0, '2012-11-20 11:57:24'),
+	(4, 'USD', 97604, 0, '2013-07-01 10:06:40'),
+	(1, 'VND', 89985000, 0, '2012-11-06 09:09:56'),
+	(3, 'VND', 320000, 0, '2012-11-06 09:09:56'),
+	(4, 'VND', 10195000, 0, '2012-11-06 09:02:14');
 /*!40000 ALTER TABLE `user_balance` ENABLE KEYS */;
 
 
--- Dumping structure for table eglobal_main_new.user_information_settings
-DROP TABLE IF EXISTS `user_information_settings`;
-CREATE TABLE IF NOT EXISTS `user_information_settings` (
-  `user_id` int(11) NOT NULL,
-  `address` tinyint(4) NOT NULL,
-  `balances` varchar(255) NOT NULL,
-  `name` tinyint(4) NOT NULL,
-  `phone` tinyint(4) NOT NULL,
-  `mobile` tinyint(4) NOT NULL,
-  `company` tinyint(4) NOT NULL,
-  `email` tinyint(4) NOT NULL,
-  PRIMARY KEY (`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+-- Dumping structure for table global.user_online
+DROP TABLE IF EXISTS `user_online`;
+CREATE TABLE IF NOT EXISTS `user_online` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ip` varchar(16) NOT NULL,
+  `session_id` varchar(40) NOT NULL,
+  `timestamp` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- Dumping data for table eglobal_main_new.user_information_settings: 7 rows
-/*!40000 ALTER TABLE `user_information_settings` DISABLE KEYS */;
-INSERT INTO `user_information_settings` (`user_id`, `address`, `balances`, `name`, `phone`, `mobile`, `company`, `email`) VALUES
-	(1, 0, '', 1, 0, 0, 0, 1),
-	(5, 1, '', 1, 1, 0, 1, 1),
-	(3, 0, 'JPY,KRW,RMB', 0, 0, 0, 0, 0),
-	(31, 1, 'eur,gpb,hkd,jpy,krw,rmb,usd', 1, 1, 1, 1, 1),
-	(53, 0, 'HKD', 0, 0, 0, 0, 0),
-	(55, 0, '', 0, 0, 0, 0, 0),
-	(70, 1, 'CAD,CHF,EUR,GPB,HKD,JPY,KRW,RMB,THB,USD', 1, 1, 1, 1, 1);
-/*!40000 ALTER TABLE `user_information_settings` ENABLE KEYS */;
+-- Dumping data for table global.user_online: 0 rows
+/*!40000 ALTER TABLE `user_online` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user_online` ENABLE KEYS */;
 
 
--- Dumping structure for table eglobal_main_new.user_wallet
-DROP TABLE IF EXISTS `user_wallet`;
-CREATE TABLE IF NOT EXISTS `user_wallet` (
-  `user_id` int(11) NOT NULL,
-  `currency_code` varchar(3) NOT NULL,
-  `balance` float NOT NULL,
-  `last_updated` datetime NOT NULL,
-  PRIMARY KEY (`user_id`,`currency_code`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- Dumping data for table eglobal_main_new.user_wallet: 0 rows
-/*!40000 ALTER TABLE `user_wallet` DISABLE KEYS */;
-/*!40000 ALTER TABLE `user_wallet` ENABLE KEYS */;
-
-
--- Dumping structure for table eglobal_main_new.zones
+-- Dumping structure for table global.zones
 DROP TABLE IF EXISTS `zones`;
 CREATE TABLE IF NOT EXISTS `zones` (
-  `zone_id` int(11) NOT NULL AUTO_INCREMENT,
-  `zone_country_id` int(11) NOT NULL DEFAULT '0',
-  `zone_code` varchar(32) NOT NULL DEFAULT '',
-  `zone_name` varchar(32) NOT NULL DEFAULT '',
-  `zone_status` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`zone_id`)
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `country_id` int(11) NOT NULL DEFAULT '0',
+  `city_code` varchar(32) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `city_name` varchar(32) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3842 DEFAULT CHARSET=latin1;
 
--- Dumping data for table eglobal_main_new.zones: 3,841 rows
+-- Dumping data for table global.zones: 3,841 rows
 /*!40000 ALTER TABLE `zones` DISABLE KEYS */;
-INSERT INTO `zones` (`zone_id`, `zone_country_id`, `zone_code`, `zone_name`, `zone_status`) VALUES
+INSERT INTO `zones` (`id`, `country_id`, `city_code`, `city_name`, `status`) VALUES
 	(1, 223, 'AL', 'Alabama', 1),
 	(2, 223, 'AK', 'Alaska', 1),
 	(3, 223, 'AS', 'American Samoa', 1),

@@ -7,7 +7,7 @@ foreach ($currencies_array as $currency_code => $currency_info) {
 }
 $smarty->assign('balance_currencies', $balance_currencies);
 //eof: get currencies
-$smarty->assign('fields_extra',FIELDS_EXTRA_SCI_LIMIT);
+$smarty->assign('fields_extra', FIELDS_EXTRA_SCI_LIMIT);
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     postAssign($smarty);
     $posts = $_POST;
@@ -29,9 +29,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     $sql_user = "SELECT user_id,  email,password FROM " . _TABLE_USERS . " WHERE account_number='" . $posts['payee_account'] . "'";
     $user_query = db_query($sql_user);
+    
     if (db_num_rows($user_query) <= 0) {
         $validator->addError('Acount Number', ERROR_ACCOUNT_NUMBER_WRONG);
     }
+    
+    if(empty($posts['checkout_currency'])){
+        $validator->addError('Currency', ERROR_CURENCY_EMPTY);
+    }
+    if(!empty($posts['checkout_amount'])){
+        if(!is_numeric($posts['checkout_amount']) || $posts['checkout_amount'] < 0){
+            $validator->addError('Amount', ERROR_AMOUNT);
+        }
+    }
+    
     if (count($validator->errors) == 0) {
 
         $zend_code_link = _HTTP_SITE_ROOT . '/index.php?' . PAGE_PROCESS . $string_input;

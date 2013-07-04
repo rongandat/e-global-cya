@@ -17,6 +17,8 @@ define('ERROR_NOT_AVAIABLE','There is an account that using the email, please tr
 define('ERROR_EMAIL_ADDRESS','Please input correct email address');
 define('ERROR_SECURE_CODE_WRONG','Please input correct turning number(displayed on the image).');
 define('ERROR_ACCOUNT_NUMBER_WRONG','Acount number not exists.');
+define('ERROR_CURENCY_EMPTY','Please select curency.');
+define('ERROR_AMOUNT','Amount is numberic and greater than zero');
 $langs	=	array('ERROR_OCCURED_NOTICE'	=>	'Error(s) Ocurred! Please check again your inputed fields.');
 
 define('_ERROR_PASSWORD_MIN_LENGTH','This password must be at least 6 characters.');
