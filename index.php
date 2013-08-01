@@ -1,5 +1,5 @@
 <?php
-error_reporting(1);
+error_reporting(E_ERROR);
 include('includes/page_init.php');
 // MAIN PAGE CONTENT
 
@@ -48,7 +48,7 @@ if (is_file(_CURRENT_MODULE . '/' . _CURRENT_PAGE . _PAGE_EXTENDSION)) {
                                                     <tr>
                                                         <td width="242" height="90">
                                                             <p align="center">
-                                                            <img border="0" src="https://www.e-globalcash.net/images/title.gif" alt="e-GlobalCash.com" width="198" height="65" align="left"></td>
+                                                            <img border="0" src="https://e-globalcash.com/images/title.gif" alt="e-GlobalCash.com" width="198" height="65" align="left"></td>
                                                         <td width="145" height="90" valign="top">
                                                             <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="111%" id="AutoNumber57">
                                                                 <tr>
@@ -66,7 +66,7 @@ if (is_file(_CURRENT_MODULE . '/' . _CURRENT_PAGE . _PAGE_EXTENDSION)) {
                                                                 <tr>
                                                                     <td width="11%" height="20" valign="bottom">
                                                                         <p align="center">
-                                                                        <img border="0" src="https://e-globalcash.net/images/key.gif" width="10" height="12"></td>
+                                                                        <img border="0" src="https://e-globalcash.com/images/key.gif" width="10" height="12"></td>
                                                                     <td width="89%" height="20" valign="bottom"><b><font color="#FFFFFF" face="Tahoma" size="2"><span lang="ja"> 
                                                                                 <a href="<?php echo get_href_link(PAGE_LOGIN, '', 'SSL'); ?>">
                                                                                     <font color="#FFFF00">Log in</font></a></span></font></b></td>
@@ -110,41 +110,41 @@ if (is_file(_CURRENT_MODULE . '/' . _CURRENT_PAGE . _PAGE_EXTENDSION)) {
                                                                 <img border="0" src="images/are_you.gif" width="16" height="16"></td>
                                                             <td width="77%" height="32" valign="bottom">
                                                                 <font color="#FFFFFF" face="Tahoma" size="2"><span lang="ja">
-                                                                    <a href="<?php echo get_href_link(PAGE_EXCHANGERS); ?>"><font color="#FFFFFF">Our 
+                                                                    <a href="<?php echo get_href_link(PAGE_EXCHANGERS,'','SSL'); ?>"><font color="#FFFFFF">Our 
                                                                         Exchangers</font></a></span></font></td>
                                                         </tr>
                                                         <tr>
                                                             <td width="23%" height="25" valign="bottom" align="center">&nbsp;</td>
                                                             <td width="77%" height="25" valign="bottom">
                                                                 <font color="#FFFFFF" face="Tahoma" size="2"><span lang="ja">
-                                                                    <a href="<?php echo get_href_link(PAGE_MERCHANTS); ?>"><font color="#FFFFFF">Our 
+                                                                    <a href="<?php echo get_href_link(PAGE_MERCHANTS,'','SSL'); ?>"><font color="#FFFFFF">Our 
                                                                         Merchants</font></a></span></font></td>
                                                         </tr>
                                                         <tr>
                                                             <td width="23%" height="25" valign="bottom" align="center">&nbsp;</td>
                                                             <td width="77%" height="25" valign="bottom">
                                                                 <font color="#FFFFFF" face="Tahoma" size="2"><span lang="ja">
-                                                                    <a href="<?php echo get_href_link(PAGE_SERVICES); ?>"><font color="#FFFFFF">Our 
+                                                                    <a href="<?php echo get_href_link(PAGE_SERVICES,'','SSL'); ?>"><font color="#FFFFFF">Our 
                                                                         Services</font></a></span></font></td>
                                                         </tr>
                                                         <tr>
                                                             <td width="23%" height="25" valign="bottom" align="center">&nbsp;</td>
                                                             <td width="77%" height="25" valign="bottom">
                                                                 <font color="#FFFFFF" face="Tahoma" size="2"><span lang="ja">
-                                                                    <a href="<?php echo get_href_link(PAGE_SECURITY); ?>"><font color="#FFFFFF">Security Measures</font></a></span></font></td>
+                                                                    <a href="<?php echo get_href_link(PAGE_SECURITY,'','SSL'); ?>"><font color="#FFFFFF">Security Measures</font></a></span></font></td>
                                                         </tr>
                                                         <tr>
                                                             <td width="23%" height="25" valign="bottom" align="center">&nbsp;</td>
                                                             <td width="77%" height="25" valign="bottom">
                                                                 <font color="#FFFFFF" face="Tahoma" size="2"><span lang="ja">
-                                                                    <a href="<?php echo get_href_link(PAGE_APPLICATIONS); ?>"><font color="#FFFFFF">SCI, 
+                                                                    <a href="<?php echo get_href_link(PAGE_APPLICATIONS,'','SSL'); ?>"><font color="#FFFFFF">SCI, 
                                                                         API Guide</font></a></span></font></td>
                                                         </tr>
                                                         <tr>
                                                             <td width="23%" height="25" valign="bottom" align="center">&nbsp;</td>
                                                             <td width="77%" height="25" valign="bottom">
                                                                 <font color="#FFFFFF" face="Tahoma" size="2"><span lang="ja">
-                                                                    <a href="<?php echo get_href_link(PAGE_FAQ); ?>"><font color="#FFFFFF">FAQ</font></a></span></font></td>
+                                                                    <a href="<?php echo get_href_link(PAGE_FAQ,'','SSL'); ?>"><font color="#FFFFFF">FAQ</font></a></span></font></td>
                                                         </tr>
                                                     </table>
                                                     <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="100%" id="AutoNumber47">

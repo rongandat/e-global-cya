@@ -1,6 +1,5 @@
 <?php
 
-error_reporting(1);
 //userLoginCheck();
 //if (!tep_session_is_registered('payee_account') && tep_not_null($payee_account))
 //    tep_redirect(get_href_link(PAGE_TRANSFER));

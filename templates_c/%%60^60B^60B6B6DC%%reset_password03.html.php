@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2012-03-29 05:33:26
+<?php /* Smarty version 2.6.18, created on 2013-08-01 04:09:48
          compiled from home/reset_password03.html */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'dev_get_page_link', 'home/reset_password03.html', 1, false),)), $this); ?>
@@ -38,26 +38,7 @@ unset($_smarty_tpl_vars);
       <td class="form_field"><input  name="Password2" type="password" maxlength="32" value="<?php echo $this->_tpl_vars['password2']; ?>
 "  class="inputtext"/></td>
 	</tr>	
-	<tr>
-	  <td class="form_label"><i>*</i>New Login PIN:</td>
-	  <td class="form_field"><input  name="LoginPinCode" type="password"  value="<?php echo $this->_tpl_vars['LoginPinCode']; ?>
-"  class="inputtext" /></td>
-	</tr>	
-	<tr>
-      <td class="form_label"><i>*</i>Confirm New Login PIN:</td>		
-      <td class="form_field"><input  name="LoginPinCode2" type="password"  value="<?php echo $this->_tpl_vars['LoginPinCode2']; ?>
-"  class="inputtext"/></td>
-	</tr>
-<tr>
-	  <td class="form_label"><i>*</i>New Master Key:</td>
-	  <td class="form_field"><input  name="MasterKeyCode" type="password"  value="<?php echo $this->_tpl_vars['MasterKeyCode']; ?>
-"  class="inputtext" /></td>
-	</tr>	
-	<tr>
-      <td class="form_label"><i>*</i>Confirm New Master Key:</td>		
-      <td class="form_field"><input  name="MasterKeyCode2" type="password"  value="<?php echo $this->_tpl_vars['MasterKeyCode2']; ?>
-"  class="inputtext"/></td>
-	</tr>	    	
+	
  </table>	    
 
 <font size="2" face="Tahoma">	  

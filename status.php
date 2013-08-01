@@ -1,7 +1,7 @@
 <?php
 
 //set POST variables
-$url = 'http://egcash.cyahost.com/sci_validate.php';
+$url = 'http://e-globalcash.com/sci_validate.php';
 //$url = 'http://global.lc/sci_validate.php';
 foreach ($_REQUEST as $key => $post) {
     $fields[$key] = urldecode($post);

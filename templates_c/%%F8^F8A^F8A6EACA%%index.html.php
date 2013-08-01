@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.18, created on 2012-05-23 19:45:54
+<?php /* Smarty version 2.6.18, created on 2013-08-01 04:03:14
          compiled from home/index.html */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'dev_get_page_link', 'home/index.html', 43, false),)), $this); ?>
@@ -82,7 +82,7 @@ smarty_core_load_plugins(array('plugins' => array(array('function', 'dev_get_pag
                 <center>
                 <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="180" id="AutoNumber44">
                   <tr>
-                    <td width="100%" background="http://www.e-globalcash.net/images/back.gif" height="220" valign="top">
+                    <td width="100%" background="https://www.e-globalcash.net/images/back.gif" height="220" valign="top">
                     <div align="center">
                       <center>
                       <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" width="150" id="AutoNumber45" height="163">

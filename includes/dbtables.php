@@ -25,4 +25,5 @@
 	define('_TABLE_TRANSACTIONS',_TABLE_PREFIX.'transactions');
 	define('_TABLE_TRANSACTIONS_HISTOTY',_TABLE_PREFIX.'transactions_history');
 	define('_TABLE_USER_SETTINGS',_TABLE_PREFIX.'user_information_settings');
+        define('_TABLE_API_CONFIGS',_TABLE_PREFIX.'api_configs');
 ?>
